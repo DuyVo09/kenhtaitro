@@ -9,7 +9,11 @@ import {
   FormControl,
   FormLabel,
   TextField,
+  Button,
+  Modal,
 } from "@mui/material";
+import { useState } from "react";
+import { ImgUploadModal } from "./ImgUploadModal";
 
 const validationSchema = yup.object().shape({
   bannerImage: yup.string().required(),
@@ -40,6 +44,10 @@ const validationSchema = yup.object().shape({
 });
 
 const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
+  const [openModal, setOpenModal] = useState(false);
+  const handleOpen = () => setOpenModal(true);
+  const handleClose = () => setOpenModal(false);
+
   const handleFormSubmit = (formValues: IEventDataModel) => {
     try {
       onSubmit?.(formValues);
@@ -58,11 +66,14 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
 
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)}>
-      <Grid container spacing={5}>
+      <Grid container spacing={5} sx={{ my: 3 }}>
         <Grid item xs={12}>
-          <FormControl fullWidth variant="standard" >
+          <Typography>Thông tin liên hệ</Typography>
+        </Grid>
+
+        <Grid item xs={12}>
+          <FormControl fullWidth variant="standard">
             <TextField
-              size="medium"
               {...register("contactName")}
               id="contactName"
               name="contactName"
@@ -77,9 +88,8 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
         </Grid>
 
         <Grid item xs={12}>
-          <FormControl fullWidth variant="standard" >
+          <FormControl fullWidth variant="standard">
             <TextField
-              
               {...register("contactPhone")}
               id="contactPhone"
               name="contactPhone"
@@ -94,9 +104,8 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
         </Grid>
 
         <Grid item xs={12}>
-          <FormControl fullWidth variant="standard" >
+          <FormControl fullWidth variant="standard">
             <TextField
-              
               {...register("contactEmail")}
               id="contactEmail"
               name="contactEmail"
@@ -109,11 +118,15 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
             </Typography>
           </FormControl>
         </Grid>
+      </Grid>
 
+      <Grid container spacing={5} sx={{ my: 3 }}>
         <Grid item xs={12}>
-          <FormControl fullWidth variant="standard" >
+          <Typography>Thông tin tổ chức sự kiện</Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <FormControl fullWidth variant="standard">
             <TextField
-              
               {...register("schoolName")}
               id="schoolName"
               name="schoolName"
@@ -128,9 +141,8 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
         </Grid>
 
         <Grid item xs={12}>
-          <FormControl fullWidth variant="standard" >
+          <FormControl fullWidth variant="standard">
             <TextField
-              
               {...register("location")}
               id="location"
               name="location"
@@ -145,9 +157,8 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
         </Grid>
 
         <Grid item xs={12}>
-          <FormControl fullWidth variant="standard" >
+          <FormControl fullWidth variant="standard">
             <TextField
-              
               {...register("eventName")}
               id="eventName"
               name="eventName"
@@ -162,9 +173,11 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
         </Grid>
 
         <Grid item xs={12}>
-          <FormControl fullWidth variant="standard" >
+          <FormControl fullWidth variant="standard">
             <TextField
-              
+              multiline
+              rows={5}
+              maxRows={5}
               {...register("eventDescription")}
               id="eventDescription"
               name="eventDescription"
@@ -178,24 +191,34 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
           </FormControl>
         </Grid>
 
-        <Grid item xs={12}>
-          <FormControl fullWidth variant="standard" >
+        <Grid item xs={10}>
+          <FormControl fullWidth variant="standard">
             <TextField
-              
               {...register("eventImages")}
               id="eventImages"
               name="eventImages"
-            //   error={errors.eventImages ? true : false}
+              //   error={errors.eventImages ? true : false}
               disabled={noEdit}
               label="Hình ảnh sự kiện"
             />
           </FormControl>
         </Grid>
 
+        <Grid item xs={2}>
+          <Button onClick={handleOpen} variant="contained">
+            Mở modal upload
+          </Button>
+          <Modal
+            open={openModal}
+            onClose={handleClose}
+          >
+            <ImgUploadModal />
+          </Modal>
+        </Grid>
+
         <Grid item xs={12}>
-          <FormControl fullWidth variant="standard" >
+          <FormControl fullWidth variant="standard">
             <TextField
-              
               {...register("eventOrganization")}
               id="eventOrganization"
               name="eventOrganization"
@@ -210,13 +233,12 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
         </Grid>
 
         <Grid item xs={12}>
-          <FormControl fullWidth variant="standard" >
+          <FormControl fullWidth variant="standard">
             <TextField
-              
               {...register("contactName")}
               id="contactName"
               name="contactName"
-            //   error={errors.contactName ? true : false}
+              //   error={errors.contactName ? true : false}
               disabled={noEdit}
               label="Họ và tên"
             />
@@ -227,13 +249,12 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
         </Grid>
 
         <Grid item xs={12}>
-          <FormControl fullWidth variant="standard" >
+          <FormControl fullWidth variant="standard">
             <TextField
-              
               {...register("contactName")}
               id="contactName"
               name="contactName"
-            //   error={errors.contactName ? true : false}
+              //   error={errors.contactName ? true : false}
               disabled={noEdit}
               label="Họ và tên"
             />
@@ -244,13 +265,12 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
         </Grid>
 
         <Grid item xs={12}>
-          <FormControl fullWidth variant="standard" >
+          <FormControl fullWidth variant="standard">
             <TextField
-              
               {...register("contactName")}
               id="contactName"
               name="contactName"
-            //   error={errors.contactName ? true : false}
+              //   error={errors.contactName ? true : false}
               disabled={noEdit}
               label="Họ và tên"
             />
@@ -261,13 +281,12 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
         </Grid>
 
         <Grid item xs={12}>
-          <FormControl fullWidth variant="standard" >
+          <FormControl fullWidth variant="standard">
             <TextField
-              
               {...register("contactName")}
               id="contactName"
               name="contactName"
-            //   error={errors.contactName ? true : false}
+              //   error={errors.contactName ? true : false}
               disabled={noEdit}
               label="Họ và tên"
             />
@@ -278,13 +297,12 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
         </Grid>
 
         <Grid item xs={12}>
-          <FormControl fullWidth variant="standard" >
+          <FormControl fullWidth variant="standard">
             <TextField
-              
               {...register("contactName")}
               id="contactName"
               name="contactName"
-            //   error={errors.contactName ? true : false}
+              //   error={errors.contactName ? true : false}
               disabled={noEdit}
               label="Họ và tên"
             />
@@ -295,13 +313,12 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
         </Grid>
 
         <Grid item xs={12}>
-          <FormControl fullWidth variant="standard" >
+          <FormControl fullWidth variant="standard">
             <TextField
-              
               {...register("contactName")}
               id="contactName"
               name="contactName"
-            //   error={errors.contactName ? true : false}
+              //   error={errors.contactName ? true : false}
               disabled={noEdit}
               label="Họ và tên"
             />
@@ -312,13 +329,12 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
         </Grid>
 
         <Grid item xs={12}>
-          <FormControl fullWidth variant="standard" >
+          <FormControl fullWidth variant="standard">
             <TextField
-              
               {...register("contactName")}
               id="contactName"
               name="contactName"
-            //   error={errors.contactName ? true : false}
+              //   error={errors.contactName ? true : false}
               disabled={noEdit}
               label="Họ và tên"
             />
@@ -329,13 +345,12 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
         </Grid>
 
         <Grid item xs={12}>
-          <FormControl fullWidth variant="standard" >
+          <FormControl fullWidth variant="standard">
             <TextField
-              
               {...register("contactName")}
               id="contactName"
               name="contactName"
-            //   error={errors.contactName ? true : false}
+              //   error={errors.contactName ? true : false}
               disabled={noEdit}
               label="Họ và tên"
             />
@@ -346,13 +361,12 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
         </Grid>
 
         <Grid item xs={12}>
-          <FormControl fullWidth variant="standard" >
+          <FormControl fullWidth variant="standard">
             <TextField
-              
               {...register("contactName")}
               id="contactName"
               name="contactName"
-            //   error={errors.contactName ? true : false}
+              //   error={errors.contactName ? true : false}
               disabled={noEdit}
               label="Họ và tên"
             />
@@ -363,13 +377,12 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
         </Grid>
 
         <Grid item xs={12}>
-          <FormControl fullWidth variant="standard" >
+          <FormControl fullWidth variant="standard">
             <TextField
-              
               {...register("contactName")}
               id="contactName"
               name="contactName"
-            //   error={errors.contactName ? true : false}
+              //   error={errors.contactName ? true : false}
               disabled={noEdit}
               label="Họ và tên"
             />
@@ -380,13 +393,12 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
         </Grid>
 
         <Grid item xs={12}>
-          <FormControl fullWidth variant="standard" >
+          <FormControl fullWidth variant="standard">
             <TextField
-              
               {...register("contactName")}
               id="contactName"
               name="contactName"
-            //   error={errors.contactName ? true : false}
+              //   error={errors.contactName ? true : false}
               disabled={noEdit}
               label="Họ và tên"
             />
@@ -397,13 +409,12 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
         </Grid>
 
         <Grid item xs={12}>
-          <FormControl fullWidth variant="standard" >
+          <FormControl fullWidth variant="standard">
             <TextField
-              
               {...register("contactName")}
               id="contactName"
               name="contactName"
-            //   error={errors.contactName ? true : false}
+              //   error={errors.contactName ? true : false}
               disabled={noEdit}
               label="Họ và tên"
             />
@@ -414,13 +425,12 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
         </Grid>
 
         <Grid item xs={12}>
-          <FormControl fullWidth variant="standard" >
+          <FormControl fullWidth variant="standard">
             <TextField
-              
               {...register("contactName")}
               id="contactName"
               name="contactName"
-            //   error={errors.contactName ? true : false}
+              //   error={errors.contactName ? true : false}
               disabled={noEdit}
               label="Họ và tên"
             />
@@ -431,13 +441,12 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
         </Grid>
 
         <Grid item xs={12}>
-          <FormControl fullWidth variant="standard" >
+          <FormControl fullWidth variant="standard">
             <TextField
-              
               {...register("contactName")}
               id="contactName"
               name="contactName"
-            //   error={errors.contactName ? true : false}
+              //   error={errors.contactName ? true : false}
               disabled={noEdit}
               label="Họ và tên"
             />

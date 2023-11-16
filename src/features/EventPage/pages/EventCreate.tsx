@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { EventForm } from "../components";
 import { IEventDataModel } from "../models";
 import { SubmitHandler } from "react-hook-form";
@@ -28,6 +28,8 @@ const mockData: IEventDataModel = {
   proposalLink: "string",
 };
 
+const formStatus = "Waiting";
+
 export function EventCreate() {
   const handleFormSubmit: SubmitHandler<IEventDataModel> = (formValues) => {
     console.log(formValues);
@@ -45,11 +47,33 @@ export function EventCreate() {
         Ảnh bìa
       </Box>
 
-      <EventForm
-        initialValue={mockData}
-        onSubmit={handleFormSubmit}
-        noEdit={false}
-      />
+      <Box
+        py={3}
+        my={2}
+        display="flex"
+        alignItems="center"
+        justifyContent="space-between"
+      >
+        <Typography>THÔNG TIN SỰ KIỆN</Typography>
+        <Button sx={{ textDecoration: "none" }} variant="contained">
+          Viết bài đăng về sự kiện
+        </Button>
+      </Box>
+
+      <Box display="flex" alignItems="center">
+        <Typography>Sự kiện ID: #123456</Typography>
+        <Box mx={10} p={2} border={1}>
+          {formStatus}
+        </Box>
+      </Box>
+
+      <Box my={5}>
+        <EventForm
+          initialValue={mockData}
+          onSubmit={handleFormSubmit}
+          noEdit={false}
+        />
+      </Box>
     </Box>
   );
 }

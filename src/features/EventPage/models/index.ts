@@ -31,3 +31,10 @@ export interface IEventFormProps {
     onSubmit?: (formValues: IEventDataModel) => void;
     noEdit: boolean;
 }
+
+export interface IImageUploader {
+    height: string | number | undefined;
+    width: string | number | undefined;
+    text: string;
+    onUploadFile: (file: File, imageStr: any) => void;
+}
