@@ -1,6 +1,7 @@
 import { Navigate, createBrowserRouter } from "react-router-dom";
 import MainLayout from "./components/Layout/MainLayout";
-import { homepageRoutes } from "features/Homepage/routes";
+import { homepageRoutes } from "features/Homepage";
+import { eventsRoutes } from "features/EventPage";
 
 const appRouter = createBrowserRouter([
   {
@@ -12,6 +13,7 @@ const appRouter = createBrowserRouter([
         element: <Navigate to="/home" />
       },
       ...homepageRoutes(),
+      ...eventsRoutes(),
     ]
   },
 ]);

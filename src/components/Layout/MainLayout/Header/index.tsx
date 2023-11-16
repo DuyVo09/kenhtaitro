@@ -3,38 +3,61 @@ import { AppBar, Box, Button, IconButton, Typography } from "@mui/material";
 import { INavbarItem } from "./types";
 import { NavLink } from "react-router-dom";
 import { NotificationsNone } from "@mui/icons-material";
+import { NavbarItem } from "./NavbarItem";
 
 const navbarItem: INavbarItem[] = [
   {
     path: "/home",
     label: "Trang chủ",
+    children: null,
   },
   {
-    path: "/events",
+    path: "",
     label: "Sự kiện",
+    children: [
+      {
+        path: "/events/create",
+        label: "Tạo sự kiện",
+        children: null,
+      },
+      {
+        path: "/events/my",
+        label: "Sự kiện của tôi",
+        children: null,
+      },
+    ],
   },
   {
     path: "/calendar",
     label: "Lịch sự kiện",
+    children: null,
   },
   {
     path: "/blogs",
     label: "Blog",
+    children: null,
   },
   {
     path: "/about-us",
     label: "Về chúng tôi",
+    children: null,
   },
   {
     path: "/contact",
     label: "Liên hệ",
+    children: null,
   },
 ];
 
 function NavbarHeader() {
   return (
     <AppBar
-      sx={{ position: 'static', flexDirection: "row", alignItems: "center", bgcolor: "white" }}
+      sx={{
+        position: "static",
+        flexDirection: "row",
+        alignItems: "center",
+        bgcolor: "white",
+      }}
     >
       <Box
         display="flex"
@@ -50,17 +73,17 @@ function NavbarHeader() {
 
       <Box display="flex">
         {navbarItem.map((e) => (
-          <Box
-            component={NavLink}
-            to={e.path}
-            sx={{ mx: 2, textDecoration: "none" }}
-          >
-            <Typography color="black">{e.label}</Typography>
-          </Box>
+          <NavbarItem path={e.path} label={e.label} children={e.children} />
         ))}
       </Box>
 
-      <Box px={2} display="flex" flex={1} justifyContent="end" alignItems="center">
+      <Box
+        px={2}
+        display="flex"
+        flex={1}
+        justifyContent="end"
+        alignItems="center"
+      >
         <Button>Đăng ký</Button>
         <Button>Đăng nhập</Button>
         <IconButton>
