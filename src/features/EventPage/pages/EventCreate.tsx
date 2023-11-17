@@ -13,18 +13,18 @@ const mockData: IEventDataModel = {
   eventName: "string",
   eventDescription: "string",
   eventOrganization: "string",
-  startTime: Date.now(),
-  endTime: Date.now(),
-  sponsorDeadline: Date.now(),
+  startTime: new Date(),
+  endTime: new Date(),
+  sponsorDeadline: new Date(),
   eventCategory: [],
   totalReachCount: 10,
   offlineReachCount: 11,
-  exclusivePackagePrice: "string",
-  diamondPackagePrice: "string",
-  goldPackagePrice: "string",
-  silverPackagePrice: "string",
-  bronzePackagePrice: "string",
-  companionPackagePrice: "string",
+  exclusivePackageValue: "string",
+  diamondPackageValue: "string",
+  goldPackageValue: "string",
+  silverPackageValue: "string",
+  bronzePackageValue: "string",
+  companionPackageValue: "string",
   proposalLink: "string",
 };
 
@@ -35,7 +35,7 @@ export function EventCreate() {
     console.log(formValues);
   };
   return (
-    <Box px={35} display="flex" flexDirection="column">
+    <Box px={20} display="flex" flexDirection="column">
       <Box
         my={5}
         border={1}
@@ -74,6 +74,12 @@ export function EventCreate() {
           noEdit={false}
         />
       </Box>
+
+      <Box>
+        
+      </Box>
+
+      <Box my={5} p={3} border={1}>Lý do từ chối</Box>
     </Box>
   );
 }

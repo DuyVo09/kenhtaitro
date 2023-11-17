@@ -1,15 +1,15 @@
 import { Menu, Typography, MenuItem, Box } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { INavbarItem } from "./types";
 import { useState } from "react";
 import { ArrowDropDown, ArrowDropUp } from "@mui/icons-material";
 
 export function NavbarItem({ path, label, children }: INavbarItem) {
+  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
   const handleOpenMenu = (e: any) => {
-    console.log(children)
     if (children) {
       e.preventDefault();
       setAnchorEl(e.currentTarget);
@@ -21,6 +21,11 @@ export function NavbarItem({ path, label, children }: INavbarItem) {
   const handleCloseMenu = () => {
     setAnchorEl(null);
   };
+
+  const handleMenuItem = (path: string) => {
+    handleCloseMenu();
+    navigate(path);
+  }
 
   return (
     <>
@@ -54,6 +59,7 @@ export function NavbarItem({ path, label, children }: INavbarItem) {
             <MenuItem key={e.label}>
               <Box
                 component={NavLink}
+                onClick={() => handleMenuItem(e.path)}
                 to={e.path}
                 sx={{ textDecoration: "none" }}
               >

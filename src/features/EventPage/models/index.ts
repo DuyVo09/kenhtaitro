@@ -9,20 +9,20 @@ export type IEventDataModel = {
     eventDescription: string;
     eventImages?: File[] | undefined;
     eventOrganization: string;
-    startTime: number;
-    endTime: number;
-    sponsorDeadline: number;
+    startTime: Date;
+    endTime: Date;
+    sponsorDeadline: Date;
     eventCategory: string[];
     totalReachCount: number;
     offlineReachCount: number;
     firstYearPersent?: number | undefined;
-    exclusivePackagePrice: string;
-    diamondPackagePrice: string;
-    goldPackagePrice: string;
-    silverPackagePrice: string;
-    bronzePackagePrice: string;
-    companionPackagePrice: string;
-    otherPackagePrice?: string | undefined;
+    exclusivePackageValue: string;
+    diamondPackageValue: string;
+    goldPackageValue: string;
+    silverPackageValue: string;
+    bronzePackageValue: string;
+    companionPackageValue: string;
+    otherPackageValue?: string | undefined;
     proposalLink: string;
 }
 
@@ -37,4 +37,9 @@ export interface IImageUploader {
     width: string | number | undefined;
     text: string;
     onUploadFile: (file: File, imageStr: any) => void;
+}
+
+export interface ICategoryOption {
+    label: string;
+    id: number;
 }
