@@ -88,7 +88,7 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
   const handleFormSubmit = (formValues: IEventDataModel) => {
     try {
       onSubmit?.(formValues);
-    } catch (error: any) {}
+    } catch (error: any) { }
   };
 
   const {
@@ -230,29 +230,8 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
           </Grid>
 
           <Grid item xs={9}>
-            <FormControl fullWidth variant="standard">
-              <TextField
-                {...register("eventImages")}
-                id="eventImages"
-                name="eventImages"
-                //   error={errors.eventImages ? true : false}
-                disabled={noEdit}
-                label="Hình ảnh sự kiện"
-              />
-            </FormControl>
-          </Grid>
+            <FormLabel>Hình ảnh sự kiện</FormLabel>
 
-          <Grid item xs={3}>
-            <Button
-              sx={{ textTransform: "none" }}
-              onClick={handleOpen}
-              variant="contained"
-            >
-              Mở modal upload
-            </Button>
-            <Modal open={openModal} onClose={handleClose}>
-              <ImgUploadModal />
-            </Modal>
           </Grid>
 
           <Grid item xs={12}>
@@ -318,22 +297,6 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
 
           <Grid item xs={12}>
             <FormControl fullWidth variant="standard">
-              <TextField
-                {...register("contactName")}
-                id="contactName"
-                name="contactName"
-                //   error={errors.contactName ? true : false}
-                disabled={noEdit}
-                label="Họ và tên"
-              />
-              <Typography variant="inherit" color={"error"}>
-                {errors.contactName?.message}
-              </Typography>
-            </FormControl>
-          </Grid>
-
-          <Grid item xs={12}>
-            <FormControl fullWidth variant="standard">
               <Autocomplete
                 {...register("eventCategory")}
                 multiple
@@ -353,22 +316,6 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
               />
               <Typography variant="inherit" color={"error"}>
                 {errors.eventCategory?.message}
-              </Typography>
-            </FormControl>
-          </Grid>
-
-          <Grid item xs={12}>
-            <FormControl fullWidth variant="standard">
-              <TextField
-                {...register("contactName")}
-                id="contactName"
-                name="contactName"
-                //   error={errors.contactName ? true : false}
-                disabled={noEdit}
-                label="Họ và tên"
-              />
-              <Typography variant="inherit" color={"error"}>
-                {errors.contactName?.message}
               </Typography>
             </FormControl>
           </Grid>

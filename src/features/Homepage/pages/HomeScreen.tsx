@@ -2,13 +2,13 @@ import { useState } from "react";
 import { Add } from "@mui/icons-material";
 import { Box, Button } from "@mui/material";
 
-import  Slider from "react-slick";
+import Slider from "react-slick";
 import { RecentEvents, HotBlogs, CustomerTestimonialCard } from "../components";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-const carouselLst = [1,2,3,4,5];
+const carouselLst = [1, 2, 3, 4, 5];
 
 const carouselSetting = {
   dots: true,
@@ -16,15 +16,15 @@ const carouselSetting = {
   autoplay: true,
   speed: 200,
   slidesToShow: 2,
-  slidesToScroll: 1
+  slidesToScroll: 1,
 };
 
 export function HomeScreen() {
   return (
-    <Box display="flex" flexDirection="column">
+    <Box px={20} display="flex" flexDirection="column">
       {/* Banner */}
       <Box
-        m={5}
+        my={5}
         border={1}
         display="flex"
         height={150}
@@ -45,10 +45,13 @@ export function HomeScreen() {
       {/* Hot blog */}
       <HotBlogs />
       {/* Customer's impression */}
-      <Box display='flex'>
-      <Slider {...carouselSetting}>{
-        carouselLst.map(e => <CustomerTestimonialCard key={e} />)
-      }</Slider></Box>
+      <Box display="flex">
+        <Slider {...carouselSetting}>
+          {carouselLst.map((e) => (
+            <CustomerTestimonialCard key={e} />
+          ))}
+        </Slider>
+      </Box>
 
       {/* <Box display="flex">
         <CustomerTestimonialCard key={1} />

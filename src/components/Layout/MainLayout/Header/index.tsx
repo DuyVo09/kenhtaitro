@@ -21,7 +21,7 @@ const navbarItem: INavbarItem[] = [
         children: null,
       },
       {
-        path: "/events/my",
+        path: "/events",
         label: "Sự kiện của tôi",
         children: null,
       },

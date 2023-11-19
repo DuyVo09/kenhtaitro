@@ -10,7 +10,7 @@ export function RecentEvents() {
           <Box
             display="flex"
             p={1}
-            my={1}
+            
             border={1}
             height={300}
             alignItems="center"
@@ -62,10 +62,10 @@ export function RecentEvents() {
             display: "flex",
             flexDirection: "column",
           }}
-          xs={3}
+          xs={4}
           item
         >
-          <Box p={1} display="flex" flexDirection="column" flex={1}>
+          <Box display="flex" flexDirection="column" flex={1}>
             <Box
               justifyContent="center"
               alignItems="center"

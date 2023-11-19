@@ -1,3 +1,16 @@
+export interface IEventViewModel {
+    id: number;
+    schoolName: string;
+    location: string;
+    eventName: string;
+    eventOrganization: string;
+    startTime: string;
+    endTime: string;
+    eventCategory: string[];
+    schale: number;
+    uploadTime: string;
+}
+
 export type IEventDataModel = {
     bannerImage: string;
     contactName: string;
