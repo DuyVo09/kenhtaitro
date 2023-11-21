@@ -7,6 +7,8 @@ import { RecentEvents, HotBlogs, CustomerTestimonialCard } from "../components";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { OrganizationView } from "./OrganizationView";
+import { BusinessView } from "./BusinessView";
 
 const carouselLst = [1, 2, 3, 4, 5];
 
@@ -19,46 +21,21 @@ const carouselSetting = {
   slidesToScroll: 1,
 };
 
+var user = 2;
 export function HomeScreen() {
+  function getView() {
+    switch (user) {
+      case 1:
+        return <OrganizationView />
+      case 2:
+        return <BusinessView />
+    }
+  }
+
   return (
     <Box px={20} display="flex" flexDirection="column">
       {/* Banner */}
-      <Box
-        my={5}
-        border={1}
-        display="flex"
-        height={150}
-        justifyContent="center"
-        alignItems="center"
-      >
-        Ảnh bìa
-      </Box>
-
-      {/* Create event */}
-      <Button sx={{ width: 200, my: 5 }} variant="contained" endIcon={<Add />}>
-        Tạo sự kiện
-      </Button>
-
-      {/* Recent events */}
-      <RecentEvents />
-
-      {/* Hot blog */}
-      <HotBlogs />
-      {/* Customer's impression */}
-      <Box display="flex">
-        <Slider {...carouselSetting}>
-          {carouselLst.map((e) => (
-            <CustomerTestimonialCard key={e} />
-          ))}
-        </Slider>
-      </Box>
-
-      {/* <Box display="flex">
-        <CustomerTestimonialCard key={1} />
-        <CustomerTestimonialCard key={2} />
-        <CustomerTestimonialCard key={3} />
-      </Box> */}
-      {/* Our sponsor */}
+      {getView()}
     </Box>
   );
 }
