@@ -1,58 +1,72 @@
+export interface EventStatus {
+    event_id: string;
+    is_published: boolean;
+}
+
 export interface IEventViewModel {
-    id: number;
-    schoolName: string;
-    location: string;
-    eventName: string;
-    eventOrganization: string;
-    startTime: string;
-    endTime: string;
-    eventCategory: string[];
-    schale: number;
-    uploadTime: string;
+  id: number;
+  school: string;
+  location: string;
+  event_name: string;
+  organizer: string;
+  start_date: Date;
+  end_date: Date;
+  event_field: string;
+  full_name: string;
+  created_at: Date;
+  updated_at: Date;
+  total_reach: number;
+  event_type_id: number;
+  event_type: string;
 }
 
 export type IEventDataModel = {
-    bannerImage: string;
-    contactName: string;
-    contactPhone: string;
-    contactEmail: string;
-    schoolName: string;
-    location: string;
-    eventName: string;
-    eventDescription: string;
-    eventImages?: File[] | undefined;
-    eventOrganization: string;
-    startTime: Date;
-    endTime: Date;
-    sponsorDeadline: Date;
-    eventCategory: string[];
-    totalReachCount: number;
-    offlineReachCount: number;
-    firstYearPersent?: number | undefined;
-    exclusivePackageValue: string;
-    diamondPackageValue: string;
-    goldPackageValue: string;
-    silverPackageValue: string;
-    bronzePackageValue: string;
-    companionPackageValue: string;
-    otherPackageValue?: string | undefined;
-    proposalLink: string;
-}
+  id?: number;
+  full_name: string;
+  phone: string;
+  email: string;
+  school: string;
+  location: string;
+  event_name: string;
+  event_description: string;
+  event_image?: string;
+  organizer: string;
+  start_date: Date;
+  end_date: Date;
+  deadline_sponsorship: string;
+  event_field: string;
+  total_reach: number;
+  total_reach_in_house: number;
+  first_year_attendee_percentage?: number;
+  exclusive_sponsorship: number;
+  diamond_sponsorship: number;
+  gold_sponsorship: number;
+  silver_sponsorship: number;
+  bronze_sponsorship: number;
+  companion_sponsorship: number;
+  other_sponsorship?: number;
+  proposal: string;
+  notes?: string | null;
+  is_published?: boolean;
+  is_edit?: boolean;
+  creator_id?: number;
+  event_type_id?: number;
+};
 
 export interface IEventFormProps {
-    initialValue: IEventDataModel;
-    onSubmit?: (formValues: IEventDataModel) => void;
-    noEdit: boolean;
+  initialValue: IEventDataModel;
+  onSubmit?: (formValues: IEventDataModel) => void;
+  noEdit: boolean;
 }
 
 export interface IImageUploader {
-    height: string | number | undefined;
-    width: string | number | undefined;
-    text: string;
-    onUploadFile: (file: File, imageStr: any) => void;
+  height: string | number | undefined;
+  width: string | number | undefined;
+  text: string;
+  onUploadFile: (file: File, imageStr: any) => void;
 }
 
 export interface ICategoryOption {
-    label: string;
-    id: number;
+  label: string;
+  id: number;
 }

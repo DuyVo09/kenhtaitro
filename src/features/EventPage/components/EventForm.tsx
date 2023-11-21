@@ -47,31 +47,31 @@ const categoriesOpt: ICategoryOption[] = [
 ];
 
 const validationSchema = yup.object().shape({
-  bannerImage: yup.string().required(),
-  contactName: yup.string().required(),
-  contactPhone: yup.string().required(),
-  contactEmail: yup.string().required("Vui lòng nhập email liên hệ").email(),
-  schoolName: yup.string().required(),
+  // bannerImage: yup.string().required(),
+  full_name: yup.string().required(),
+  phone: yup.string().required(),
+  email: yup.string().required("Vui lòng nhập email liên hệ"),
+  school: yup.string().required(),
   location: yup.string().required(),
-  eventName: yup.string().required().max(90),
-  eventDescription: yup.string().required().min(50).max(3000),
-  eventImages: yup.array(),
-  eventOrganization: yup.string().required(),
-  startTime: yup.date().required(),
-  endTime: yup.date().required(),
-  sponsorDeadline: yup.date().required(),
-  eventCategory: yup.array().required(),
-  totalReachCount: yup.number().required(),
-  offlineReachCount: yup.number().required(),
-  firstYearPersent: yup.number(),
-  exclusivePackageValue: yup.string().required(),
-  diamondPackageValue: yup.string().required(),
-  goldPackageValue: yup.string().required(),
-  silverPackageValue: yup.string().required(),
-  bronzePackageValue: yup.string().required(),
-  companionPackageValue: yup.string().required(),
-  otherPackageValue: yup.string(),
-  proposalLink: yup.string().required(),
+  event_name: yup.string().required().max(90),
+  event_description: yup.string().required().min(50).max(3000),
+  event_image: yup.string(),
+  organizer: yup.string().required(),
+  start_date: yup.date().required(),
+  end_date: yup.date().required(),
+  deadline_sponsorship: yup.string().required(),
+  event_field: yup.string().required(),
+  total_reach: yup.number().required(),
+  total_reach_in_house: yup.number().required(),
+  first_year_attendee_percentage: yup.number(),
+  exclusive_sponsorship: yup.number().required(),
+  diamond_sponsorship: yup.number().required(),
+  gold_sponsorship: yup.number().required(),
+  silver_sponsorship: yup.number().required(),
+  bronze_sponsorship: yup.number().required(),
+  companion_sponsorship: yup.number().required(),
+  other_sponsorship: yup.number(),
+  proposal: yup.string().required(),
 });
 
 const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
@@ -85,7 +85,8 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
   >([]);
 
   const handleUploadFiles = (files: File[]) => {
-    setFiles((pre) => [...pre, ...files])
+    setFiles((pre) => [...pre, ...files]);
+    setValue("event_image", "");
   }
 
   const handleFormSubmit = (formValues: IEventDataModel) => {
@@ -115,15 +116,15 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
           <Grid item xs={12}>
             <FormControl fullWidth variant="standard">
               <TextField
-                {...register("contactName")}
-                id="contactName"
-                name="contactName"
-                error={errors.contactName ? true : false}
+                {...register("full_name")}
+                id="full_name"
+                name="full_name"
+                error={errors.full_name ? true : false}
                 disabled={noEdit}
                 label="Họ và tên"
               />
               <Typography variant="inherit" color={"error"}>
-                {errors.contactName?.message}
+                {errors.full_name?.message}
               </Typography>
             </FormControl>
           </Grid>
@@ -131,15 +132,15 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
           <Grid item xs={12}>
             <FormControl fullWidth variant="standard">
               <TextField
-                {...register("contactPhone")}
-                id="contactPhone"
-                name="contactPhone"
-                error={errors.contactPhone ? true : false}
+                {...register("phone")}
+                id="phone"
+                name="phone"
+                error={errors.phone ? true : false}
                 disabled={noEdit}
                 label="Số điện thoại"
               />
               <Typography variant="inherit" color={"error"}>
-                {errors.contactPhone?.message}
+                {errors.phone?.message}
               </Typography>
             </FormControl>
           </Grid>
@@ -147,15 +148,15 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
           <Grid item xs={12}>
             <FormControl fullWidth variant="standard">
               <TextField
-                {...register("contactEmail")}
-                id="contactEmail"
-                name="contactEmail"
-                error={errors.contactEmail ? true : false}
+                {...register("email")}
+                id="email"
+                name="email"
+                error={errors.email ? true : false}
                 disabled={noEdit}
                 label="Email"
               />
               <Typography variant="inherit" color={"error"}>
-                {errors.contactEmail?.message}
+                {errors.email?.message}
               </Typography>
             </FormControl>
           </Grid>
@@ -168,15 +169,15 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
           <Grid item xs={12}>
             <FormControl fullWidth variant="standard">
               <TextField
-                {...register("schoolName")}
-                id="schoolName"
-                name="schoolName"
-                error={errors.schoolName ? true : false}
+                {...register("school")}
+                id="school"
+                name="school"
+                error={errors.school ? true : false}
                 disabled={noEdit}
                 label="Tên trường"
               />
               <Typography variant="inherit" color={"error"}>
-                {errors.schoolName?.message}
+                {errors.school?.message}
               </Typography>
             </FormControl>
           </Grid>
@@ -200,15 +201,15 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
           <Grid item xs={12}>
             <FormControl fullWidth variant="standard">
               <TextField
-                {...register("eventName")}
-                id="eventName"
-                name="eventName"
-                error={errors.eventName ? true : false}
+                {...register("event_name")}
+                id="event_name"
+                name="event_name"
+                error={errors.event_name ? true : false}
                 disabled={noEdit}
                 label="Tên sự kiện"
               />
               <Typography variant="inherit" color={"error"}>
-                {errors.eventName?.message}
+                {errors.event_name?.message}
               </Typography>
             </FormControl>
           </Grid>
@@ -219,15 +220,15 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
                 multiline
                 rows={5}
                 maxRows={5}
-                {...register("eventDescription")}
-                id="eventDescription"
-                name="eventDescription"
-                error={errors.eventDescription ? true : false}
+                {...register("event_description")}
+                id="event_description"
+                name="event_description"
+                error={errors.event_description ? true : false}
                 disabled={noEdit}
                 label="Mô tả sự kiện"
               />
               <Typography variant="inherit" color={"error"}>
-                {errors.eventDescription?.message}
+                {errors.event_description?.message}
               </Typography>
             </FormControl>
           </Grid>
@@ -245,15 +246,15 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
           <Grid item xs={12}>
             <FormControl fullWidth variant="standard">
               <TextField
-                {...register("eventOrganization")}
-                id="eventOrganization"
-                name="eventOrganization"
-                error={errors.eventOrganization ? true : false}
+                {...register("organizer")}
+                id="organizer"
+                name="organizer"
+                error={errors.organizer ? true : false}
                 disabled={noEdit}
                 label="Đơn vị tổ chức sự kiện"
               />
               <Typography variant="inherit" color={"error"}>
-                {errors.eventOrganization?.message}
+                {errors.organizer?.message}
               </Typography>
             </FormControl>
           </Grid>
@@ -261,14 +262,14 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
           <Grid item xs={12}>
             <FormControl fullWidth variant="standard">
               <DateTimePicker
-                {...register("startTime")}
+                {...register("start_date")}
                 label="Thời gian bắt đầu"
                 value={startTimeValue}
                 onChange={(e) => setStartTimeValue(e)}
                 disabled={noEdit}
               />
               <Typography variant="inherit" color={"error"}>
-                {errors.startTime?.message}
+                {errors.start_date?.message}
               </Typography>
             </FormControl>
           </Grid>
@@ -276,14 +277,14 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
           <Grid item xs={12}>
             <FormControl fullWidth variant="standard">
               <DateTimePicker
-                {...register("endTime")}
+                {...register("end_date")}
                 label="Thời gian kết thúc"
                 value={endTimeValue}
                 onChange={(e) => setEndTimeValue(e)}
                 disabled={noEdit}
               />
               <Typography variant="inherit" color={"error"}>
-                {errors.endTime?.message}
+                {errors.end_date?.message}
               </Typography>
             </FormControl>
           </Grid>
@@ -291,14 +292,14 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
           <Grid item xs={12}>
             <FormControl fullWidth variant="standard">
               <DateTimePicker
-                {...register("sponsorDeadline")}
+                {...register("deadline_sponsorship")}
                 label="Thời hạn cuối nhận tài trợ"
                 value={deadlineValue}
                 onChange={(e) => setDeadlineValue(e)}
                 disabled={noEdit}
               />
               <Typography variant="inherit" color={"error"}>
-                {errors.sponsorDeadline?.message}
+                {errors.deadline_sponsorship?.message}
               </Typography>
             </FormControl>
           </Grid>
@@ -306,7 +307,7 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
           <Grid item xs={12}>
             <FormControl fullWidth variant="standard">
               <Autocomplete
-                {...register("eventCategory")}
+                {...register("event_field")}
                 multiple
                 id="eventCategory"
                 options={categoriesOpt}
@@ -323,7 +324,7 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
                 )}
               />
               <Typography variant="inherit" color={"error"}>
-                {errors.eventCategory?.message}
+                {errors.event_field?.message}
               </Typography>
             </FormControl>
           </Grid>
@@ -331,15 +332,15 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
           <Grid item xs={12}>
             <FormControl fullWidth variant="standard">
               <TextField
-                {...register("totalReachCount")}
-                id="totalReachCount"
-                name="totalReachCount"
-                error={errors.totalReachCount ? true : false}
+                {...register("total_reach")}
+                id="total_reach"
+                name="total_reach"
+                error={errors.total_reach ? true : false}
                 disabled={noEdit}
                 label="Tổng lượt tiếp cận"
               />
               <Typography variant="inherit" color={"error"}>
-                {errors.totalReachCount?.message}
+                {errors.total_reach?.message}
               </Typography>
             </FormControl>
           </Grid>
@@ -347,15 +348,15 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
           <Grid item xs={12}>
             <FormControl fullWidth variant="standard">
               <TextField
-                {...register("offlineReachCount")}
-                id="offlineReachCount"
-                name="offlineReachCount"
-                error={errors.offlineReachCount ? true : false}
+                {...register("total_reach_in_house")}
+                id="total_reach_in_house"
+                name="total_reach_in_house"
+                error={errors.total_reach_in_house ? true : false}
                 disabled={noEdit}
                 label="Lượt tiếp cận trực tiếp tại sự kiện"
               />
               <Typography variant="inherit" color={"error"}>
-                {errors.offlineReachCount?.message}
+                {errors.total_reach_in_house?.message}
               </Typography>
             </FormControl>
           </Grid>
@@ -363,15 +364,15 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
           <Grid item xs={12}>
             <FormControl fullWidth variant="standard">
               <TextField
-                {...register("firstYearPersent")}
-                id="firstYearPersent"
-                name="firstYearPersent"
-                error={errors.firstYearPersent ? true : false}
+                {...register("first_year_attendee_percentage")}
+                id="first_year_attendee_percentage"
+                name="first_year_attendee_percentage"
+                error={errors.first_year_attendee_percentage ? true : false}
                 disabled={noEdit}
                 label="Tỷ lệ sinh viện năm 1 tại sự kiện"
               />
               <Typography variant="inherit" color={"error"}>
-                {errors.firstYearPersent?.message}
+                {errors.first_year_attendee_percentage?.message}
               </Typography>
             </FormControl>
           </Grid>
@@ -379,15 +380,15 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
           <Grid item xs={12}>
             <FormControl fullWidth variant="standard">
               <TextField
-                {...register("exclusivePackageValue")}
-                id="exclusivePackageValue"
-                name="exclusivePackageValue"
-                error={errors.exclusivePackageValue ? true : false}
+                {...register("exclusive_sponsorship")}
+                id="exclusive_sponsorship"
+                name="exclusive_sponsorship"
+                error={errors.exclusive_sponsorship ? true : false}
                 disabled={noEdit}
                 label="Giá trị Gói tài trợ Độc quyền"
               />
               <Typography variant="inherit" color={"error"}>
-                {errors.exclusivePackageValue?.message}
+                {errors.exclusive_sponsorship?.message}
               </Typography>
             </FormControl>
           </Grid>
@@ -395,15 +396,15 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
           <Grid item xs={12}>
             <FormControl fullWidth variant="standard">
               <TextField
-                {...register("diamondPackageValue")}
-                id="diamondPackageValue"
-                name="diamondPackageValue"
-                error={errors.diamondPackageValue ? true : false}
+                {...register("diamond_sponsorship")}
+                id="diamond_sponsorship"
+                name="diamond_sponsorship"
+                error={errors.diamond_sponsorship ? true : false}
                 disabled={noEdit}
                 label="Giá trị Gói tài trợ Kim cương"
               />
               <Typography variant="inherit" color={"error"}>
-                {errors.diamondPackageValue?.message}
+                {errors.diamond_sponsorship?.message}
               </Typography>
             </FormControl>
           </Grid>
@@ -411,15 +412,15 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
           <Grid item xs={12}>
             <FormControl fullWidth variant="standard">
               <TextField
-                {...register("goldPackageValue")}
-                id="goldPackageValue"
-                name="goldPackageValue"
-                error={errors.goldPackageValue ? true : false}
+                {...register("gold_sponsorship")}
+                id="gold_sponsorship"
+                name="gold_sponsorship"
+                error={errors.gold_sponsorship ? true : false}
                 disabled={noEdit}
                 label="Giá trị Gói tài trợ Vàng"
               />
               <Typography variant="inherit" color={"error"}>
-                {errors.goldPackageValue?.message}
+                {errors.gold_sponsorship?.message}
               </Typography>
             </FormControl>
           </Grid>
@@ -427,15 +428,31 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
           <Grid item xs={12}>
             <FormControl fullWidth variant="standard">
               <TextField
-                {...register("bronzePackageValue")}
-                id="bronzePackageValue"
-                name="bronzePackageValue"
-                error={errors.bronzePackageValue ? true : false}
+                {...register("silver_sponsorship")}
+                id="silver_sponsorship"
+                name="silver_sponsorship"
+                error={errors.silver_sponsorship ? true : false}
+                disabled={noEdit}
+                label="Giá trị Gói tài trợ Bạc"
+              />
+              <Typography variant="inherit" color={"error"}>
+                {errors.gold_sponsorship?.message}
+              </Typography>
+            </FormControl>
+          </Grid>
+
+          <Grid item xs={12}>
+            <FormControl fullWidth variant="standard">
+              <TextField
+                {...register("bronze_sponsorship")}
+                id="bronze_sponsorship"
+                name="bronze_sponsorship"
+                error={errors.bronze_sponsorship ? true : false}
                 disabled={noEdit}
                 label="Giá trị Gói tài trợ Đồng"
               />
               <Typography variant="inherit" color={"error"}>
-                {errors.bronzePackageValue?.message}
+                {errors.bronze_sponsorship?.message}
               </Typography>
             </FormControl>
           </Grid>
@@ -443,15 +460,15 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
           <Grid item xs={12}>
             <FormControl fullWidth variant="standard">
               <TextField
-                {...register("companionPackageValue")}
-                id="companionPackageValue"
-                name="companionPackageValue"
-                error={errors.companionPackageValue ? true : false}
+                {...register("companion_sponsorship")}
+                id="companion_sponsorship"
+                name="companion_sponsorship"
+                error={errors.companion_sponsorship ? true : false}
                 disabled={noEdit}
                 label="Giá trị Gói tài trợ  Đồng hành - Hảo tâm"
               />
               <Typography variant="inherit" color={"error"}>
-                {errors.companionPackageValue?.message}
+                {errors.companion_sponsorship?.message}
               </Typography>
             </FormControl>
           </Grid>
@@ -459,15 +476,15 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
           <Grid item xs={12}>
             <FormControl fullWidth variant="standard">
               <TextField
-                {...register("otherPackageValue")}
-                id="otherPackageValue"
-                name="otherPackageValue"
-                error={errors.otherPackageValue ? true : false}
+                {...register("other_sponsorship")}
+                id="other_sponsorship"
+                name="other_sponsorship"
+                error={errors.other_sponsorship ? true : false}
                 disabled={noEdit}
                 label="Giá trị Gói tài trợ  Khác (Nếu có)"
               />
               <Typography variant="inherit" color={"error"}>
-                {errors.otherPackageValue?.message}
+                {errors.other_sponsorship?.message}
               </Typography>
             </FormControl>
           </Grid>
@@ -475,15 +492,15 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
           <Grid item xs={12}>
             <FormControl fullWidth variant="standard">
               <TextField
-                {...register("proposalLink")}
-                id="proposalLink"
-                name="proposalLink"
-                error={errors.proposalLink ? true : false}
+                {...register("proposal")}
+                id="proposal"
+                name="proposal"
+                error={errors.proposal ? true : false}
                 disabled={noEdit}
                 label="Link Proposal tài trợ"
               />
               <Typography variant="inherit" color={"error"}>
-                {errors.proposalLink?.message}
+                {errors.proposal?.message}
               </Typography>
             </FormControl>
           </Grid>

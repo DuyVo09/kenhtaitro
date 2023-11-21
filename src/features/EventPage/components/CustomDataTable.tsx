@@ -3,18 +3,20 @@ import MUIDataTable, { MUIDataTableOptions } from "mui-datatables";
 import { MUIDataTableColumnDef } from "mui-datatables";
 import { IEventViewModel } from "../models";
 
-const tableMockData: IEventViewModel[] = [{
-  id: 1,
-  schoolName: "School name",
-  location: "Some location",
-  eventName: "Event name",
-  eventOrganization: "Organization name",
-  startTime: "12/12/2023",
-  endTime: "20/12/2023",
-  eventCategory: [],
-  schale: 150,
-  uploadTime: "11/2/2023"
-}];
+const tableMockData: IEventViewModel[] = [
+  // {
+//   id: 1,
+//   schoolName: "School name",
+//   location: "Some location",
+//   eventName: "Event name",
+//   eventOrganization: "Organization name",
+//   startTime: "12/12/2023",
+//   endTime: "20/12/2023",
+//   eventCategory: [],
+//   schale: 150,
+//   uploadTime: "11/2/2023"
+// }
+];
 
 function CustomDataTable() {
   const columns: MUIDataTableColumnDef[] = [
