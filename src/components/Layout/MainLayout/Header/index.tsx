@@ -1,9 +1,21 @@
 // import { ReactComponent as AppLogo } from "logo.svg";
-import { AppBar, Box, Button, IconButton, Typography } from "@mui/material";
+import {
+  AppBar,
+  Avatar,
+  Box,
+  Button,
+  FormControl,
+  FormControlLabel,
+  IconButton,
+  Radio,
+  RadioGroup,
+  Typography,
+} from "@mui/material";
 import { INavbarItem } from "./types";
 import { NavLink } from "react-router-dom";
 import { NotificationsNone } from "@mui/icons-material";
 import { NavbarItem } from "./NavbarItem";
+import { useState } from "react";
 
 const navbarItem: INavbarItem[] = [
   {
@@ -50,6 +62,16 @@ const navbarItem: INavbarItem[] = [
 ];
 
 function NavbarHeader() {
+  const [user, setUser] = useState(0);
+
+  const handleLogin = () => {
+    setUser(1);
+  };
+
+  const handleChangeUser = (e: any) => {
+    setUser(e.target.value);
+  };
+
   return (
     <AppBar
       sx={{
@@ -84,8 +106,53 @@ function NavbarHeader() {
         justifyContent="end"
         alignItems="center"
       >
-        <Button>Đăng ký</Button>
-        <Button>Đăng nhập</Button>
+        {user === 0 ? (
+          <>
+            <Button>Đăng ký</Button>
+            <Button onClick={handleLogin}>Đăng nhập</Button>
+          </>
+        ) : (
+          <Box display="flex" alignItems="center" p={3}>
+            <Box>
+              <FormControl>
+                <RadioGroup
+                  value={user}
+                  onChange={handleChangeUser}
+                  row
+                  aria-labelledby="demo-row-radio-buttons-group-label"
+                  name="row-radio-buttons-group"
+                >
+                  <FormControlLabel
+                    value={3}
+                    control={<Radio />}
+                    sx={{ color: "black" }}
+                    label="Admin"
+                  />
+                  <FormControlLabel
+                    value={2}
+                    control={<Radio />}
+                    sx={{ color: "black" }}
+                    label="Enterprise"
+                  />
+                  <FormControlLabel
+                    value={1}
+                    control={<Radio />}
+                    sx={{ color: "black" }}
+                    label="Organization"
+                  />
+                </RadioGroup>
+              </FormControl>
+            </Box>
+            <Avatar sx={{ width: 24, height: 24 }} />
+            <Typography
+              justifyContent="center"
+              textAlign="center"
+              color="black"
+            >
+              User
+            </Typography>
+          </Box>
+        )}
         <IconButton>
           <NotificationsNone />
         </IconButton>

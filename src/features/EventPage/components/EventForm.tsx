@@ -17,9 +17,11 @@ import {
   Button,
   Modal,
   Autocomplete,
+  Box,
 } from "@mui/material";
 import { useState } from "react";
-import { ImgUploadModal } from "./ImgUploadModal";
+import FileUpload from "components/Common/FileUploader";
+
 
 const categoriesOpt: ICategoryOption[] = [
   {
@@ -76,14 +78,15 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
   const [startTimeValue, setStartTimeValue] = useState<Dayjs | null>();
   const [endTimeValue, setEndTimeValue] = useState<Dayjs | null>();
   const [deadlineValue, setDeadlineValue] = useState<Dayjs | null>();
-
-  const [openModal, setOpenModal] = useState(false);
-  const handleOpen = () => setOpenModal(true);
-  const handleClose = () => setOpenModal(false);
+  const [files, setFiles] = useState<File[]>([]);
 
   const [selectedCategories, setSelectedCategories] = useState<
     ICategoryOption[]
   >([]);
+
+  const handleUploadFiles = (files: File[]) => {
+    setFiles((pre) => [...pre, ...files])
+  }
 
   const handleFormSubmit = (formValues: IEventDataModel) => {
     try {
@@ -229,9 +232,14 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
             </FormControl>
           </Grid>
 
-          <Grid item xs={9}>
-            <FormLabel>Hình ảnh sự kiện</FormLabel>
+          {/* <Grid item xs={9}>
+            <Box height={150} display='flex' flex="auto" border={1}></Box>
+          </Grid> */}
 
+          <Grid item xs={12}>
+            <FormLabel>Hình ảnh sự kiện</FormLabel>
+            
+            <FileUpload value={files} onChange={handleUploadFiles} />
           </Grid>
 
           <Grid item xs={12}>
