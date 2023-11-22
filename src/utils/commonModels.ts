@@ -17,3 +17,12 @@ export interface MetaData {
   total_page: number;
   limit: number;
 }
+
+export interface ExtraResponse<T> {
+  config: any;
+  data: T;
+  header: any;
+  request: any;
+  status: number;
+  statusText: string;
+}

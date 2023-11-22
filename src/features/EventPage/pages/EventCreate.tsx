@@ -2,6 +2,7 @@ import { Box, Button, Typography, Grid } from "@mui/material";
 import { EventForm } from "../components";
 import { IEventDataModel } from "../models";
 import { SubmitHandler } from "react-hook-form";
+import { organizerEventApi } from "../eventsApi";
 
 const mockData: IEventDataModel = {
   // bannerImage: "string",
@@ -40,8 +41,13 @@ const formStatus = "Waiting";
 
 export function EventCreate() {
   const handleFormSubmit: SubmitHandler<IEventDataModel> = (formValues) => {
-    console.log(formValues);
+    organizerEventApi.sendCreateRequest(formValues).then(
+      res => {
+        console.log(res);
+      }
+    ).catch(error => console.log(error))
   };
+  
   return (
     <Box px={20} display="flex" flexDirection="column">
       <Box
@@ -83,35 +89,6 @@ export function EventCreate() {
         />
       </Box>
 
-      <Box my={5} p={3} height={250} border={1}>
-        Lý do từ chối
-      </Box>
-
-      <Box my={1} display="flex" justifyContent="space-between">
-        <Button sx={{ textDecoration: "none" }} variant="contained">
-          Lưu nháp
-        </Button>
-
-        <Button sx={{ textDecoration: "none" }} variant="contained">
-          Hủy bài nháp
-        </Button>
-
-        <Button sx={{ textDecoration: "none" }} variant="contained">
-          Hủy bỏ
-        </Button>
-      </Box>
-
-      <Box  my={1} display="flex" justifyContent="space-between">
-        <Button sx={{ textDecoration: "none" }} variant="contained">
-          Gửi bài
-        </Button>
-        <Button sx={{ textDecoration: "none" }} variant="contained">
-          Chấp nhận
-        </Button>
-        <Button sx={{ textDecoration: "none" }} variant="contained">
-          Từ chối
-        </Button>
-      </Box>
     </Box>
   );
 }

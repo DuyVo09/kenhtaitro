@@ -1,5 +1,5 @@
 import { axiosClient } from "utils/axiosClient";
-import { ListParams, BaseResponse } from "utils/commonModels";
+import { ListParams, BaseResponse, ExtraResponse } from "utils/commonModels";
 import { IEventViewModel, SponserParams, SponsorDataModel } from "./models";
 
 export const organizerHomeApi = {
@@ -10,7 +10,7 @@ export const organizerHomeApi = {
 };
 
 export const businessHomeApi = {
-  getRecent(params: ListParams): Promise<BaseResponse<IEventViewModel[]>> {
+  getRecent(params: ListParams): Promise<ExtraResponse<BaseResponse<IEventViewModel[]>>> {
     const url = `/events/newest/search`;
     return axiosClient.get(url, { params });
   },

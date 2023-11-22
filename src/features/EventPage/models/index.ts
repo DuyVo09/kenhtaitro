@@ -3,6 +3,19 @@ export interface EventStatus {
     is_published: boolean;
 }
 
+export interface EventDataTable {
+  id: 1,
+  school: string,
+  location: string,
+  event_name: string,
+  organizer: string,
+  start_date: string,
+  end_date: string,
+  event_field: string,
+  schale: number,
+  upload_time: string
+}
+
 export interface IEventViewModel {
   id: number;
   school: string;
@@ -29,7 +42,7 @@ export type IEventDataModel = {
   location: string;
   event_name: string;
   event_description: string;
-  event_image?: string;
+  event_image: string;
   organizer: string;
   start_date: Date;
   end_date: Date;
@@ -44,7 +57,7 @@ export type IEventDataModel = {
   silver_sponsorship: number;
   bronze_sponsorship: number;
   companion_sponsorship: number;
-  other_sponsorship?: number;
+  other_sponsorship?: number | null;
   proposal: string;
   notes?: string | null;
   is_published?: boolean;

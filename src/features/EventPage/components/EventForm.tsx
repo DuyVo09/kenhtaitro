@@ -22,56 +22,92 @@ import {
 import { useState } from "react";
 import FileUpload from "components/Common/FileUploader";
 
+// const categoriesOpt: ICategoryOption[] = [
+//   {
+//     label: "Field 1",
+//     id: 1,
+//   },
+//   {
+//     label: "Field 2",
+//     id: 2,
+//   },
+//   {
+//     label: "Field 3",
+//     id: 3,
+//   },
+//   {
+//     label: "Field 4",
+//     id: 4,
+//   },
+//   {
+//     label: "Field 5",
+//     id: 5,
+//   },
+// ];
 
-const categoriesOpt: ICategoryOption[] = [
-  {
-    label: "Field 1",
-    id: 1,
-  },
-  {
-    label: "Field 2",
-    id: 2,
-  },
-  {
-    label: "Field 3",
-    id: 3,
-  },
-  {
-    label: "Field 4",
-    id: 4,
-  },
-  {
-    label: "Field 5",
-    id: 5,
-  },
-];
+const categoriesOpt = ["Field 1", "Field 2", "Field 3", "Field 4"];
+
+const requiredMsg = "Trường thông tin này là bắt buộc";
 
 const validationSchema = yup.object().shape({
-  // bannerImage: yup.string().required(),
-  full_name: yup.string().required(),
-  phone: yup.string().required(),
-  email: yup.string().required("Vui lòng nhập email liên hệ"),
-  school: yup.string().required(),
-  location: yup.string().required(),
-  event_name: yup.string().required().max(90),
-  event_description: yup.string().required().min(50).max(3000),
-  event_image: yup.string(),
-  organizer: yup.string().required(),
-  start_date: yup.date().required(),
-  end_date: yup.date().required(),
-  deadline_sponsorship: yup.string().required(),
-  event_field: yup.string().required(),
-  total_reach: yup.number().required(),
-  total_reach_in_house: yup.number().required(),
-  first_year_attendee_percentage: yup.number(),
-  exclusive_sponsorship: yup.number().required(),
-  diamond_sponsorship: yup.number().required(),
-  gold_sponsorship: yup.number().required(),
-  silver_sponsorship: yup.number().required(),
-  bronze_sponsorship: yup.number().required(),
-  companion_sponsorship: yup.number().required(),
-  other_sponsorship: yup.number(),
-  proposal: yup.string().required(),
+  // bannerImage: yup.string().required(requiredMsg),
+  full_name: yup.string().required(requiredMsg),
+  phone: yup.string().required(requiredMsg),
+  email: yup.string().required(requiredMsg),
+  school: yup.string().required(requiredMsg),
+  location: yup.string().required(requiredMsg),
+  event_name: yup.string().required(requiredMsg).max(90),
+  event_description: yup
+    .string()
+    .required(requiredMsg)
+    .min(50, "Phải nhập ít nhất 50 kí tự")
+    .max(3000),
+  event_image: yup.string().required(requiredMsg),
+  organizer: yup.string().required(requiredMsg),
+  start_date: yup.date().required(requiredMsg).typeError("Invalid Date"),
+  end_date: yup.date().required(requiredMsg).typeError("Invalid Date"),
+  deadline_sponsorship: yup.string().required(requiredMsg),
+  event_field: yup.string().required(requiredMsg),
+  total_reach: yup
+    .number()
+    .required(requiredMsg)
+    .typeError("Trường này chỉ nhập số"),
+  total_reach_in_house: yup
+    .number()
+    .required(requiredMsg)
+    .typeError("Trường này chỉ nhập số"),
+  first_year_attendee_percentage: yup
+    .number()
+    .typeError("Trường này chỉ nhập số"),
+  exclusive_sponsorship: yup
+    .number()
+    .required(requiredMsg)
+    .typeError("Trường này chỉ nhập số"),
+  diamond_sponsorship: yup
+    .number()
+    .required(requiredMsg)
+    .typeError("Trường này chỉ nhập số"),
+  gold_sponsorship: yup
+    .number()
+    .required(requiredMsg)
+    .typeError("Trường này chỉ nhập số"),
+  silver_sponsorship: yup
+    .number()
+    .required(requiredMsg)
+    .typeError("Trường này chỉ nhập số"),
+  bronze_sponsorship: yup
+    .number()
+    .required(requiredMsg)
+    .typeError("Trường này chỉ nhập số"),
+  companion_sponsorship: yup
+    .number()
+    .required(requiredMsg)
+    .typeError("Trường này chỉ nhập số"),
+  other_sponsorship: yup
+    .number()
+    .nullable()
+    .transform((_, val) => (val ? Number(val) : null)),
+  proposal: yup.string().required(requiredMsg),
 });
 
 const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
@@ -80,34 +116,68 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
   const [deadlineValue, setDeadlineValue] = useState<Dayjs | null>();
   const [files, setFiles] = useState<File[]>([]);
 
-  const [selectedCategories, setSelectedCategories] = useState<
-    ICategoryOption[]
-  >([]);
+  const [selectedCategories, setSelectedCategories] = useState<string | null>(
+    categoriesOpt[0]
+  );
 
   const handleUploadFiles = (files: File[]) => {
     setFiles((pre) => [...pre, ...files]);
-    setValue("event_image", "");
-  }
+    setValue("event_image", "new string");
+  };
+
+  const handleSelectStartDate = (value: Dayjs | null) => {
+    setStartTimeValue(value);
+    if (value) {
+      setValue("start_date", value.toDate());
+    }
+  };
+
+  const handleSelectEndDate = (value: Dayjs | null) => {
+    setEndTimeValue(value);
+    if (value) {
+      setValue("end_date", value.toDate());
+    }
+  };
+
+  const handleSelecDeadlineDate = (value: Dayjs | null) => {
+    setDeadlineValue(value);
+    if (value) {
+      setValue("deadline_sponsorship", value.toString());
+    }
+  };
+
+  const handleSelectField = (e: any, value: string | null) => {
+    setSelectedCategories(value);
+    if (value) {
+      setValue("event_field", value);
+    }
+  };
 
   const handleFormSubmit = (formValues: IEventDataModel) => {
     try {
       onSubmit?.(formValues);
-    } catch (error: any) { }
+    } catch (error: any) {}
+  };
+
+  const handleFormError = (e: any) => {
+    // console.log(getValues('event_image'))
+    console.log(e);
   };
 
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors, isSubmitting },
     setValue,
   } = useForm({
-    defaultValues: initialValue,
+    // defaultValues: initialValue,
     resolver: yupResolver(validationSchema),
   });
 
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="en-gb">
-      <form onSubmit={handleSubmit(handleFormSubmit)}>
+    <form onSubmit={handleSubmit(handleFormSubmit, handleFormError)}>
+      <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="en-gb">
         <Grid container spacing={5} sx={{ my: 3 }}>
           <Grid item xs={12}>
             <Typography>Thông tin liên hệ</Typography>
@@ -239,7 +309,7 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
 
           <Grid item xs={12}>
             <FormLabel>Hình ảnh sự kiện</FormLabel>
-            
+
             <FileUpload value={files} onChange={handleUploadFiles} />
           </Grid>
 
@@ -262,10 +332,9 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
           <Grid item xs={12}>
             <FormControl fullWidth variant="standard">
               <DateTimePicker
-                {...register("start_date")}
                 label="Thời gian bắt đầu"
                 value={startTimeValue}
-                onChange={(e) => setStartTimeValue(e)}
+                onChange={handleSelectStartDate}
                 disabled={noEdit}
               />
               <Typography variant="inherit" color={"error"}>
@@ -277,10 +346,9 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
           <Grid item xs={12}>
             <FormControl fullWidth variant="standard">
               <DateTimePicker
-                {...register("end_date")}
                 label="Thời gian kết thúc"
                 value={endTimeValue}
-                onChange={(e) => setEndTimeValue(e)}
+                onChange={handleSelectEndDate}
                 disabled={noEdit}
               />
               <Typography variant="inherit" color={"error"}>
@@ -292,10 +360,9 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
           <Grid item xs={12}>
             <FormControl fullWidth variant="standard">
               <DateTimePicker
-                {...register("deadline_sponsorship")}
                 label="Thời hạn cuối nhận tài trợ"
                 value={deadlineValue}
-                onChange={(e) => setDeadlineValue(e)}
+                onChange={handleSelecDeadlineDate}
                 disabled={noEdit}
               />
               <Typography variant="inherit" color={"error"}>
@@ -307,14 +374,13 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
           <Grid item xs={12}>
             <FormControl fullWidth variant="standard">
               <Autocomplete
-                {...register("event_field")}
-                multiple
-                id="eventCategory"
+                // multiple
+                // id="eventCategory"
                 options={categoriesOpt}
-                getOptionLabel={(opt) => opt.label}
+                // getOptionLabel={(opt) => opt.label}
                 filterSelectedOptions
                 value={selectedCategories}
-                onChange={(e, value) => setSelectedCategories(value)}
+                onChange={handleSelectField}
                 renderInput={(params) => (
                   <TextField
                     {...params}
@@ -505,8 +571,42 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
             </FormControl>
           </Grid>
         </Grid>
-      </form>
-    </LocalizationProvider>
+
+        <Box my={5} p={3} height={250} border={1}>
+          Lý do từ chối
+        </Box>
+
+        <Box my={1} display="flex" justifyContent="space-between">
+          <Button sx={{ textDecoration: "none" }} variant="contained">
+            Lưu nháp
+          </Button>
+
+          <Button sx={{ textDecoration: "none" }} variant="contained">
+            Hủy bài nháp
+          </Button>
+
+          <Button sx={{ textDecoration: "none" }} variant="contained">
+            Hủy bỏ
+          </Button>
+        </Box>
+
+        <Box my={1} display="flex" justifyContent="space-between">
+          <Button
+            type="submit"
+            sx={{ textDecoration: "none" }}
+            variant="contained"
+          >
+            Gửi bài
+          </Button>
+          <Button sx={{ textDecoration: "none" }} variant="contained">
+            Chấp nhận
+          </Button>
+          <Button sx={{ textDecoration: "none" }} variant="contained">
+            Từ chối
+          </Button>
+        </Box>
+      </LocalizationProvider>
+    </form>
   );
 };
 

@@ -1,21 +1,21 @@
 import { Button, Box } from "@mui/material";
 import MUIDataTable, { MUIDataTableOptions } from "mui-datatables";
 import { MUIDataTableColumnDef } from "mui-datatables";
-import { IEventViewModel } from "../models";
+import { EventDataTable, IEventViewModel } from "../models";
 
-const tableMockData: IEventViewModel[] = [
-  // {
-//   id: 1,
-//   schoolName: "School name",
-//   location: "Some location",
-//   eventName: "Event name",
-//   eventOrganization: "Organization name",
-//   startTime: "12/12/2023",
-//   endTime: "20/12/2023",
-//   eventCategory: [],
-//   schale: 150,
-//   uploadTime: "11/2/2023"
-// }
+const tableMockData: EventDataTable[] = [
+  {
+  id: 1,
+  school: "School name",
+  location: "Some location",
+  event_name: "Event name",
+  organizer: "Organization name",
+  start_date: "12/12/2023",
+  end_date: "12/12/2023",
+  event_field: "",
+  schale: 150,
+  upload_time: "12/12/2023"
+}
 ];
 
 function CustomDataTable() {
@@ -37,7 +37,7 @@ function CustomDataTable() {
       },
     },
     {
-      name: "schoolName",
+      name: "school",
       label: "Tên trường",
       options: {
         filter: false,
@@ -53,7 +53,7 @@ function CustomDataTable() {
       },
     },
     {
-      name: "eventName",
+      name: "event_name",
       label: "Tên sự kiện",
       options: {
         filter: false,
@@ -61,7 +61,7 @@ function CustomDataTable() {
       },
     },
     {
-      name: "eventOrganization",
+      name: "organizer",
       label: "Đơn vị tổ chức sự kiện",
       options: {
         filter: false,
@@ -69,7 +69,7 @@ function CustomDataTable() {
       },
     },
     {
-      name: "startTime",
+      name: "start_date",
       label: "Thời gian bắt đầu",
       options: {
         filter: false,
@@ -77,7 +77,7 @@ function CustomDataTable() {
       },
     },
     {
-      name: "endTime",
+      name: "end_date",
       label: "Thời gian kết thúc",
       options: {
         filter: false,
@@ -85,7 +85,7 @@ function CustomDataTable() {
       },
     },
     {
-      name: "eventCategory",
+      name: "event_field",
       label: "Lĩnh vực sự kiện",
       options: {
         filter: false,
@@ -101,7 +101,7 @@ function CustomDataTable() {
       },
     },
     {
-      name: "uploadTime",
+      name: "upload_time",
       label: "Thời điểm úp bài",
       options: {
         filter: false,

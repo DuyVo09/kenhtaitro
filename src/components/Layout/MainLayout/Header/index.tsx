@@ -15,7 +15,9 @@ import { INavbarItem } from "./types";
 import { NavLink } from "react-router-dom";
 import { NotificationsNone } from "@mui/icons-material";
 import { NavbarItem } from "./NavbarItem";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { authAction, selectUser } from "features/Authentication/saga/authSlice";
 
 const navbarItem: INavbarItem[] = [
   {
@@ -28,12 +30,22 @@ const navbarItem: INavbarItem[] = [
     label: "Sự kiện",
     children: [
       {
+        path: "/events",
+        label: "Xem sự kiện",
+        children: null,
+      },
+      {
+        path: "/events/manage",
+        label: "Quản lý sự kiện",
+        children: null,
+      },
+      {
         path: "/events/create",
         label: "Tạo sự kiện",
         children: null,
       },
       {
-        path: "/events",
+        path: "/events/my",
         label: "Sự kiện của tôi",
         children: null,
       },
@@ -62,14 +74,15 @@ const navbarItem: INavbarItem[] = [
 ];
 
 function NavbarHeader() {
-  const [user, setUser] = useState(0);
+  const dispatch = useDispatch();
+  const user = useSelector(selectUser)
 
   const handleLogin = () => {
-    setUser(1);
+    dispatch(authAction.login());
   };
 
   const handleChangeUser = (e: any) => {
-    setUser(e.target.value);
+    dispatch(authAction.switch(e.target.value))
   };
 
   return (

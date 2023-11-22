@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Add } from "@mui/icons-material";
 import { Box, Button } from "@mui/material";
 
@@ -9,33 +9,32 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { OrganizationView } from "./OrganizationView";
 import { BusinessView } from "./BusinessView";
+import { useSelector } from "react-redux";
+import { selectUser } from "features/Authentication/saga/authSlice";
 
-const carouselLst = [1, 2, 3, 4, 5];
-
-const carouselSetting = {
-  dots: true,
-  infinite: true,
-  autoplay: true,
-  speed: 200,
-  slidesToShow: 2,
-  slidesToScroll: 1,
-};
-
-var user = 2;
 export function HomeScreen() {
-  function getView() {
-    switch (user) {
+  // const user = useSelector(selectUser);
+  const user = 2;
+
+  const  getView = (type: number) => {
+    switch (type) {
       case 1:
-        return <OrganizationView />
+        return <OrganizationView />;
       case 2:
-        return <BusinessView />
+        return <BusinessView />;
+      default:
+        return null;
     }
   }
+
+  useEffect(() => {}, [user])
+
+  console.log(user)
 
   return (
     <Box px={20} display="flex" flexDirection="column">
       {/* Banner */}
-      {getView()}
+      {getView(user)}
     </Box>
   );
 }

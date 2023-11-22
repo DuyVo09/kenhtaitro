@@ -1,10 +1,14 @@
 import { axiosClient } from "utils/axiosClient";
 import { EventStatus, IEventDataModel, IEventViewModel } from "./models";
-import { BaseResponse } from "utils/commonModels";
+import { BaseResponse, ListParams, ExtraResponse } from "utils/commonModels";
 
 export const eventsApi = {
   getById(id: number): Promise<BaseResponse<IEventDataModel>> {
     const url = `/events/${id}`;
+    return axiosClient.get(url);
+  },
+  getAll(params: ListParams): Promise<ExtraResponse<BaseResponse<IEventDataModel[]>>> {
+    const url = `/events/event/all`;
     return axiosClient.get(url);
   },
 };
