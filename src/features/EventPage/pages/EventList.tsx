@@ -5,22 +5,22 @@ import { IEventViewModel } from "features/Homepage/models";
 import { eventsApi } from "../eventsApi";
 import { IEventDataModel } from "../models";
 
-const mockEvent: IEventViewModel[] = [
-  {
-    id: 1,
-    event_image: "",
-    event_name: "Some name",
-    event_description: "Description about the event",
-    organizer: "First organizer",
-    location: "Viet Nam",
-    created_at: new Date(),
-  },
-];
+// const mockEvent: IEventViewModel[] = [
+//   {
+//     id: 1,
+//     event_image: "",
+//     event_name: "Some name",
+//     event_description: "Description about the event",
+//     organizer: "First organizer",
+//     location: "Viet Nam",
+//     created_at: new Date(),
+//   },
+// ];
 
 function EventList() {
   const [eventList, setEventList] = useState<IEventDataModel[]>([]);
   useEffect(() => {
-    // setEventList(mockEvent);
+    // z
     eventsApi
       .getAll({ limit: 2, page: 1 })
       .then((data) => setEventList(data.data.data))

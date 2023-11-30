@@ -116,9 +116,7 @@ const EventForm = ({ initialValue, onSubmit, noEdit }: IEventFormProps) => {
   const [deadlineValue, setDeadlineValue] = useState<Dayjs | null>();
   const [files, setFiles] = useState<File[]>([]);
 
-  const [selectedCategories, setSelectedCategories] = useState<string | null>(
-    categoriesOpt[0]
-  );
+  const [selectedCategories, setSelectedCategories] = useState<string | null>();
 
   const handleUploadFiles = (files: File[]) => {
     setFiles((pre) => [...pre, ...files]);

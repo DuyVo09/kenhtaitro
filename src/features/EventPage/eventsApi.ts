@@ -3,11 +3,13 @@ import { EventStatus, IEventDataModel, IEventViewModel } from "./models";
 import { BaseResponse, ListParams, ExtraResponse } from "utils/commonModels";
 
 export const eventsApi = {
-  getById(id: number): Promise<BaseResponse<IEventDataModel>> {
+  getById(id: number): Promise<ExtraResponse<BaseResponse<IEventDataModel>>> {
     const url = `/events/${id}`;
     return axiosClient.get(url);
   },
-  getAll(params: ListParams): Promise<ExtraResponse<BaseResponse<IEventDataModel[]>>> {
+  getAll(
+    params: ListParams
+  ): Promise<ExtraResponse<BaseResponse<IEventDataModel[]>>> {
     const url = `/events/event/all`;
     return axiosClient.get(url);
   },
@@ -22,7 +24,9 @@ export const organizerEventApi = {
     data: IEventDataModel
   ): Promise<BaseResponse<IEventDataModel>> {
     const url = `/events/organizer/event`;
-    return axiosClient.post(url, data);
+    return axiosClient.post(url, data, {headers: {
+      'Content-Type': 'multipart/form-data'
+    }});
   },
   saveDraft(data: IEventDataModel): Promise<BaseResponse<IEventDataModel>> {
     const url = `/events/organizer/draft`;
@@ -53,10 +57,8 @@ export const adminEventsApi = {
     const url = `/events/admin/${id}/lock-unlock`;
     return axiosClient.put(url, { is_published: is_published });
   },
-  delete(
-    id: string
-  ) {
+  delete(id: string) {
     const url = `/events/admin/${id}`;
     return axiosClient.delete(url);
-  }
+  },
 };
