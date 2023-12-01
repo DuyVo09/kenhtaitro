@@ -5,11 +5,17 @@ const config: Config = {
     "./app/**/*.{ts,tsx}", // Note the addition of the `app` directory.
     "./common/**/*.{ts,tsx}",
     "./modules/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
   ],
+  corePlugins: {
+    preflight: false,
+  },
+  // important: '#__next',
+  // prefix: 'th-',
   theme: {
     extend: {
       colors: {
-        primary: "#AC907F",
+        primary: "#0986CA",
         secondary: "#EF940C",
         background: "#FFF6F6",
         light: "#F9F9F9",
@@ -31,6 +37,6 @@ const config: Config = {
       },
     },
   },
-  plugins: [require("@tailwindcss/line-clamp")],
+  plugins: [],
 };
 export default config;
