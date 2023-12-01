@@ -1,7 +1,8 @@
 import {BannerSection} from "@/modules/home/sections";
+import { Box } from "@mui/material";
 
 function Homepage() {
-  return <div className="flex-col flex w-full items-center">
+  return <Box className="flex-col flex w-full items-center">
     {/* Banner section */}
     <BannerSection />
     {/* Event list section */}
@@ -13,7 +14,7 @@ function Homepage() {
     {/* Category 3 section */}
     {/* Hot blog section */}
     {/* About us section */}
-  </div>;
+  </Box>;
 }
 
 export default Homepage;
