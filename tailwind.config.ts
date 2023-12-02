@@ -10,6 +10,7 @@ const config: Config = {
   corePlugins: {
     preflight: false,
   },
+  important: true,
   // important: '#__next',
   // prefix: 'th-',
   theme: {

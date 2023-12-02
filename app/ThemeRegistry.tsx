@@ -9,6 +9,7 @@ import { useState } from 'react';
 const theme = createTheme({
     typography: {
         fontFamily: 'inherit',
+        // htmlFontSize: 10,
         // fontSize: 'inherit',
     }
 });

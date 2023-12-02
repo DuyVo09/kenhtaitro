@@ -24,7 +24,7 @@ export const ActiveLink = ({
       {...props}
       className={classNames(
         props.className,
-        isActive ? (activeClassName || "") : "text-black"        
+        isActive ? (activeClassName || "") : "text-black hover:text-primary"
       )}
       style={{textDecoration: 'none', }}
     >
