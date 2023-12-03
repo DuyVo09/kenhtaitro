@@ -1,4 +1,4 @@
-import AppHeader from "@/components/AppHeader";
+import AppHeader from "@components/AppHeader";
 import { Box, Typography, Button } from "@mui/material";
 import { PlayArrow } from "@mui/icons-material";
 import Image from "next/image";
@@ -92,7 +92,7 @@ const BannerSection = () => {
                 src="/images/homepage/topEvent.png"
                 style={{
                   objectFit: "cover",
-                  borderRadius: '10px'
+                  borderRadius: "10px",
                 }}
               />
             </Box>

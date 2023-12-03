@@ -1,4 +1,4 @@
-import { EventCard } from "@/components/EventCard";
+import { EventCard } from "@components/EventCard";
 import { Box, Grid, Typography } from "@mui/material";
 import Image from "next/image";
 
