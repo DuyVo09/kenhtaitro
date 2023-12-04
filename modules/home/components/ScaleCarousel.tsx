@@ -14,6 +14,7 @@ export function ScaleCarousel() {
   const sliderSetting: Settings = {
     // className: "center",
     dots: true,
+    variableWidth: true,
     // centerMode: true,
     infinite: true,
     centerPadding: "10px",
