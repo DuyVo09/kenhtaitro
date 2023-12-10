@@ -48,7 +48,7 @@ function AppHeader() {
           style={{ objectFit: "contain" }}
         />
       </div>
-      <div className="flex flex-auto justify-between px-5">
+      <div className="flex flex-auto justify-between px-5 max-w-[1000px]">
         {navigation.map(({ path, label }) => (
           <ActiveLink
             key={path}

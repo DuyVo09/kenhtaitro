@@ -9,7 +9,6 @@ const BannerSection = () => {
       className="flex flex-col h-[600px] w-full bg-cover"
       style={{ backgroundImage: "url('/images/homeBanner.png')" }}
     >
-      <AppHeader />
       <Box display="flex" flex={1}>
         <Box
           display="flex"
