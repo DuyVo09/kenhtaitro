@@ -1,4 +1,4 @@
-export * from "./BannerSection";
+export * from "../../../common/components/BannerSection";
 export * from "./NewestEventSection";
 export * from "./NumericSection";
 export * from "./SponsorSection";

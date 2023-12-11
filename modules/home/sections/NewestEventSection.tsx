@@ -21,7 +21,7 @@ export function NewestEventSection() {
       width="100%"
       alignItems="center"
     >
-      <Typography className="text-5xl text-primary font-bold py-24">
+      <Typography className="text-5xl text-primary font-bold p-20">
         Sự kiện mới nhất
       </Typography>
       <Grid container>

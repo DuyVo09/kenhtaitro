@@ -40,7 +40,6 @@ function Homepage() {
 
       <PartnerSection />
       <QuoteSection />
-      <AppFooter />
     </Box>
   );
 }

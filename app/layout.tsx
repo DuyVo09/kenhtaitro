@@ -18,7 +18,7 @@ const montserrat = Montserrat({
   fallback: ["Quicksand"],
 });
 
-export default function RootLayout({ children, params, ...props }: any) {
+export default function RootLayout({ children, params,  }: any) {
   return (
     <html lang="en">
       <StyledEngineProvider injectFirst>
