@@ -1,4 +1,3 @@
-import AppHeader from "@components/AppHeader";
 import { Box, Typography, Button } from "@mui/material";
 import { PlayArrow } from "@mui/icons-material";
 import Image from "next/image";
@@ -6,7 +5,7 @@ import Image from "next/image";
 const BannerSection = () => {
   return (
     <Box
-      className="flex flex-col h-[600px] w-full bg-cover mb-[50px]"
+      className="flex flex-col h-[600px] w-full bg-cover"
       style={{ backgroundImage: "url('/images/homeBanner.png')" }}
     >
       <Box display="flex" flex={1}>

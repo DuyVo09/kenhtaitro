@@ -3,17 +3,16 @@ import { TEventCardProps } from "./types";
 import Image from "next/image";
 import { GroupsOutlined } from "@mui/icons-material";
 
-export const EventCard = ({
+export const DescripEventCard = ({
   img,
   title,
   description,
   location,
-  date,
   participant,
   ...rest
 }: TEventCardProps) => {
   return (
-    <Paper sx={{ width: rest.width ?? "300px", m: 3, ...rest }}>
+    <Paper sx={{ width: rest.width ?? "300px", m: 3 }}>
       <Box
         display="flex"
         flex={1}
@@ -37,7 +36,10 @@ export const EventCard = ({
           alignItems: "center",
         }}
       >
-        <Typography className="font-bold  py-5">{title}</Typography>
+        <Typography className="font-bold text-center text-transparent bg-clip-text bg-gradient-to-b from-primary to-[#D7C7FF] py-5">
+          {title}
+        </Typography>
+        <Typography className="font-light py-2">{description}</Typography>
         <Box
           display="flex"
           justifyContent="space-between"
@@ -53,14 +55,13 @@ export const EventCard = ({
               textOverflow: "ellipsis",
             }}
           >
-            {date}
+            {location}
           </Typography>
           <Box display="flex">
             <GroupsOutlined sx={{ mx: 1 }} />
             <Typography>{`Upto ${participant}`}</Typography>
           </Box>
         </Box>
-        <Typography className="w-full py-5 text-slate-400">{location}</Typography>
       </Box>
     </Paper>
   );

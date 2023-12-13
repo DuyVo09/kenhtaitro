@@ -4,7 +4,7 @@ import { INavigation } from "../AppHeader/types";
 
 function DropdownMenu({children}: {children: INavigation[]}) {
   return (
-    <div className="hidden absolute top-full peer-hover:flex hover:flex w-[200px] flex-col bg-white drop-shadow-lg">
+    <div className="hidden absolute top-full peer-hover:flex hover:flex w-[200px] flex-col bg-white drop-shadow-lg z-10">
       {children.map(({ path, label }) => (
         <ActiveLink
           key={path}

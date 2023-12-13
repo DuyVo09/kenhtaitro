@@ -11,13 +11,10 @@ const imageLst = [
 
 export function PartnerSection() {
   return (
-    <Box display="flex" flexDirection="column" width="100%" my={2} px='7%'>
+    <Box display="flex" flexDirection="column" width="100%" my={2} px="7%">
       <Box display="flex" width="100%">
-        <Typography className="text-6xl font-bold text-primary">
-          ĐỐI TÁC
-        </Typography>{" "}
         <Typography className="text-6xl font-bold ml-4">
-          CỦA CHÚNG TÔI
+          <span className="text-primary">ĐỐI TÁC</span> CỦA CHÚNG TÔI
         </Typography>
       </Box>
       <Box display="flex" flexDirection="column" alignItems="center" py={7}>
@@ -29,7 +26,7 @@ export function PartnerSection() {
         </Typography>
       </Box>
 
-      <Box display="flex" justifyContent="space-between" >
+      <Box display="flex" justifyContent="space-between">
         {imageLst.map((image, index) => (
           <Box
             key={index}
@@ -42,7 +39,7 @@ export function PartnerSection() {
               src={image}
               alt={`Image ${index + 1}`}
               fill
-              objectFit="contain"
+              style={{ objectFit: "contain" }}
             />
           </Box>
         ))}
