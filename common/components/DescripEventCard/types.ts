@@ -5,6 +5,5 @@ export interface TEventCardProps extends BoxProps {
     title: string;
     description: string;
     location: string;
-    date: string;
     participant: number;
 }

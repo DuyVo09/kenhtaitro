@@ -7,6 +7,11 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { useState } from 'react';
 
 const theme = createTheme({
+    palette: {
+      primary: {
+        main: "#0986CA"
+      }
+    },
     typography: {
         fontFamily: 'inherit',
         // htmlFontSize: 10,

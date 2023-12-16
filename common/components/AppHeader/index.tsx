@@ -52,14 +52,15 @@ function AppHeader() {
       </div>
       <div className="flex flex-auto justify-between px-5 max-w-[1000px]">
         {navigation.map(({ path, label, children }) => (
-          <div key={path + label} className="flex relative">
+          <div className="flex relative">
             <ActiveLink
-              // key={path+label}
+              key={path + label}
               href={path}
+              childPath={children}
               activeClassName="group is-active font-bold text-transparent bg-clip-text bg-gradient-to-b from-[#659FDF] to-[#B7B5F1]"
               className="group peer relative uppercase pt-3 pb-2 font-medium"
             >
-              <div className="group-[.is-active]:before:block before:absolute before:w-full before:border-primary before:top-[-14px] before:hidden">
+              <div className="relative group-[.is-active]:before:block before:absolute before:w-full before:border-primary before:top-[-14px] before:hidden">
                 {label}
               </div>
               {children && (

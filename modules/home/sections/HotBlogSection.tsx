@@ -14,10 +14,9 @@ export function HotBlogSection() {
     >
       <Box display="flex" width="100%">
         <Box display="flex" flex={1}>
-          <Typography className="text-6xl font-bold text-primary">
-            BLOG
-          </Typography>{" "}
-          <Typography className="text-6xl font-bold ml-4">NỔI BẬT</Typography>
+          <Typography className="text-6xl font-bold ml-4">
+            <span className="text-primary">BLOG</span> NỔI BẬT
+          </Typography>
         </Box>
         <Box display="flex" color="#7848F4">
           <Typography className="font-medium italic">Xem tất cả</Typography>
@@ -29,7 +28,7 @@ export function HotBlogSection() {
         tempor incididunt
       </Typography>
 
-      <Box display="flex" width='100%'>
+      <Box display="flex" width="100%">
         <BlogCard
           img="/images/homepage/eventImg.png"
           title="Chương trình chào mừng ngày Nhà giáo Việt Nam"

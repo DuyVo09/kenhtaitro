@@ -1,4 +1,4 @@
-import { EventCard } from "@components/EventCard";
+import { DescripEventCard } from "@components/DescripEventCard";
 import { Box, Grid, Typography } from "@mui/material";
 import Image from "next/image";
 
@@ -21,8 +21,8 @@ export function NewestEventSection() {
       width="100%"
       alignItems="center"
     >
-      <Typography className="text-5xl text-primary font-bold p-20">
-        Sự kiện mới nhất
+      <Typography className="text-5xl uppercase font-bold p-20">
+        Sự kiện <span className="text-primary">mới nhất</span>
       </Typography>
       <Grid container>
         <Grid
@@ -34,7 +34,7 @@ export function NewestEventSection() {
           alignItems="center"
           flexDirection="column"
         >
-          <EventCard
+          <DescripEventCard
             img={eventData.img}
             title={eventData.title}
             description={eventData.description}
@@ -42,7 +42,7 @@ export function NewestEventSection() {
             participant={eventData.participant}
           />
 
-          <EventCard
+          <DescripEventCard
             img={eventData.img}
             title={eventData.title}
             description={eventData.description}
@@ -67,9 +67,9 @@ export function NewestEventSection() {
             maxWidth="450px"
             position="relative"
             sx={{
-                "@media (max-width: 1200px)": {
-                    display: 'none'
-                }
+              "@media (max-width: 1200px)": {
+                display: "none",
+              },
             }}
           >
             <Image
@@ -90,7 +90,7 @@ export function NewestEventSection() {
           alignItems="center"
           flexDirection="column"
         >
-          <EventCard
+          <DescripEventCard
             img={eventData.img}
             title={eventData.title}
             description={eventData.description}
@@ -98,7 +98,7 @@ export function NewestEventSection() {
             participant={eventData.participant}
           />
 
-          <EventCard
+          <DescripEventCard
             img={eventData.img}
             title={eventData.title}
             description={eventData.description}

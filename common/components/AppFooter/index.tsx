@@ -15,9 +15,10 @@ export function AppFooter() {
         src="/images/pexels-min-an-1006121.jpg"
         alt="Footer"
         fill
+        
         style={{
           backgroundColor: "rgba(0, 0, 0, 0.5)",
-          objectFit: "cover",
+          objectFit:"cover"
         }}
       />
       <div
