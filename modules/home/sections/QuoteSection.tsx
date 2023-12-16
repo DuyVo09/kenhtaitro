@@ -42,7 +42,7 @@ export function QuoteSection() {
             src={"/person/girl.jpg"}
             alt="Quote Avatar"
             fill
-            objectFit="cover"
+            style={{objectFit:"cover"}}
           />
         </Box>
         <Box display="flex">

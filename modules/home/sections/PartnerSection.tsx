@@ -42,7 +42,7 @@ export function PartnerSection() {
               src={image}
               alt={`Image ${index + 1}`}
               fill
-              objectFit="contain"
+              style={{objectFit: "contain"}}
             />
           </Box>
         ))}

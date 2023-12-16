@@ -15,9 +15,9 @@ export function AppFooter() {
         src="/images/pexels-min-an-1006121.jpg"
         alt="Footer"
         fill
-        objectFit="cover"
         style={{
           backgroundColor: "rgba(0, 0, 0, 0.5)",
+          objectFit: "cover",
         }}
       />
       <div
@@ -100,7 +100,12 @@ export function AppFooter() {
             alignItems="center"
           >
             <Typography className="font-bold text-lg">Follow us</Typography>
-            <Box display='flex' width='100%' justifyContent='space-around' my={1}>
+            <Box
+              display="flex"
+              width="100%"
+              justifyContent="space-around"
+              my={1}
+            >
               <SocialIcon url="www.facebook.com" />
               <SocialIcon url="www.instagram.com" />
               <SocialIcon url="www.tiktok.com" />
