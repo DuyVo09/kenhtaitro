@@ -1,4 +1,5 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Divider, Typography } from "@mui/material";
+import CustomDataTable from "../components/CustomTable";
 
 export function TableSection() {
   return (
@@ -6,6 +7,7 @@ export function TableSection() {
       <Box display="flex" alignItems="center" px='7%' py={5}>
         <Box display="flex" flex={1}>
           <Typography className="text-xl font-bold">Đã liên hệ tài trợ</Typography>
+          <Divider orientation="vertical" flexItem sx={{ mx: '50px' }} />
           <Typography className="text-xl font-bold">Đang quan tâm</Typography>
         </Box>
         <Button
@@ -20,6 +22,10 @@ export function TableSection() {
         >
           <Typography className="font-bold">Xem chi tiết</Typography>
         </Button>
+      </Box>
+
+      <Box px='7%'>
+        <CustomDataTable />
       </Box>
     </Box>
   );
