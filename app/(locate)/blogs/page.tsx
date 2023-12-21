@@ -2,7 +2,7 @@ import {
   BlogCarouselSection,
   BlogListSection,
   SidebarSection,
-} from "@/modules/blogs/sections";
+} from "@/modules/blogs/pages/blog-list/sections";
 import { Box, Grid } from "@mui/material";
 
 function BlogsPage() {
