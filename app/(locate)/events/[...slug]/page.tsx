@@ -1,4 +1,4 @@
-import { DetailSection, OverviewSection, RelatedSection } from "@/modules/event/sections";
+import { DetailSection, OverviewSection, RelatedSection } from "@/modules/events-manage/pages/event-detail/sections";
 import { Box } from "@mui/material";
 
 function EventDetailPage() {
