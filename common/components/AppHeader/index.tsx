@@ -35,7 +35,7 @@ function AppHeader() {
   ];
 
   return (
-    <div className="flex border-2 pl-2.5 h-28 items-center gap-7">
+    <div className="flex border-2 pl-2.5 h-28 items-center gap-7 justify-center">
       <div style={{ height: "100%", width: "200px", position: "relative" }}>
         <Image
           src="/images/logo.png"

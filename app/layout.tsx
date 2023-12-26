@@ -4,6 +4,8 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import classNames from "classnames";
 import "@/styles/_global.scss";
+import 'react-awesome-button/dist/styles.css';
+
 import { CssBaseline, StyledEngineProvider, createTheme } from "@mui/material";
 import ThemeRegistry from "./ThemeRegistry";
 
@@ -23,7 +25,7 @@ export default function RootLayout({ children, params,  }: any) {
     <html lang="en">
       <StyledEngineProvider injectFirst>
         <CssBaseline />
-        <body className={classNames(montserrat.className, "bg-background")}>
+        <body className={classNames(montserrat.className, "bg-neutral-50")}>
           <ThemeRegistry options={{ key: "mui" }}>{children}</ThemeRegistry>
         </body>
       </StyledEngineProvider>
