@@ -5,10 +5,10 @@ import Image from "next/image";
 const BannerSection = () => {
   return (
     <Box
-      className="flex flex-col h-[600px] w-full bg-cover"
+      className="flex flex-col h-[600px] w-full bg-cover items-center"
       style={{ backgroundImage: "url('/images/homeBanner.png')" }}
     >
-      <Box display="flex" flex={1}>
+      <Box display="flex" flex={1} width='1440px'>
         <Box
           display="flex"
           flexDirection="column"

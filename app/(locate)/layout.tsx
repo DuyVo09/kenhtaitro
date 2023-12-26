@@ -7,7 +7,7 @@ export default function MainLayout({ children }: PropsWithChildren) {
     <>
       <AppHeader />
       <div className="flex justify-center">
-        <div className="w-[1440px] max-w-[1440px] min-w-[1440px]">{children}</div>
+        {children}
       </div>
       <AppFooter />
     </>
