@@ -1,6 +1,6 @@
 import { BannerSection } from "@/common/components/BannerSection";
 import { Box } from "@mui/material";
-import { FilterSection, EventListSection } from "@/modules/event-list";
+import { FilterSection, EventListSection } from "./sections";
 
 function EventsPage() {
   return (

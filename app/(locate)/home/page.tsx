@@ -1,7 +1,6 @@
 import { AppFooter } from "@components/AppFooter";
 import {
   AboutUsSection,
-  BannerSection,
   BigEventSection,
   FirstCategorySection,
   HotBlogSection,
@@ -12,7 +11,8 @@ import {
   SecondCategorySection,
   SponsorSection,
   ThirdCategorySection,
-} from "@/modules/home/sections";
+} from "./sections";
+import { BannerSection } from "@/common/components/BannerSection";
 import { Box } from "@mui/material";
 
 function Homepage() {

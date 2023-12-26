@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import { BannerSection } from "@/common/components/BannerSection";
-import { EventCreateSection } from "@/modules/event-create";
+import { EventCreateSection } from "./sections";
 
 function EventCreatePage() {
   return (

@@ -1,24 +1,25 @@
 "use client";
 
 import { convertEventDataToCardProps } from "@/common/helpers/convertEventData";
-import { mockEventList } from "@/modules/home/mockEventList";
+import { mockEventList } from "../mockEventList";
 import { Box } from "@mui/material";
 import Slider, { Settings } from "react-slick";
 import { PrevSliderArrow, NextSliderArrow } from "./CardCarouselArrow";
 import { useState } from "react";
 import { CardCarouselItem } from "./CardCarouselItem";
 
-export function CardCarousel() {
+export function ScaleCarousel() {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
   const sliderSetting: Settings = {
-    className: "center",
+    // className: "center",
     dots: true,
-    centerMode: true,
+    variableWidth: true,
+    // centerMode: true,
     infinite: true,
-    centerPadding: "0px",
-    slidesToShow: 3,
-    speed: 800,
+    centerPadding: "10px",
+    slidesToShow: 4,
+    speed: 500,
     prevArrow: <PrevSliderArrow />,
     nextArrow: <NextSliderArrow />,
     beforeChange: (current, next) => {
@@ -59,6 +60,7 @@ export function CardCarousel() {
           // padding: "100px 0",
           // margin: "-100px 0",
           // height: 500,
+          mx: 5,
           display: "flex",
           flexDirection: "column",
         },
@@ -95,7 +97,7 @@ export function CardCarousel() {
             <CardCarouselItem
               key={index}
               {...eventProps}
-              carouselCenter={currentIndex === index}
+              carouselCenter={false}
             />
           );
         })}

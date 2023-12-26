@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 
-import { mockEventList } from "@/modules/home/mockEventList";
+import { mockEventList } from "../../home/mockEventList";
 import { EventCard } from "@/common/components/EventCard";
 
 export function EventListSection() {

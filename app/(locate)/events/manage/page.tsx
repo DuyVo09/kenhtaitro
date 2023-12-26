@@ -1,4 +1,4 @@
-import { OverviewSection, TableSection } from "@/modules/events-manage";
+import { OverviewSection, TableSection } from "./sections";
 import { Box } from "@mui/material";
 
 function EventsManagePage() {
