@@ -1,3 +1,5 @@
+import { ITitleImageItem } from "@/common/types";
+
 export interface IEventDataModel {
   id: string;
   name: string;
@@ -28,7 +30,7 @@ export type IEventFormModel = {
   district: string;
   event_name: string;
   event_description: string;
-  event_image: string;
+  event_image?: ITitleImageItem[];
   organizer: string;
   start_date: Date;
   end_date: Date;

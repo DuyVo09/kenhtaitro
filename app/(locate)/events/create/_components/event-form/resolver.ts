@@ -18,7 +18,6 @@ export const resolver = yupResolver(
       .required(requiredMsg)
       .min(50, "Phải nhập ít nhất 50 kí tự")
       .max(3000),
-    event_image: string().required(requiredMsg),
     organizer: string().required(requiredMsg),
     start_date: date().required(requiredMsg).typeError("Invalid Date"),
     end_date: date().required(requiredMsg).typeError("Invalid Date"),

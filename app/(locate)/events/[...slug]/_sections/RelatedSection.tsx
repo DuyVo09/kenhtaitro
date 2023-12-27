@@ -1,5 +1,5 @@
 import { EventCard } from "@/common/components/EventCard";
-import { mockEventList } from "@/app/(locate)/home/mockEventList";
+import { mockEventList } from "@/common/mockData/mockEventList";
 import { Box, Grid, Typography } from "@mui/material";
 
 export function RelatedSection() {

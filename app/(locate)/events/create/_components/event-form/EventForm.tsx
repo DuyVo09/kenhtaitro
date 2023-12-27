@@ -2,14 +2,46 @@ import { IEventFormModel } from "@/types";
 import { Box, Input, Typography } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { resolver } from "./resolver";
+import { TextEditor } from "@/common/components/TextEditor";
+import { useRef, useState } from "react";
+import { ITitleImageItem } from "@/common/types";
+import { ImageUpload } from "@/common/components/ImageUpload";
+import { ImageListType } from "react-images-uploading";
+import {
+  findMissingUrls,
+  convertToReduceImageList,
+  convertToImageListType,
+} from "@/common/helpers/imageUpload";
+
+interface IEventFormProps {
+  initialValues: IEventFormModel;
+  redirect?: string;
+  onSubmitForm?: (formData: IEventFormModel) => void;
+  onSuccess?: () => void;
+  onUpdateImage?: (fileList: File[]) => void;
+  onDeleteImage?: (urlList: string[]) => void;
+  uploadImageUrl?: string;
+  noEdit: boolean;
+}
 
 export const EventForm = ({
   redirect,
+  initialValues,
+  onSubmitForm,
   onSuccess,
-}: {
-  redirect?: string;
-  onSuccess?: () => void;
-}) => {
+  onUpdateImage,
+  onDeleteImage,
+  uploadImageUrl,
+  noEdit,
+}: IEventFormProps) => {
+  const uploadImageUrl_ =
+    typeof uploadImageUrl === "undefined" || uploadImageUrl === "" ? "" : "";
+  // (API_URL_ROOT && API_URL_ROOT) + uploadImageUrl;
+  const editorRef = useRef<any>();
+
+  const [description, setDescription] = useState<string>("");
+  const [formImageList, setFormImageList] = useState<ITitleImageItem[]>([]);
+
   const {
     control,
     handleSubmit,
@@ -17,8 +49,10 @@ export const EventForm = ({
     formState: { errors, isDirty, isValid },
   } = useForm<IEventFormModel>({ resolver });
 
-  const onSubmit = handleSubmit((data) => {
-    console.log(data);
+  const onSubmit = handleSubmit((formValues: IEventFormModel) => {
+    try {
+      onSubmitForm?.(formValues);
+    } catch (error: any) {}
 
     if (redirect) {
       // return navigate.replace(redirect);
@@ -28,6 +62,59 @@ export const EventForm = ({
       return onSuccess();
     }
   });
+
+  const handleTextClick = (): void => {
+    if (editorRef.current) {
+      editorRef.current.focus();
+    }
+  };
+
+  const onTextEditorChange = (data: string) => {
+    setDescription(data);
+  };
+
+  const onChangeImage = (
+    imageList: ImageListType,
+    addUpdateIndex: number[] | undefined
+  ) => {
+    setFormImageList((prev) => convertToReduceImageList(imageList));
+    // if (typeof addUpdateIndex === "undefined") {
+    //   let deleteUrlList: string[] = findMissingUrls(
+    //     formImageList,
+    //     convertToReduceImageList(imageList)
+    //   );
+    //   onDeleteImage(deleteUrlList);
+    // } else {
+    //   if (imageList.length > initialValues.event_image.length) {
+    //     let addImgList: ImageListType = getItemsAtIndices(
+    //       imageList,
+    //       addUpdateIndex
+    //     );
+    //     let filesArray: File[] = addImgList
+    //       .filter((item) => item.file !== null)
+    //       .map((item) => item.file as File);
+    //     onAddImage(filesArray);
+    //   } else {
+    //     let updateImgList: TITLE_IMAGE_ITEM[] = convertToReduceImageList(
+    //       getItemsAtIndices(imageList, addUpdateIndex)
+    //     );
+    //     let originImgList: TITLE_IMAGE_ITEM[] = getItemsAtIndices(
+    //       initialValues.images,
+    //       addUpdateIndex
+    //     );
+    //     console.log(originImgList[0]);
+    //     let replaceUrls: TITLE_IMAGE_ITEM[] = updateImgList.map(
+    //       (item, index) => {
+    //         return {
+    //           ...item,
+    //           url: originImgList[index].url,
+    //         };
+    //       }
+    //     );
+    //     onUpdateImage(replaceUrls);
+    //   }
+    // }
+  };
 
   return (
     <form onSubmit={onSubmit}>
@@ -220,6 +307,73 @@ export const EventForm = ({
               </Box>
             )}
           />
+
+          <Controller
+            control={control}
+            name="event_description"
+            render={({ field }) => (
+              <Box>
+                <Typography className="font-medium leading-tight my-4">
+                  Mô tả sự kiện
+                </Typography>
+                <Box border={1} height="300px" onClick={handleTextClick}>
+                  <TextEditor
+                    propRef={editorRef}
+                    noEdit={noEdit}
+                    initialData={initialValues.event_description}
+                    onChange={onTextEditorChange}
+                    uploadImageRequestHeader={{
+                      // [hAuthName]: hAuthValue,
+                      "Content-Type": "application/x-www-form-urlencoded",
+                    }}
+                    uploadImageRequestUrl={""}
+                  />
+                </Box>
+                <Typography variant="inherit" color={"error"}>
+                  {errors.event_description?.message}
+                </Typography>
+              </Box>
+            )}
+          />
+
+          <Controller
+            control={control}
+            name="event_image"
+            render={({ field }) => (
+              <Box>
+                <Typography className="font-bold text-[22px] text-primary leading-tight my-4">
+                  Ảnh tiêu đề*
+                </Typography>
+                <Box
+                  className="bg-white"
+                  height="300px"
+                  
+                >
+                  <ImageUpload
+                    noEdit={false}
+                    onChange={onChangeImage}
+                    isMultiple={true}
+                    imageList={convertToImageListType(formImageList)}
+                  />
+                </Box>
+                <Typography variant="inherit" color={"error"}>
+                  {errors.event_description?.message}
+                </Typography>
+              </Box>
+            )}
+          />
+        </Box>
+
+        <Box
+          className="bg-blue-200 bg-opacity-30 grid grid-cols-1 gap-9 mt-10"
+          p={5}
+          display="flex"
+          flexDirection="column"
+        >
+          <Typography className="text-[22px] text-primary font-bold capitalize">
+            Thời gian tổ chức*
+          </Typography>
+          
         </Box>
       </Box>
     </form>
