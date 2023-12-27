@@ -11,7 +11,7 @@ import {
   SecondCategorySection,
   SponsorSection,
   ThirdCategorySection,
-} from "./sections";
+} from "./_sections";
 import { BannerSection } from "@/common/components/BannerSection";
 import { Box } from "@mui/material";
 

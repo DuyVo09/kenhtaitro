@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import AboutUsCard from "../components/AboutUsCard";
+import AboutUsCard from "../_components/AboutUsCard";
 
 export function AboutUsSection() {
   return (

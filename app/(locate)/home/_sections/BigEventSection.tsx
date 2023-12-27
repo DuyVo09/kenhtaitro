@@ -8,7 +8,7 @@ import { mockEventList } from "../mockEventList";
 import { EventCard } from "@components/EventCard";
 
 import { convertEventDataToCardProps } from "@/common/helpers/convertEventData";
-import { CardCarousel } from "../components";
+import { CardCarousel } from "../_components";
 
 
 export function BigEventSection() {

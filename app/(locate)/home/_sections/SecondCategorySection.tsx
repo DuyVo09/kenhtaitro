@@ -1,5 +1,5 @@
 import { Box, Grid, Typography } from "@mui/material";
-import { ScaleCarousel } from "../components/ScaleCarousel";
+import { ScaleCarousel } from "../_components/ScaleCarousel";
 
 export function SecondCategorySection() {
   return (

@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import { BlogCarousel } from "../components/BlogCarousel";
+import { BlogCarousel } from "../_components/BlogCarousel";
 
 export function BlogCarouselSection() {
   return (

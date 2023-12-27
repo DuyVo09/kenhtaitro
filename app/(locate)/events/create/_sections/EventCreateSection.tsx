@@ -1,7 +1,7 @@
 "use client";
 import { Box, Button, Grid, Typography } from "@mui/material";
 import { AwesomeButton } from "react-awesome-button";
-import { EventForm } from "../components/event-form/EventForm";
+import { EventForm } from "../_components/event-form/EventForm";
 
 export function EventCreateSection() {
   return (
