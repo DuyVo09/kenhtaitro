@@ -20,9 +20,6 @@ import { AwesomeButton } from "react-awesome-button";
 function Homepage() {
   return (
     <Box className="flex-col flex w-full items-center">
-      <AwesomeButton type="primary">
-          <Typography className="font-medium">Viết bài về sự kiện</Typography>
-        </AwesomeButton>
       <BannerSection />
 
       <NewestEventSection />
