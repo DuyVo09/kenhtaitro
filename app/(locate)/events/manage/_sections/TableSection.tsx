@@ -1,5 +1,5 @@
 import { Box, Button, Divider, Typography } from "@mui/material";
-import CustomDataTable from "../components/CustomTable";
+import CustomDataTable from "../_components/CustomTable";
 
 export function TableSection() {
   return (

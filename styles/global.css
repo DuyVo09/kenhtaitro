@@ -12,14 +12,3 @@ input.custom-number-input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input.custom-number-input[type="number"] {
-  -moz-appearance: textfield;
-}
-
-.react-multi-carousel-dot button {
-  background-color: #D7D7D7;
-}
-.react-multi-carousel-dot--active button {
-  background-color: #AC907F;
-  
-}

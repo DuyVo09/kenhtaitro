@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import classNames from "classnames";
 import "@/styles/_global.scss";
-import 'react-awesome-button/dist/styles.css';
+import "react-awesome-button/dist/styles.css";
 
 import { CssBaseline, StyledEngineProvider, createTheme } from "@mui/material";
 import ThemeRegistry from "./ThemeRegistry";
@@ -20,7 +20,7 @@ const montserrat = Montserrat({
   fallback: ["Quicksand"],
 });
 
-export default function RootLayout({ children, params,  }: any) {
+export default function RootLayout({ children, params }: any) {
   return (
     <html lang="en">
       <StyledEngineProvider injectFirst>

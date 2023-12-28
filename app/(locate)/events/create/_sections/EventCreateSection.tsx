@@ -25,7 +25,7 @@ export function EventCreateSection() {
     start_date: new Date(),
     end_date: new Date(),
     deadline_sponsorship: "",
-    event_field: "",
+    category: [],
     total_reach: 0,
     total_reach_in_house: 0,
     first_year_attendee_percentage: undefined,

@@ -1,4 +1,4 @@
-import { ITitleImageItem } from "@/common/types";
+import { ITitleImageItem, IValueLabel } from "@/common/types";
 
 export interface IEventDataModel {
   id: string;
@@ -14,6 +14,7 @@ export type TEventData = {
   id: string;
   img: string;
   title: string;
+  date: string;
   description: string;
   location: string;
   participant: number;
@@ -35,7 +36,7 @@ export type IEventFormModel = {
   start_date: Date;
   end_date: Date;
   deadline_sponsorship: string;
-  event_field: string;
+  category: IValueLabel<string>[];
   total_reach: number;
   total_reach_in_house: number;
   first_year_attendee_percentage?: number;

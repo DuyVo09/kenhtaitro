@@ -1,3 +1,4 @@
+"use client";
 import { AppFooter } from "@components/AppFooter";
 import {
   AboutUsSection,
@@ -13,11 +14,15 @@ import {
   ThirdCategorySection,
 } from "./_sections";
 import { BannerSection } from "@/common/components/BannerSection";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
+import { AwesomeButton } from "react-awesome-button";
 
 function Homepage() {
   return (
     <Box className="flex-col flex w-full items-center">
+      <AwesomeButton type="primary">
+          <Typography className="font-medium">Viết bài về sự kiện</Typography>
+        </AwesomeButton>
       <BannerSection />
 
       <NewestEventSection />

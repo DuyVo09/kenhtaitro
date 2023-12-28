@@ -1,7 +1,13 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { object, string, date, number } from "yup";
+import { object, string, date, number, array } from "yup";
 
 const requiredMsg = "Trường thông tin này là bắt buộc";
+const valueLabelSchema = object().shape({
+  value: string().required(requiredMsg),
+  label: string().required(requiredMsg),
+});
+
+const categorySchema = array().of(valueLabelSchema).default([]).required(requiredMsg);
 
 export const resolver = yupResolver(
   object().shape({
@@ -22,7 +28,7 @@ export const resolver = yupResolver(
     start_date: date().required(requiredMsg).typeError("Invalid Date"),
     end_date: date().required(requiredMsg).typeError("Invalid Date"),
     deadline_sponsorship: string().required(requiredMsg),
-    event_field: string().required(requiredMsg),
+    category: categorySchema,
     total_reach: number()
       .required(requiredMsg)
       .typeError("Trường này chỉ nhập số"),
