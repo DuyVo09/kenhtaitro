@@ -7,7 +7,7 @@ const valueLabelSchema = object().shape({
   label: string().required(requiredMsg),
 });
 
-const categorySchema = array().of(valueLabelSchema).default([]).required(requiredMsg);
+const fieldSchema = array().of(valueLabelSchema).default([]).required(requiredMsg);
 
 export const resolver = yupResolver(
   object().shape({
@@ -28,7 +28,8 @@ export const resolver = yupResolver(
     start_date: date().required(requiredMsg).typeError("Invalid Date"),
     end_date: date().required(requiredMsg).typeError("Invalid Date"),
     deadline_sponsorship: string().required(requiredMsg),
-    category: categorySchema,
+    event_field: fieldSchema,
+    tags: fieldSchema,
     total_reach: number()
       .required(requiredMsg)
       .typeError("Trường này chỉ nhập số"),

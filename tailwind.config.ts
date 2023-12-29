@@ -5,7 +5,7 @@ const config: Config = {
     "./app/**/*.{ts,tsx}", // Note the addition of the `app` directory.
     "./common/**/*.{ts,tsx}",
     "./modules/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
+    "./common/components/**/*.{ts,tsx}",
   ],
   corePlugins: {
     preflight: false,

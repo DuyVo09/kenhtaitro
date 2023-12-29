@@ -4,8 +4,15 @@ import { AwesomeButton } from "react-awesome-button";
 import { EventForm } from "../_components/event-form/EventForm";
 import { IEventFormModel } from "@/types";
 import { SubmitHandler } from "react-hook-form";
+import ReactiveButton from "reactive-button";
+import { Email, PhoneInTalk, Place } from "@mui/icons-material";
+import { SocialIcon } from "react-social-icons";
+import SideContactUsSection from "@/common/components/SideContactUsSection";
+import { useState } from "react";
 
 export function EventCreateSection() {
+  const [rejected, setRejected] = useState(false);
+  
   const handleFormSubmit: SubmitHandler<IEventFormModel> = (formValues) => {
     console.log(formValues);
   };
@@ -25,7 +32,8 @@ export function EventCreateSection() {
     start_date: new Date(),
     end_date: new Date(),
     deadline_sponsorship: "",
-    category: [],
+    event_field: [],
+    tags: [],
     total_reach: 0,
     total_reach_in_house: 0,
     first_year_attendee_percentage: undefined,
@@ -63,6 +71,7 @@ export function EventCreateSection() {
           </Typography>
         </Box>
 
+        {/* <ReactiveButton color="primary" /> */}
         <AwesomeButton type="primary">
           <Typography className="font-medium">Viết bài về sự kiện</Typography>
         </AwesomeButton>
@@ -81,14 +90,75 @@ export function EventCreateSection() {
         </Grid>
 
         <Grid item xs={4}>
-          <Box
-            className="bg-blue-200/30"
-            display="flex"
-            flexDirection="column"
-            p={2}
-          ></Box>
+          <SideContactUsSection />
         </Grid>
       </Grid>
+
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        className="bg-blue-200 bg-opacity-30"
+        p={5}
+      >
+        <Box className="grid grid-cols-3 gap-9">
+          <ReactiveButton
+            className="bg-primary"
+            idleText={
+              <Typography className="font-bold  p-3">Lưu nháp</Typography>
+            }
+            size="large"
+            style={{ borderRadius: "12px" }}
+          />
+
+          <ReactiveButton
+            className="bg-primary"
+            idleText={
+              <Typography className="font-bold  p-3">Huỷ bỏ</Typography>
+            }
+            size="large"
+            style={{ borderRadius: "12px" }}
+          />
+
+          <ReactiveButton
+            className="bg-primary"
+            idleText={
+              <Typography className="font-bold  p-3">
+                Huỷ bỏ bản nháp
+              </Typography>
+            }
+            size="large"
+            style={{ borderRadius: "12px" }}
+          />
+
+          <ReactiveButton
+            className="bg-primary"
+            idleText={
+              <Typography className="font-bold  p-3">Gửi bài</Typography>
+            }
+            size="large"
+            style={{ borderRadius: "12px" }}
+          />
+
+          <ReactiveButton
+            className="bg-primary"
+            idleText={
+              <Typography className="font-bold  p-3">Chấp nhận</Typography>
+            }
+            size="large"
+            style={{ borderRadius: "12px" }}
+          />
+
+          <ReactiveButton
+            className="bg-primary"
+            idleText={
+              <Typography className="font-bold  p-3">Từ chối</Typography>
+            }
+            size="large"
+            style={{ borderRadius: "12px" }}
+          />
+        </Box>
+      </Box>
     </Box>
   );
 }

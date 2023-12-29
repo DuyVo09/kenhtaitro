@@ -36,7 +36,8 @@ export type IEventFormModel = {
   start_date: Date;
   end_date: Date;
   deadline_sponsorship: string;
-  category: IValueLabel<string>[];
+  event_field: IValueLabel<string>[];
+  tags: IValueLabel<string>[];
   total_reach: number;
   total_reach_in_house: number;
   first_year_attendee_percentage?: number;

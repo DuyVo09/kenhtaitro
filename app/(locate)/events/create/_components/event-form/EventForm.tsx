@@ -1,17 +1,24 @@
 import { IEventFormModel } from "@/types";
 import {
   Box,
+  Button,
   Checkbox,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
   FormControlLabel,
   Input,
   InputAdornment,
+  OutlinedInput,
+  TextField,
   Typography,
 } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { resolver } from "./resolver";
 import { TextEditor } from "@/common/components/TextEditor";
 import { useRef, useState } from "react";
-import { ITitleImageItem } from "@/common/types";
+import { ITitleImageItem, IValueLabel } from "@/common/types";
 import { ImageUpload } from "@/common/components/ImageUpload";
 import { ImageListType } from "react-images-uploading";
 import {
@@ -28,6 +35,8 @@ import {
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { Schedule } from "@mui/icons-material";
 import { mockEventCategory } from "@/common/mockData/mockEventList";
+import CreatableAutoComplete from "@/common/components/CreatableAutoComplete";
+import ReactiveButton from "reactive-button";
 
 interface IEventFormProps {
   initialValues: IEventFormModel;
@@ -62,6 +71,18 @@ export const EventForm = ({
   const [startTime, setStartTime] = useState<Dayjs | null>(null);
   const [endTime, setEndTime] = useState<Dayjs | null>(null);
   const [deadline, setDeadline] = useState<Dayjs | null>(null);
+  const [tags, setTags] = useState<IValueLabel<string>[]>([
+    {
+      value: "1",
+      label: "1",
+    },
+    {
+      value: "2",
+      label: "2",
+    },
+  ]);
+  const [open, setOpen] = useState(false);
+  const [inputValue, setInputValue] = useState("");
 
   const {
     control,
@@ -137,10 +158,37 @@ export const EventForm = ({
     // }
   };
 
-  console.log()
+  const handleDeleteTag = (option: IValueLabel<string>) => {
+    setTags((prev) => prev.filter((e) => e.value !== option.value));
+  };
+
+  const handleDialogOpen = () => {
+    setOpen(true);
+  };
+
+  const handleDialogClose = () => {
+    setOpen(false);
+  };
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(event.target.value);
+  };
+
+  const handleSubmitTag = () => {
+    console.log("Submitted value:", inputValue);
+    setTags((prev) => [
+      ...prev,
+      {
+        value: inputValue,
+        label: inputValue,
+      },
+    ]);
+    setInputValue("");
+    setOpen(false);
+  };
 
   return (
-    <form onSubmit={onSubmit}>
+    <form id="event-form" onSubmit={onSubmit}>
       <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="vi">
         <Box display="flex" flexDirection="column">
           <Box
@@ -514,7 +562,7 @@ export const EventForm = ({
               Lĩnh vực sự kiện
             </Typography>
             <Controller
-              name="category"
+              name="event_field"
               control={control}
               render={({ field }) => (
                 <>
@@ -525,24 +573,22 @@ export const EventForm = ({
                       control={
                         <Checkbox
                           value={option.value}
-                          // For some reason codesandbox doesn't support `field.value.includes(...)`
                           checked={
                             field.value &&
                             field.value.some(
-                              (existingValue) =>
-                                existingValue.value === option.value
+                              (value) => value.value === option.value
                             )
                           }
                           onChange={(event, checked) => {
                             if (checked) {
                               field.onChange([
                                 ...field.value,
-                                event.target.value,
+                                { value: option.value, label: option.label },
                               ]);
                             } else {
                               field.onChange(
                                 field.value.filter(
-                                  (value) => value.value !== event.target.value
+                                  (value) => value.value !== option.value
                                 )
                               );
                             }
@@ -552,6 +598,316 @@ export const EventForm = ({
                     />
                   ))}
                 </>
+              )}
+            />
+          </Box>
+
+          <Box
+            className="bg-blue-200 bg-opacity-30 grid grid-cols-2 gap-9 mt-10"
+            p={5}
+            display="flex"
+            flexDirection="column"
+          >
+            <Typography className="text-[22px] text-primary font-bold capitalize">
+              Tên tag*
+            </Typography>
+            <Box display="flex" justifyContent="end">
+              <ReactiveButton
+                className="bg-primary"
+                onClick={handleDialogOpen}
+                idleText={
+                  <Typography className="font-medium">Thêm tag</Typography>
+                }
+              />
+              <Dialog open={open} onClose={handleDialogClose}>
+                <DialogTitle>Add Tag</DialogTitle>
+                <DialogContent>
+                  <TextField
+                    value={inputValue}
+                    onChange={handleInputChange}
+                    label="Tag"
+                  />
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={handleDialogClose}>Cancel</Button>
+                  <Button onClick={handleSubmitTag}>Add</Button>
+                </DialogActions>
+              </Dialog>
+            </Box>
+            <Box className="col-span-2">
+              <CreatableAutoComplete
+                disabled={noEdit}
+                initialOptions={tags}
+                onDeleteOption={handleDeleteTag}
+              />
+            </Box>
+          </Box>
+
+          <Box
+            className="bg-blue-200 bg-opacity-30 grid grid-cols-2 gap-9 mt-10"
+            p={5}
+            display="flex"
+            flexDirection="column"
+          >
+            <Typography className="text-[22px] text-primary font-bold capitalize col-span-2">
+              Lượt tiếp cận*
+            </Typography>
+            <Controller
+              control={control}
+              name="total_reach"
+              render={({ field }) => (
+                <Box>
+                  <Typography className="font-medium leading-tight">
+                    Tổng lượt tiếp cận (online + offline)
+                  </Typography>
+                  <Input
+                    id="total_reach"
+                    {...field}
+                    fullWidth
+                    placeholder="Nhập số lượng"
+                    error={errors.total_reach ? true : false}
+                  />
+                  <Typography variant="inherit" color={"error"}>
+                    {errors.total_reach?.message}
+                  </Typography>
+                </Box>
+              )}
+            />
+
+            <Controller
+              control={control}
+              name="total_reach_in_house"
+              render={({ field }) => (
+                <Box>
+                  <Typography className="font-medium leading-tight">
+                    Lượt tiếp cận trực tiếp tại sự kiện
+                  </Typography>
+                  <Input
+                    id="total_reach_in_house"
+                    {...field}
+                    fullWidth
+                    placeholder="Nhập số lượng"
+                    error={errors.total_reach_in_house ? true : false}
+                  />
+                  <Typography variant="inherit" color={"error"}>
+                    {errors.total_reach_in_house?.message}
+                  </Typography>
+                </Box>
+              )}
+            />
+
+            <Controller
+              control={control}
+              name="total_reach_in_house"
+              render={({ field }) => (
+                <Box className="col-span-2">
+                  <Typography className="font-medium leading-tight">
+                    Tỷ lệ sinh viên năm nhất tại sự kiện (Nếu là sự kiện học
+                    sinh, điền “Học sinh”)
+                  </Typography>
+                  <Input
+                    id="total_reach_in_house"
+                    {...field}
+                    fullWidth
+                    error={errors.total_reach_in_house ? true : false}
+                  />
+                  <Typography variant="inherit" color={"error"}>
+                    {errors.total_reach_in_house?.message}
+                  </Typography>
+                </Box>
+              )}
+            />
+          </Box>
+
+          <Box
+            className="bg-blue-200 bg-opacity-30 grid grid-cols-2 gap-9 mt-10"
+            p={5}
+            display="flex"
+            flexDirection="column"
+          >
+            <Typography className="text-[22px] text-primary font-bold capitalize col-span-2">
+              Giá trị các gói tài trợ (VNĐ)
+            </Typography>
+
+            <Controller
+              control={control}
+              name="exclusive_sponsorship"
+              render={({ field }) => (
+                <Box>
+                  <Typography className="font-medium leading-tight">
+                    Gói tài trợ độc quyền*
+                  </Typography>
+                  <Input
+                    id="exclusive_sponsorship"
+                    {...field}
+                    fullWidth
+                    placeholder="Nhập số lượng"
+                    error={errors.exclusive_sponsorship ? true : false}
+                  />
+                  <Typography variant="inherit" color={"error"}>
+                    {errors.exclusive_sponsorship?.message}
+                  </Typography>
+                </Box>
+              )}
+            />
+
+            <Controller
+              control={control}
+              name="diamond_sponsorship"
+              render={({ field }) => (
+                <Box>
+                  <Typography className="font-medium leading-tight">
+                    Gói tài trợ kim cương*
+                  </Typography>
+                  <Input
+                    id="diamond_sponsorship"
+                    {...field}
+                    fullWidth
+                    placeholder="Nhập số lượng"
+                    error={errors.diamond_sponsorship ? true : false}
+                  />
+                  <Typography variant="inherit" color={"error"}>
+                    {errors.diamond_sponsorship?.message}
+                  </Typography>
+                </Box>
+              )}
+            />
+
+            <Controller
+              control={control}
+              name="gold_sponsorship"
+              render={({ field }) => (
+                <Box>
+                  <Typography className="font-medium leading-tight">
+                    Gói tài trợ vàng*
+                  </Typography>
+                  <Input
+                    id="gold_sponsorship"
+                    {...field}
+                    fullWidth
+                    placeholder="Nhập số lượng"
+                    error={errors.gold_sponsorship ? true : false}
+                  />
+                  <Typography variant="inherit" color={"error"}>
+                    {errors.gold_sponsorship?.message}
+                  </Typography>
+                </Box>
+              )}
+            />
+
+            <Controller
+              control={control}
+              name="silver_sponsorship"
+              render={({ field }) => (
+                <Box>
+                  <Typography className="font-medium leading-tight">
+                    Gói tài trợ bạc*
+                  </Typography>
+                  <Input
+                    id="silver_sponsorship"
+                    {...field}
+                    fullWidth
+                    placeholder="Nhập số lượng"
+                    error={errors.silver_sponsorship ? true : false}
+                  />
+                  <Typography variant="inherit" color={"error"}>
+                    {errors.silver_sponsorship?.message}
+                  </Typography>
+                </Box>
+              )}
+            />
+
+            <Controller
+              control={control}
+              name="bronze_sponsorship"
+              render={({ field }) => (
+                <Box>
+                  <Typography className="font-medium leading-tight">
+                    Gói tài trợ đồng*
+                  </Typography>
+                  <Input
+                    id="bronze_sponsorship"
+                    {...field}
+                    fullWidth
+                    placeholder="Nhập số lượng"
+                    error={errors.bronze_sponsorship ? true : false}
+                  />
+                  <Typography variant="inherit" color={"error"}>
+                    {errors.bronze_sponsorship?.message}
+                  </Typography>
+                </Box>
+              )}
+            />
+
+            <Controller
+              control={control}
+              name="companion_sponsorship"
+              render={({ field }) => (
+                <Box>
+                  <Typography className="font-medium leading-tight">
+                    Gói tài trợ bạn đồng hành*
+                  </Typography>
+                  <Input
+                    id="companion_sponsorship"
+                    {...field}
+                    fullWidth
+                    placeholder="Nhập số lượng"
+                    error={errors.companion_sponsorship ? true : false}
+                  />
+                  <Typography variant="inherit" color={"error"}>
+                    {errors.companion_sponsorship?.message}
+                  </Typography>
+                </Box>
+              )}
+            />
+
+            <Controller
+              control={control}
+              name="other_sponsorship"
+              render={({ field }) => (
+                <Box className="col-span-2">
+                  <Typography className="font-medium leading-tight">
+                    Gói tài trợ khác
+                  </Typography>
+                  <Input
+                    id="other_sponsorship"
+                    {...field}
+                    fullWidth
+                    error={errors.other_sponsorship ? true : false}
+                  />
+                  <Typography variant="inherit" color={"error"}>
+                    {errors.other_sponsorship?.message}
+                  </Typography>
+                </Box>
+              )}
+            />
+          </Box>
+
+          <Box
+            className="bg-blue-200 bg-opacity-30 grid grid-cols-1 gap-9 mt-10 rounded-xl"
+            p={5}
+            display="flex"
+            flexDirection="column"
+          >
+            <Typography className="text-[22px] text-primary font-bold capitalize col-span-2">
+              Link proposal*
+            </Typography>
+            <Controller
+              control={control}
+              name="proposal"
+              render={({ field }) => (
+                <Box>
+                  <OutlinedInput
+                    id="proposal"
+                    placeholder="Điền link sự kiện"
+                    {...field}
+                    fullWidth
+                    error={errors.proposal ? true : false}
+                  />
+                  <Typography variant="inherit" color={"error"}>
+                    {errors.proposal?.message}
+                  </Typography>
+                </Box>
               )}
             />
           </Box>

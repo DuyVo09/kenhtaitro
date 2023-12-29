@@ -1,6 +1,8 @@
+"use client";
 import { Box, Typography, Button } from "@mui/material";
 import { PlayArrow } from "@mui/icons-material";
 import Image from "next/image";
+import { AwesomeButton } from "react-awesome-button";
 
 const BannerSection = () => {
   return (
@@ -8,7 +10,7 @@ const BannerSection = () => {
       className="flex flex-col h-[600px] w-full bg-cover items-center"
       style={{ backgroundImage: "url('/images/homeBanner.png')" }}
     >
-      <Box display="flex" flex={1} width='1440px'>
+      <Box display="flex" flex={1} width="1440px">
         <Box
           display="flex"
           flexDirection="column"
@@ -26,18 +28,9 @@ const BannerSection = () => {
             </Typography>
 
             <Box display="flex" alignItems="center" py={3}>
-              <Button
-                variant="contained"
-                sx={{
-                  boxShadow: 5,
-                  textTransform: "none",
-                  py: 2,
-                  px: 6,
-                  borderRadius: "12px",
-                }}
-              >
+              <AwesomeButton className="h-14" type="primary" size="large">
                 <Typography className="font-bold">Tài trợ</Typography>
-              </Button>
+              </AwesomeButton>
               <Box display="flex" alignItems="center">
                 <Box
                   display="flex"

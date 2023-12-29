@@ -15,7 +15,6 @@ import {
 } from "./_sections";
 import { BannerSection } from "@/common/components/BannerSection";
 import { Box, Typography } from "@mui/material";
-import { AwesomeButton } from "react-awesome-button";
 
 function Homepage() {
   return (
