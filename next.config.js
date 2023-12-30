@@ -1,9 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    target: 'serverless',
-    experimental: {
-      outputFileTracing: true,
-    },
+  output: 'export',
 }
 
 module.exports = nextConfig
