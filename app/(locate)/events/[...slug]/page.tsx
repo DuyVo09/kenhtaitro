@@ -15,7 +15,7 @@ async function fetchSlugsFromIYourAPI() {
 
 export async function generateStaticParams() {
   // Replace this with your own logic to fetch the possible values for [...slug]
-  const slugs = await fetchSlugsFromIYourAPI();
+  const slugs = ["mock-slug-1", "mock-slug-2"];
 
   const paths = slugs.map((slug: string) => ({
     params: { slug: slug.split("/") }, // Split the slug into its parts
