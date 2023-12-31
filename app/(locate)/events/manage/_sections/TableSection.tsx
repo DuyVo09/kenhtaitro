@@ -4,10 +4,12 @@ import CustomDataTable from "../_components/CustomTable";
 export function TableSection() {
   return (
     <Box display="flex" flexDirection="column" width="100%">
-      <Box display="flex" alignItems="center" px='7%' py={5}>
+      <Box display="flex" alignItems="center" px="7%" py={5}>
         <Box display="flex" flex={1}>
-          <Typography className="text-xl font-bold">Đã liên hệ tài trợ</Typography>
-          <Divider orientation="vertical" flexItem sx={{ mx: '50px' }} />
+          <Typography className="text-xl font-bold">
+            Đã liên hệ tài trợ
+          </Typography>
+          <Divider orientation="vertical" flexItem sx={{ mx: "50px" }} />
           <Typography className="text-xl font-bold">Đang quan tâm</Typography>
         </Box>
         <Button
@@ -24,7 +26,7 @@ export function TableSection() {
         </Button>
       </Box>
 
-      <Box px='7%'>
+      <Box px="7%" my="70px">
         <CustomDataTable />
       </Box>
     </Box>

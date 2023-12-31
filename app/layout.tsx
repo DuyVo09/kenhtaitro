@@ -4,9 +4,10 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import classNames from "classnames";
 import "@/styles/_global.scss";
-import 'react-awesome-button/dist/styles.css';
+import "react-awesome-button/dist/styles.css";
 
 import { CssBaseline, StyledEngineProvider, createTheme } from "@mui/material";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 import ThemeRegistry from "./ThemeRegistry";
 
 export const metadata: Metadata = {
@@ -23,12 +24,13 @@ const montserrat = Montserrat({
 export default function RootLayout({ children, params }: any) {
   return (
     <html lang="en">
-      <StyledEngineProvider injectFirst>
-        <CssBaseline />
-        <body className={classNames(montserrat.className, "bg-neutral-50")}>
-          <ThemeRegistry options={{ key: "mui" }}>{children}</ThemeRegistry>
-        </body>
-      </StyledEngineProvider>
+      <AppRouterCacheProvider>
+        <StyledEngineProvider injectFirst>
+          <body className={classNames(montserrat.className, "bg-neutral-50")}>
+            <ThemeRegistry options={{ key: "mui" }}>{children}</ThemeRegistry>
+          </body>
+        </StyledEngineProvider>
+      </AppRouterCacheProvider>
     </html>
   );
 }

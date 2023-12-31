@@ -12,6 +12,7 @@ export async function generateStaticParams() {
 }
 
 function EventDetailPage({ params }: { params: { slug: string } }) {
+  // console.log(params.slug)
   return (
     <Box className="flex-col flex w-full">
       <OverviewSection />

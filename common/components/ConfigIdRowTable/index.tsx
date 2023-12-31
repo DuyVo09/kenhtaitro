@@ -11,7 +11,7 @@ import {
 export const configTableOptions = (
   count: number,
   page: number,
-  query: any,
+  query: any
 ): MUIDataTableOptions => {
   return {
     tableBodyHeight: "100%",
@@ -20,6 +20,7 @@ export const configTableOptions = (
     selectableRowsOnClick: true,
     filterType: "dropdown",
     responsive: "vertical",
+    elevation: 0,
     count: count,
     page: 0,
     rowsPerPage: query.itemsPerPage,
@@ -42,7 +43,7 @@ export const configTableOptions = (
         displayRows: "của",
         jumpToPage: "Đi tới trang",
       },
-    }
+    },
   };
 };
 
@@ -67,8 +68,8 @@ export const configIDRowTable = (
           <th
             align="center"
             key={`head-th-${columnMeta.label}`}
-            className="MuiTableCell-root MuiTableCell-head"
-            style={{ width: "20px" }}
+            className="MuiTableCell-root MuiTableCell-head bg-[#BDE0FE]/50 text-primary"
+            style={{ width: "20px", borderRight: "1px solid #0986CA" }}
           >
             <div className="text-center">{columnMeta.label}</div>
           </th>
@@ -84,7 +85,7 @@ export const configIDRowTable = (
           <div
             style={{
               textAlign: "center",
-              width: "40px",
+              width: "20px",
               textOverflow: "ellipsis",
               overflow: "hidden",
               whiteSpace: "nowrap",

@@ -35,10 +35,10 @@ function CustomDataTable() {
           return (
             <th
               key={`head-th-${columnMeta.label}`}
-              className="MuiTableCell-root MuiTableCell-head"
+              className="MuiTableCell-root MuiTableCell-head bg-[#BDE0FE]/50 text-primary"
               style={{
                 width: "15%",
-                // border: "1px solid black",
+                borderRight: "1px solid #0986CA",
               }}
             >
               <div>{columnMeta.label}</div>
@@ -48,10 +48,7 @@ function CustomDataTable() {
         customBodyRender: (value) => {
           return value ? (
             <span>
-              <div
-                className={value}
-                style={{ textAlign: "center" }}
-              >
+              <div className={value} style={{ textAlign: "center" }}>
                 {value}
               </div>
             </span>
@@ -69,9 +66,10 @@ function CustomDataTable() {
           return (
             <th
               key={`head-th-${columnMeta.label}`}
-              className="MuiTableCell-root MuiTableCell-head"
+              className="MuiTableCell-root MuiTableCell-head bg-[#BDE0FE]/50 text-primary"
               style={{
                 width: "20%",
+                borderRight: "1px solid #0986CA",
               }}
             >
               <div>{columnMeta.label}</div>
@@ -99,9 +97,10 @@ function CustomDataTable() {
           return (
             <th
               key={`head-th-${columnMeta.label}`}
-              className="MuiTableCell-root MuiTableCell-head"
+              className="MuiTableCell-root MuiTableCell-head bg-[#BDE0FE]/50 text-primary"
               style={{
                 width: "20%",
+                borderRight: "1px solid #0986CA",
               }}
             >
               <div>{columnMeta.label}</div>
@@ -120,9 +119,10 @@ function CustomDataTable() {
           return (
             <th
               key={`head-th-${columnMeta.label}`}
-              className="MuiTableCell-root MuiTableCell-head"
+              className="MuiTableCell-root MuiTableCell-head bg-[#BDE0FE]/50 text-primary"
               style={{
                 width: "15%",
+                borderRight: "1px solid #0986CA",
               }}
             >
               <div>{columnMeta.label}</div>
@@ -141,9 +141,10 @@ function CustomDataTable() {
           return (
             <th
               key={`head-th-${columnMeta.label}`}
-              className="MuiTableCell-root MuiTableCell-head"
+              className="MuiTableCell-root MuiTableCell-head bg-[#BDE0FE]/50 text-primary"
               style={{
                 width: "20%",
+                borderRight: "1px solid #0986CA",
               }}
             >
               <div>{columnMeta.label}</div>
@@ -162,9 +163,10 @@ function CustomDataTable() {
           return (
             <th
               key={`head-th-${columnMeta.label}`}
-              className="MuiTableCell-root MuiTableCell-head"
+              className="MuiTableCell-root MuiTableCell-head bg-[#BDE0FE]/50 text-primary"
               style={{
                 width: "10%",
+                borderRight: "1px solid #0986CA",
               }}
             >
               <div>{columnMeta.label}</div>
@@ -181,18 +183,14 @@ function CustomDataTable() {
     {
       page: 1,
     }
+
     // totalItems,
     // currentPage,
     // filter
   );
 
   return (
-    <MUIDataTable
-      title={""}
-      data={data}
-      columns={columns}
-      options={options}
-    />
+    <MUIDataTable title={""} data={data} columns={columns} options={options} />
   );
 }
 

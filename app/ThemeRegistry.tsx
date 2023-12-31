@@ -17,6 +17,35 @@ const theme = createTheme({
     // htmlFontSize: 10,
     // fontSize: 'inherit',
   },
+  components: {
+    MuiTable: {
+      styleOverrides:{
+        root: {
+            backgroundColor: "#ffffff",
+            border: "1px solid #0986CA",
+        },
+      }
+    },
+    MuiTableHead: {
+      styleOverrides:{
+        root: {
+            height: "70px",
+        },
+      }
+    },
+    MuiTableCell: {
+      styleOverrides:{
+        root: {
+            backgroundColor: "#ffffff",
+            border: "1px solid #0986CA",
+        },
+        head: {
+          backgroundColor: "#ffffff",
+          border: "1px solid #0986CA",
+      }
+      }
+    }
+  }
 });
 
 export default function ThemeRegistry(props: any) {

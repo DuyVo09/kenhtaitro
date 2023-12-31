@@ -17,7 +17,7 @@ function AppHeader() {
       label: "Sự kiện",
       children: [
         { path: "/events", label: "Xem sự kiện" },
-        { path: "/events-manage", label: "Quản lý sự kiện" },
+        { path: "/events/manage", label: "Quản lý sự kiện" },
       ],
     },
     { path: "/calendar", label: "Lịch sự kiện" },
