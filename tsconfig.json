@@ -26,6 +26,9 @@
       "@components/*": [
         "./common/components/*"
       ],
+      "@sections/*": [
+        "./common/sections/*"
+      ],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

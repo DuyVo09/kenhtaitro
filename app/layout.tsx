@@ -5,6 +5,8 @@ import { Montserrat } from "next/font/google";
 import classNames from "classnames";
 import "@/styles/_global.scss";
 import "react-awesome-button/dist/styles.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 import { CssBaseline, StyledEngineProvider, createTheme } from "@mui/material";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
