@@ -18,7 +18,7 @@ export function NumericSection() {
         color="white"
         alignItems="center"
       >
-        <Typography className="font-bold text-6xl">5.000</Typography>
+        <Typography className="font-bold text-6xl">5.000+</Typography>
         <Typography className="font-semibold text-xl">
           Sự Kiện Hằng Năm
         </Typography>
@@ -35,7 +35,7 @@ export function NumericSection() {
         color="white"
         alignItems="center"
       >
-        <Typography className="font-bold text-6xl">1.000</Typography>
+        <Typography className="font-bold text-6xl">1.000+</Typography>
         <Typography className="font-semibold text-xl">Nhà Tài Trợ</Typography>
       </Box>
 
@@ -50,7 +50,7 @@ export function NumericSection() {
         color="white"
         alignItems="center"
       >
-        <Typography className="font-bold text-6xl">500</Typography>
+        <Typography className="font-bold text-6xl">500+</Typography>
         <Typography className="font-semibold text-xl">
           Sự Kiện Quy Mô Lớn
         </Typography>

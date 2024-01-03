@@ -6,7 +6,7 @@ import { Box } from "@mui/material";
 import Slider, { Settings } from "react-slick";
 import { PrevSliderArrow, NextSliderArrow } from "./CardCarouselArrow";
 import { useState } from "react";
-import { CardCarouselItem } from "./CardCarouselItem";
+import { ScaleCarouselItem } from "./ScaleCarouselItem";
 
 export function ScaleCarousel() {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
@@ -17,8 +17,8 @@ export function ScaleCarousel() {
     variableWidth: true,
     // centerMode: true,
     infinite: true,
-    centerPadding: "10px",
-    slidesToShow: 4,
+    centerPadding: "0px",
+    slidesToShow: 3,
     speed: 500,
     prevArrow: <PrevSliderArrow />,
     nextArrow: <NextSliderArrow />,
@@ -46,6 +46,8 @@ export function ScaleCarousel() {
     ],
   };
 
+  console.log("currentIndex", currentIndex)
+
   return (
     <Box
       display="flex"
@@ -55,46 +57,12 @@ export function ScaleCarousel() {
       px={5}
       my={5}
       bgcolor="white"
-      sx={{
-        "& .slick-list": {
-          // padding: "100px 0",
-          // margin: "-100px 0",
-          // height: 500,
-          mx: 5,
-          display: "flex",
-          flexDirection: "column",
-        },
-        "& .slick-track": {
-          // height: 500,
-          display: "flex",
-          alignItems: "center",
-          // flexDirection: 'column'
-        },
-        "& .slick-slide": {
-          // width: 'min-content',
-          // height: 500,
-        },
-        "& .slick-slide > div": {
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          // width: 'max-content',
-          // margin: "0 5px",
-          // height: '100%'
-        },
-        "& .eventcard-content": {
-          display: "none",
-        },
-        "& .slick-center": {
-          ".eventcard-content": { display: "" },
-        },
-      }}
     >
       <Slider {...sliderSetting}>
         {mockEventList.map((data, index) => {
           const eventProps = convertEventDataToCardProps(data);
           return (
-            <CardCarouselItem
+            <ScaleCarouselItem
               key={index}
               {...eventProps}
               carouselCenter={false}

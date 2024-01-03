@@ -18,15 +18,15 @@ export function CardCarousel() {
     infinite: true,
     centerPadding: "0px",
     slidesToShow: 3,
-    speed: 800,
+    speed: 300,
     prevArrow: <PrevSliderArrow />,
     nextArrow: <NextSliderArrow />,
     beforeChange: (current, next) => {
       setCurrentIndex(next);
     },
-    afterChange: (current) => {
-      setCurrentIndex(current);
-    },
+    // afterChange: (current) => {
+    //   setCurrentIndex(current);
+    // },
     responsive: [
       {
         breakpoint: 768,
@@ -54,39 +54,7 @@ export function CardCarousel() {
       px={5}
       my={5}
       bgcolor="white"
-      sx={{
-        "& .slick-list": {
-          // padding: "100px 0",
-          // margin: "-100px 0",
-          // height: 500,
-          display: "flex",
-          flexDirection: "column",
-        },
-        "& .slick-track": {
-          // height: 500,
-          display: "flex",
-          alignItems: "center",
-          // flexDirection: 'column'
-        },
-        "& .slick-slide": {
-          // width: 'min-content',
-          // height: 500,
-        },
-        "& .slick-slide > div": {
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          // width: 'max-content',
-          // margin: "0 5px",
-          // height: '100%'
-        },
-        "& .eventcard-content": {
-          display: "none",
-        },
-        "& .slick-center": {
-          ".eventcard-content": { display: "" },
-        },
-      }}
+      sx={{}}
     >
       <Slider {...sliderSetting}>
         {mockEventList.map((data, index) => {
