@@ -1,13 +1,11 @@
+"use client";
 import { Box, Button, Typography } from "@mui/material";
 import { useRouter, redirect } from "next/navigation";
 import Image from "next/image";
 import { LoginForm } from "./_components/SignInForm";
 
 const SignInPage = ({ params }: { params: { role: string } }) => {
-  // if (params.role !== "organization" && params.role !== "business") {
-  //   redirect("/role");
-  // }
-
+  const router = useRouter();
   return (
     <div className="flex w-full">
       <div className="flex flex-col max-h-screen grow p-5 items-center ">
@@ -24,7 +22,7 @@ const SignInPage = ({ params }: { params: { role: string } }) => {
         </Box>
 
         <Typography className="text-sky-600 text-[26px] font-semibold">
-          Dành cho doanh nghiệp
+          Đăng nhập vào tài khoản
         </Typography>
 
         <div className="w-1/2 h-full flex items-center">
@@ -40,7 +38,7 @@ const SignInPage = ({ params }: { params: { role: string } }) => {
         justifyContent="center"
       >
         <Image
-          src="/images/login/login.png"
+          src="/images/auth/login.png"
           alt="history"
           fill
           style={{
@@ -61,8 +59,7 @@ const SignInPage = ({ params }: { params: { role: string } }) => {
           alignItems="center"
           justifyContent="center"
           sx={{
-            backgroundImage:
-              "linear-gradient(to top, rgba(0, 0, 0, 0.4), rgba(7, 7, 7, 0.3), rgba(82, 82, 82, 0) 97%, rgba(84, 84, 84, 0))",
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
           }}
         >
           <Box
@@ -71,9 +68,9 @@ const SignInPage = ({ params }: { params: { role: string } }) => {
             textAlign="center"
             alignItems="center"
           >
-            <Typography className="text-[40px] font-bold">Welcome</Typography>
-            <Typography className="my-8">
-              Vui lòng đăng ký để sử dụng dịch vụ của chúng tôi
+            <Typography className="text-[40px] font-bold">Welcome back</Typography>
+            <Typography className="my-8 mx-8">
+              Chưa có tài khoản? Vui lòng đăng ký để sử dụng dịch vụ của chúng tôi
             </Typography>
             <Button
               variant="contained"
@@ -85,6 +82,9 @@ const SignInPage = ({ params }: { params: { role: string } }) => {
                 "&:hover": {
                   bgcolor: "rgba(255, 255, 255, 0.4)",
                 },
+              }}
+              onClick={() => {
+                router.push("/role");
               }}
             >
               <Typography>Đăng ký</Typography>
