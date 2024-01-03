@@ -50,7 +50,6 @@ export const ScaleCarouselItem = ({
             style={{
               objectFit: "cover",
               maxWidth: "100%",
-              height: "auto"
             }} />
         </Box>
 

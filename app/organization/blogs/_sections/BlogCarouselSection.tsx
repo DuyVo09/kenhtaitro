@@ -17,7 +17,6 @@ export function BlogCarouselSection() {
               style={{
                 objectFit: "contain",
                 maxWidth: "100%",
-                height: "auto"
               }} />
           </Box>
           <Box>

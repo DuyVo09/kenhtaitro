@@ -24,7 +24,6 @@ export const HistorySection = () => {
               fill
               style={{
                 maxWidth: "100%",
-                height: "auto",
                 objectFit: "contain"
               }} />
           </Box>

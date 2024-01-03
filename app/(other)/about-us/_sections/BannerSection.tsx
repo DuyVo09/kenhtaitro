@@ -80,7 +80,6 @@ export const BannerSection = () => {
                 objectFit: "cover",
                 borderRadius: "10px",
                 maxWidth: "100%",
-                height: "auto"
               }} />
             <Box
               position="absolute"

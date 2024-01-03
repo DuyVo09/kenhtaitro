@@ -79,7 +79,6 @@ export function NewestEventSection() {
               style={{
                 objectFit: "cover",
                 maxWidth: "100%",
-                height: "auto"
               }} />
           </Box>
         </Grid>

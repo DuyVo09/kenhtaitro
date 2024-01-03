@@ -45,7 +45,6 @@ export function QuoteSection() {
               style={{
                 objectFit: "cover",
                 maxWidth: "100%",
-                height: "auto"
               }} />
           </Box>
           <Box display="flex">

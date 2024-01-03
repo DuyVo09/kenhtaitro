@@ -1,38 +1,25 @@
 import { Box, Button, Typography } from "@mui/material";
 import { useRouter, redirect } from "next/navigation";
 import Image from "next/image";
-import { LoginForm } from "./_components/SignInForm";
+import { SignUpForm } from "./_components/SignUpForm";
 
-const SignInPage = ({ params }: { params: { role: string } }) => {
-  // if (params.role !== "organization" && params.role !== "business") {
-  //   redirect("/role");
-  // }
+
+const SignupPage = ({ params }: { params: { role: string } }) => {
+  let accountRole = "";
+  if (params.role !== "organization" && params.role !== "business") {
+    redirect("/role");
+  }
+
+  if(params.role === "organization") {
+    accountRole = "Ban tổ chức";
+  } else {
+    accountRole = "Doanh nghiệp";
+  }
 
   return (
     <div className="flex w-full">
-      <div className="flex flex-col max-h-screen grow p-5 items-center ">
-        <Box position="relative" height="140px" width="300px" my={7}>
-          <Image
-            src="/images/logo.png"
-            alt="history"
-            fill
-            style={{
-              maxWidth: "100%",
-              objectFit: "cover",
-            }}
-          />
-        </Box>
-
-        <Typography className="text-sky-600 text-[26px] font-semibold">
-          Dành cho doanh nghiệp
-        </Typography>
-
-        <div className="w-1/2 h-full flex items-center">
-          <LoginForm />
-        </div>
-      </div>
       <Box
-        height="100svh"
+        maxHeight="100svh"
         width="600px"
         position="relative"
         display="flex"
@@ -40,7 +27,7 @@ const SignInPage = ({ params }: { params: { role: string } }) => {
         justifyContent="center"
       >
         <Image
-          src="/images/login/login.png"
+          src="/images/auth/signup.png"
           alt="history"
           fill
           style={{
@@ -73,7 +60,7 @@ const SignInPage = ({ params }: { params: { role: string } }) => {
           >
             <Typography className="text-[40px] font-bold">Welcome</Typography>
             <Typography className="my-8">
-              Vui lòng đăng ký để sử dụng dịch vụ của chúng tôi
+              Đã có tài khoản? Đăng nhập ngay
             </Typography>
             <Button
               variant="contained"
@@ -87,13 +74,34 @@ const SignInPage = ({ params }: { params: { role: string } }) => {
                 },
               }}
             >
-              <Typography>Đăng ký</Typography>
+              <Typography>Đăng nhập</Typography>
             </Button>
           </Box>
         </Box>
       </Box>
+      <div className="flex flex-col h-svh grow p-5 items-center ">
+        <Box position="relative" height="140px" width="300px" my={7}>
+          <Image
+            src="/images/logo.png"
+            alt="history"
+            fill
+            style={{
+              maxWidth: "100%",
+              objectFit: "cover",
+            }}
+          />
+        </Box>
+
+        <Typography className="text-sky-600 text-[26px] font-semibold">
+          {`Dành cho ${accountRole}`}
+        </Typography>
+
+        <div className="w-1/2 h-full flex items-center">
+          <SignUpForm />
+        </div>
+      </div>
     </div>
   );
 };
 
-export default SignInPage;
+export default SignupPage;

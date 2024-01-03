@@ -34,9 +34,7 @@ export function FirstCategorySection() {
           src="/images/homepage/category1Bg.png"
           style={{
             objectFit: "cover",
-            height: "100%",
             maxWidth: "100%",
-            height: "auto"
           }} />
         <Box display="flex" position="relative" py="100px">
           <Pagination
@@ -74,7 +72,6 @@ export function FirstCategorySection() {
                     objectFit: "cover",
                     borderRadius: "10px",
                     maxWidth: "100%",
-                    height: "auto"
                   }} />
               </Box>
             </Box>

@@ -30,7 +30,6 @@ export const EventCard = ({
               objectFit: "cover",
               borderRadius: 5,
               maxWidth: "100%",
-              height: "auto"
             }} />
           <Box
             position="absolute"

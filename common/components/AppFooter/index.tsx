@@ -19,7 +19,6 @@ export function AppFooter() {
           backgroundColor: "rgba(0, 0, 0, 0.5)",
           objectFit:"cover",
           maxWidth: "100%",
-          height: "auto"
         }} />
       <div
         style={{
@@ -94,7 +93,6 @@ export function AppFooter() {
               style={{
                 objectFit: "contain",
                 maxWidth: "100%",
-                height: "auto"
               }} />
           </div>
           <Box

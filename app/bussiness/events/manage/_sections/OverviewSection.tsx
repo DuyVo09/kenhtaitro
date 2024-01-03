@@ -65,7 +65,6 @@ export function OverviewSection() {
             objectFit: "cover",
             borderRadius: "10px",
             maxWidth: "100%",
-            height: "auto"
           }} />
       </Box>
     </Box>

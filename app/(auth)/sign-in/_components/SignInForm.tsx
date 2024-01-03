@@ -77,7 +77,7 @@ export const LoginForm = ({
   });
   
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} className="w-full">
       <Box
         display="flex"
         flexDirection="column"

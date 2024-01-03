@@ -41,7 +41,6 @@ export function ThirdCategorySection() {
                   objectFit: "cover",
                   borderRadius: "12px 85px 12px 12px",
                   maxWidth: "100%",
-                  height: "auto"
                 }} />
             </Box>
           </Box>

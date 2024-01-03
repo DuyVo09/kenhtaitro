@@ -44,7 +44,6 @@ function AppHeader() {
           style={{
             objectFit: "contain",
             maxWidth: "100%",
-            height: "auto"
           }} />
       </div>
       <div className="flex flex-auto justify-between px-5 max-w-[1000px]">

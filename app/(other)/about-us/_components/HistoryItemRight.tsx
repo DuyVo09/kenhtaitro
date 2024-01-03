@@ -43,7 +43,6 @@ export const HistoryItemRight = ({
           fill
           style={{
             maxWidth: "100%",
-            height: "auto",
             objectFit: "cover"
           }} />
         <Box
@@ -62,7 +61,6 @@ export const HistoryItemRight = ({
             fill
             style={{
               maxWidth: "100%",
-              height: "auto",
               objectFit: "cover"
             }} />
         </Box>
