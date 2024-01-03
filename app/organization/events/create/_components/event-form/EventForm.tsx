@@ -298,6 +298,27 @@ export const EventForm = ({
 
             <Controller
               control={control}
+              name="school"
+              render={({ field }) => (
+                <Box>
+                  <Typography className="font-medium leading-tight">
+                    Tên trường
+                  </Typography>
+                  <Input
+                    id="school"
+                    {...field}
+                    fullWidth
+                    error={errors.school ? true : false}
+                  />
+                  <Typography variant="inherit" color={"error"}>
+                    {errors.school?.message}
+                  </Typography>
+                </Box>
+              )}
+            />
+
+            <Controller
+              control={control}
               name="location"
               render={({ field }) => (
                 <Box>
