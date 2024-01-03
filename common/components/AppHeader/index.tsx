@@ -1,4 +1,4 @@
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { INavigation } from "./types";
 import { ActiveLink } from "../ActiveLink";
 import {
@@ -41,8 +41,11 @@ function AppHeader() {
           src="/images/logo.png"
           alt="Logo"
           fill
-          style={{ objectFit: "contain" }}
-        />
+          style={{
+            objectFit: "contain",
+            maxWidth: "100%",
+            height: "auto"
+          }} />
       </div>
       <div className="flex flex-auto justify-between px-5 max-w-[1000px]">
         {navigation.map(({ path, label, children }) => (

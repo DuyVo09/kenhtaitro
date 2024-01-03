@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import Image from "next/legacy/image";
+import Image from "next/image";
 
 interface BlogCarouselItemProps {
   href: string;
@@ -29,7 +29,15 @@ export const BlogCarouselItem = ({
         width={centerImg ? "80%" : "100%"}
         overflow="hidden"
       >
-        <Image src={img} alt="Blog image" fill style={{ objectFit: "cover" }} />
+        <Image
+          src={img}
+          alt="Blog image"
+          fill
+          style={{
+            objectFit: "cover",
+            maxWidth: "100%",
+            height: "auto"
+          }} />
       </Box>
     </Box>
   );

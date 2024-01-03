@@ -7,7 +7,7 @@ import {
 } from "@mui/icons-material";
 import { Box, Typography } from "@mui/material";
 import { AwesomeButton } from "react-awesome-button";
-import Image from "next/legacy/image";
+import Image from "next/image";
 
 export const BannerSection = () => {
   return (
@@ -76,8 +76,12 @@ export const BannerSection = () => {
               src={"/images/about-us/banner.png"}
               alt="Banner"
               fill
-              style={{ objectFit: "cover", borderRadius: "10px" }}
-            />
+              style={{
+                objectFit: "cover",
+                borderRadius: "10px",
+                maxWidth: "100%",
+                height: "auto"
+              }} />
             <Box
               position="absolute"
               bottom={0}

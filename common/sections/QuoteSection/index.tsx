@@ -5,7 +5,7 @@ import {
   West,
 } from "@mui/icons-material";
 import { Box, Typography } from "@mui/material";
-import Image from "next/legacy/image";
+import Image from "next/image";
 
 export function QuoteSection() {
   return (
@@ -42,8 +42,11 @@ export function QuoteSection() {
               src={"/person/girl.jpg"}
               alt="Quote Avatar"
               fill
-              style={{ objectFit: "cover" }}
-            />
+              style={{
+                objectFit: "cover",
+                maxWidth: "100%",
+                height: "auto"
+              }} />
           </Box>
           <Box display="flex">
             <Typography>Next</Typography>

@@ -1,6 +1,6 @@
 import { DescripEventCard } from "@components/DescripEventCard";
 import { Box, Grid, Typography } from "@mui/material";
-import Image from "next/legacy/image";
+import Image from "next/image";
 
 const eventData = {
   img: "/images/homepage/eventImg.png",
@@ -76,8 +76,11 @@ export function NewestEventSection() {
               alt="Decorate image"
               fill
               src="/images/homepage/newEvent.png"
-              style={{ objectFit: "cover" }}
-            />
+              style={{
+                objectFit: "cover",
+                maxWidth: "100%",
+                height: "auto"
+              }} />
           </Box>
         </Grid>
 

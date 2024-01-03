@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { HistoryItemRight } from "../_components";
 import { HistoryItemLeft } from "../_components/HistoryItemLeft";
 
@@ -22,8 +22,11 @@ export const HistorySection = () => {
               src="/images/about-us/historyTitleLine.png"
               alt="line"
               fill
-              objectFit="contain"
-            />
+              style={{
+                maxWidth: "100%",
+                height: "auto",
+                objectFit: "contain"
+              }} />
           </Box>
 
           <HistoryItemRight

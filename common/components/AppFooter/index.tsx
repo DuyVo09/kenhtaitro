@@ -1,5 +1,5 @@
 import { Box, Grid, Typography } from "@mui/material";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { SocialIcon } from "react-social-icons";
 
 export function AppFooter() {
@@ -15,12 +15,12 @@ export function AppFooter() {
         src="/images/pexels-min-an-1006121.jpg"
         alt="Footer"
         fill
-        
         style={{
           backgroundColor: "rgba(0, 0, 0, 0.5)",
-          objectFit:"cover"
-        }}
-      />
+          objectFit:"cover",
+          maxWidth: "100%",
+          height: "auto"
+        }} />
       <div
         style={{
           position: "absolute",
@@ -91,8 +91,11 @@ export function AppFooter() {
               src="/images/logo.png"
               alt="Logo"
               fill
-              style={{ objectFit: "contain" }}
-            />
+              style={{
+                objectFit: "contain",
+                maxWidth: "100%",
+                height: "auto"
+              }} />
           </div>
           <Box
             display="flex"

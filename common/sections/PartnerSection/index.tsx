@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import Image from "next/legacy/image";
+import Image from "next/image";
 
 const imageLst = [
   "/brands/google.svg",
@@ -45,8 +45,11 @@ export function PartnerSection() {
               src={image}
               alt={`Image ${index + 1}`}
               fill
-              style={{ objectFit: "contain" }}
-            />
+              style={{
+                objectFit: "contain",
+                maxWidth: "100%",
+                height: "auto"
+              }} />
           </Box>
         ))}
       </Box>

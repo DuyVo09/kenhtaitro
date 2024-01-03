@@ -1,6 +1,6 @@
 import { Box, Paper, Typography } from "@mui/material";
 import { TEventCardProps } from "./types";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { GroupsOutlined } from "@mui/icons-material";
 
 export const EventCard = ({
@@ -26,8 +26,12 @@ export const EventCard = ({
             src={img}
             alt="Event image"
             fill
-            style={{ objectFit: "cover", borderRadius: 5 }}
-          />
+            style={{
+              objectFit: "cover",
+              borderRadius: 5,
+              maxWidth: "100%",
+              height: "auto"
+            }} />
           <Box
             position="absolute"
             top="10px"

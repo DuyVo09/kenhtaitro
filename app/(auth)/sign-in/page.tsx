@@ -1,5 +1,5 @@
 import { Box, Button, Typography } from "@mui/material";
-import Image from "next/legacy/image";
+import Image from "next/image";
 
 const SignInPage = () => {
   return (
@@ -21,7 +21,15 @@ const SignInPage = () => {
           </Button>
         </Box>
         <Box position="relative" height="140px" width="300px">
-          <Image src="/images/logo.png" alt="history" fill objectFit="cover" />
+          <Image
+            src="/images/logo.png"
+            alt="history"
+            fill
+            style={{
+              maxWidth: "100%",
+              height: "auto",
+              objectFit: "cover"
+            }} />
         </Box>
 
         <Typography className="text-sky-600 text-[26px] font-semibold">

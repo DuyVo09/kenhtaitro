@@ -1,5 +1,5 @@
 import { Paper, Box, Typography } from "@mui/material";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { TBlogCardProps } from "./types";
 import { CalendarMonthOutlined, ModeEditOutlineOutlined, StickyNote2Outlined } from "@mui/icons-material";
 
@@ -25,8 +25,11 @@ function BlogCard({
           src={img}
           alt="Event image"
           fill
-          style={{ objectFit: "cover" }}
-        />
+          style={{
+            objectFit: "cover",
+            maxWidth: "100%",
+            height: "auto"
+          }} />
       </Box>
       <Box
         display="flex"

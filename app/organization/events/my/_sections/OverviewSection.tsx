@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import Image from "next/legacy/image";
+import Image from "next/image";
 
 export function OverviewSection() {
   return (
@@ -61,8 +61,12 @@ export function OverviewSection() {
           alt="Overview Image"
           src="/images/events/overview.png"
           fill
-          style={{ objectFit: "cover", borderRadius: "10px" }}
-        />
+          style={{
+            objectFit: "cover",
+            borderRadius: "10px",
+            maxWidth: "100%",
+            height: "auto"
+          }} />
       </Box>
     </Box>
   );

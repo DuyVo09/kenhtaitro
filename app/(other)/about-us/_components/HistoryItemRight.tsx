@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import Image from "next/legacy/image";
+import Image from "next/image";
 
 interface HistoryItemRightProps {
   title: string;
@@ -41,8 +41,11 @@ export const HistoryItemRight = ({
           src="/images/about-us/historyImage.png"
           alt="history"
           fill
-          objectFit="cover"
-        />
+          style={{
+            maxWidth: "100%",
+            height: "auto",
+            objectFit: "cover"
+          }} />
         <Box
           width="400px"
           height="400px"
@@ -53,7 +56,15 @@ export const HistoryItemRight = ({
               "polygon(37.66% 1.07%, 100% 18.69%, 100% 76.23%, 47.58% 99.97%, 1.28% 54.66%)",
           }}
         >
-          <Image src={image} alt="history" fill objectFit="cover" />
+          <Image
+            src={image}
+            alt="history"
+            fill
+            style={{
+              maxWidth: "100%",
+              height: "auto",
+              objectFit: "cover"
+            }} />
         </Box>
       </Box>
     </Box>

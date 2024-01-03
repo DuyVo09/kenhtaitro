@@ -1,7 +1,7 @@
 "use client";
 import { Box, Typography, Button } from "@mui/material";
 import { PlayArrow } from "@mui/icons-material";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { AwesomeButton } from "react-awesome-button";
 
 const BannerSection = () => {
@@ -84,8 +84,9 @@ const BannerSection = () => {
                 style={{
                   objectFit: "cover",
                   borderRadius: "10px",
-                }}
-              />
+                  maxWidth: "100%",
+                  height: "auto"
+                }} />
             </Box>
           </Box>
         </Box>

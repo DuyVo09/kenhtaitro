@@ -1,5 +1,5 @@
 import { Box, Button, Grid, Pagination, Typography } from "@mui/material";
-import Image from "next/legacy/image";
+import Image from "next/image";
 
 export function FirstCategorySection() {
   return (
@@ -32,8 +32,12 @@ export function FirstCategorySection() {
           fill
           alt="Category 2 bg"
           src="/images/homepage/category1Bg.png"
-          style={{ objectFit: "cover", height: "100%" }}
-        />
+          style={{
+            objectFit: "cover",
+            height: "100%",
+            maxWidth: "100%",
+            height: "auto"
+          }} />
         <Box display="flex" position="relative" py="100px">
           <Pagination
             hidePrevButton
@@ -69,8 +73,9 @@ export function FirstCategorySection() {
                   style={{
                     objectFit: "cover",
                     borderRadius: "10px",
-                  }}
-                />
+                    maxWidth: "100%",
+                    height: "auto"
+                  }} />
               </Box>
             </Box>
           </Box>

@@ -2,7 +2,7 @@ import { TEventCardProps } from "@/common/components/EventCard";
 import { GroupsOutlined } from "@mui/icons-material";
 import { Paper, Box, Typography } from "@mui/material";
 
-import Image from "next/legacy/image";
+import Image from "next/image";
 
 export const CardCarouselItem = ({
   img,
@@ -47,8 +47,11 @@ export const CardCarouselItem = ({
             src={img}
             alt="Event image"
             fill
-            style={{ objectFit: "cover" }}
-          />
+            style={{
+              objectFit: "cover",
+              maxWidth: "100%",
+              height: "auto"
+            }} />
         </Box>
         <Box
           sx={{

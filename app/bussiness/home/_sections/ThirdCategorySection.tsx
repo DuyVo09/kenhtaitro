@@ -1,5 +1,5 @@
 import { Box, Button, Grid, Typography } from "@mui/material";
-import Image from "next/legacy/image";
+import Image from "next/image";
 
 export function ThirdCategorySection() {
   return (
@@ -40,8 +40,9 @@ export function ThirdCategorySection() {
                 style={{
                   objectFit: "cover",
                   borderRadius: "12px 85px 12px 12px",
-                }}
-              />
+                  maxWidth: "100%",
+                  height: "auto"
+                }} />
             </Box>
           </Box>
         </Grid>

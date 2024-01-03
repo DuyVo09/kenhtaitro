@@ -1,4 +1,4 @@
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { Box, Typography } from "@mui/material";
 import { BlogCarousel } from "../_components/BlogCarousel";
 import { SocialIcon } from "react-social-icons";
@@ -14,8 +14,11 @@ export function BlogCarouselSection() {
               src="/images/logo.png"
               alt="Logo"
               fill
-              style={{ objectFit: "contain" }}
-            />
+              style={{
+                objectFit: "contain",
+                maxWidth: "100%",
+                height: "auto"
+              }} />
           </Box>
           <Box>
             <Typography className="font-medium text-primary text-xl ">
