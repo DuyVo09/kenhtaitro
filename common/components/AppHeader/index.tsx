@@ -21,15 +21,10 @@ function AppHeader() {
   if (ROLE === "organization") {
     navigation = [
       ...organizationRoutes,
-      { path: "/events", label: "Sự kiện" },
-      { path: "/organizations", label: "Tổ chức" },
-      { path: "/businesses", label: "Doanh nghiệp" },
     ];
   } else {
     navigation = [
       ...businessRoutes,
-      { path: "/events", label: "Sự kiện" },
-      { path: "/organizations", label: "Tổ chức" },
     ];
   }
 
