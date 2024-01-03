@@ -7,7 +7,7 @@ import {
 } from "@mui/icons-material";
 import { Box, Typography } from "@mui/material";
 import { AwesomeButton } from "react-awesome-button";
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 export const BannerSection = () => {
   return (

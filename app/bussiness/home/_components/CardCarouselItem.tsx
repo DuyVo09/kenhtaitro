@@ -2,7 +2,7 @@ import { TEventCardProps } from "@/common/components/EventCard";
 import { GroupsOutlined } from "@mui/icons-material";
 import { Paper, Box, Typography } from "@mui/material";
 
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 export const CardCarouselItem = ({
   img,

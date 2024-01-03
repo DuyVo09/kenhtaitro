@@ -1,7 +1,7 @@
 import BlogCard from "@/common/components/BlogCard/BlogCard";
 import { KeyboardDoubleArrowRight } from "@mui/icons-material";
 import { Box, Paper, Typography } from "@mui/material";
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 export function HotBlogSection() {
   return (

@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { Box, Typography } from "@mui/material";
 import { BlogCarousel } from "../_components/BlogCarousel";
 import { SocialIcon } from "react-social-icons";

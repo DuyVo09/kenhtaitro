@@ -1,5 +1,5 @@
 import { Paper, Box, Typography } from "@mui/material";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { TBlogCardProps } from "./types";
 import { CalendarMonthOutlined, ModeEditOutlineOutlined, StickyNote2Outlined } from "@mui/icons-material";
 

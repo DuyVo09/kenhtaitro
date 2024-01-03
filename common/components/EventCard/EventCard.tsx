@@ -1,6 +1,6 @@
 import { Box, Paper, Typography } from "@mui/material";
 import { TEventCardProps } from "./types";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { GroupsOutlined } from "@mui/icons-material";
 
 export const EventCard = ({

@@ -1,6 +1,6 @@
 import { DescripEventCard } from "@components/DescripEventCard";
 import { Box, Grid, Typography } from "@mui/material";
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 const eventData = {
   img: "/images/homepage/eventImg.png",

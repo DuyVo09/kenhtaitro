@@ -1,7 +1,7 @@
 "use client";
 import { Box, Typography, Button } from "@mui/material";
 import { PlayArrow } from "@mui/icons-material";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { AwesomeButton } from "react-awesome-button";
 
 const BannerSection = () => {

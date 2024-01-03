@@ -1,5 +1,5 @@
 import { Box, Button, Grid, Pagination, Typography } from "@mui/material";
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 export function FirstCategorySection() {
   return (

@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { HistoryItemRight } from "../_components";
 import { HistoryItemLeft } from "../_components/HistoryItemLeft";
 
