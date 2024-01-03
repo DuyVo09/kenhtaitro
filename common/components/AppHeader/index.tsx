@@ -8,31 +8,30 @@ import {
   Search,
 } from "@mui/icons-material";
 import DropdownMenu from "../DropdownMenu";
+import { organizationRoutes, businessRoutes } from "./roleBasedRoutes";
+
+const ROLE = 'organization';
 
 function AppHeader() {
-  const navigation: INavigation[] = [
-    { path: "/home", label: "Trang chủ" },
-    {
-      path: "#",
-      label: "Sự kiện",
-      children: [
-        { path: "/events", label: "Xem sự kiện" },
-        { path: "/events/manage", label: "Quản lý sự kiện" },
-      ],
-    },
-    { path: "/calendar", label: "Lịch sự kiện" },
-    {
-      path: "#",
-      label: "Blog",
-      children: [
-        { path: "/blogs", label: "Tất cả blog" },
-        { path: "/blogs/category1", label: "Blog category 1" },
-        { path: "/blogs/category2", label: "Blog category 2" },
-      ],
-    },
+  let navigation: INavigation[] = [
     { path: "/about-us", label: "Về chúng tôi" },
     { path: "/contact", label: "Liên hệ" },
   ];
+
+  if (ROLE === "organization") {
+    navigation = [
+      ...organizationRoutes,
+      { path: "/events", label: "Sự kiện" },
+      { path: "/organizations", label: "Tổ chức" },
+      { path: "/businesses", label: "Doanh nghiệp" },
+    ];
+  } else {
+    navigation = [
+      ...businessRoutes,
+      { path: "/events", label: "Sự kiện" },
+      { path: "/organizations", label: "Tổ chức" },
+    ];
+  }
 
   return (
     <div className="flex border-2 pl-2.5 h-28 items-center gap-7 justify-center">
