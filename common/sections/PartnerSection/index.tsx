@@ -11,7 +11,13 @@ const imageLst = [
 
 export function PartnerSection() {
   return (
-    <Box display="flex" flexDirection="column" width="100%" my={2} px="7%">
+    <Box
+      display="flex"
+      flexDirection="column"
+      width="100%"
+      maxWidth="1440px"
+      my={2}
+    >
       <Box display="flex" width="100%">
         <Typography className="text-6xl font-bold ml-4">
           <span className="text-primary">ĐỐI TÁC</span> CỦA CHÚNG TÔI

@@ -1,8 +1,9 @@
 // @use "./commons";
 // @use "./modules";
 @use "node_modules/tailwindcss/tailwind.css" as *;
-// @use "node_modules/react-multi-carousel-18/lib/styles.css" as *;
-// @use "node_modules/react-dropdown/style.css" as *;
+@use "node_modules/react-awesome-button/dist/styles.css" as *;
+@use "node_modules/slick-carousel/slick/slick.css" as *;
+@use "node_modules/slick-carousel/slick/slick-theme.css" as *;
 
 @use "./util";
 @use "./common";
@@ -60,10 +61,10 @@ input.custom-number-input[type="number"] {
 
 
 
-.content {
-  background: url("/icons/background-head.svg") no-repeat top left,
-    url("/icons/background-foot.svg") no-repeat bottom right;
-}
+// .content {
+//   background: url("") no-repeat top left,
+//     url("/icons/background-foot.svg") no-repeat bottom right;
+// }
 
 .zalo-chat-widget {
   bottom: 100px !important;

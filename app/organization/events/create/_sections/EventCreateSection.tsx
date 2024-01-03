@@ -7,7 +7,7 @@ import { SubmitHandler } from "react-hook-form";
 import ReactiveButton from "reactive-button";
 import { Email, PhoneInTalk, Place } from "@mui/icons-material";
 import { SocialIcon } from "react-social-icons";
-import SideContactUsSection from "@/common/components/SideContactUsSection";
+import SideContactUsSection from "@/common/sections/SideContactUsSection";
 import { useState } from "react";
 
 export function EventCreateSection() {

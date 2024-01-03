@@ -8,5 +8,3 @@ export * from "./SecondCategorySection";
 export * from "./ThirdCategorySection";
 export * from "./HotBlogSection";
 export * from "./AboutUsSection";
-export * from "./PartnerSection";
-export * from "./QuoteSection";
