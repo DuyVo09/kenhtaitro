@@ -1,3 +1,5 @@
+"use client";
+
 import { Search } from "@mui/icons-material";
 import {
   Box,
@@ -10,8 +12,17 @@ import {
 
 import { mockEventList } from "../../../../common/mockData/mockEventList";
 import { EventCard } from "@/common/components/EventCard";
+import { PublishedEvent } from "@/types";
+import { useEffect, useState } from "react";
+import { getAllPublishedEvents } from "@/apis/events";
 
 export function EventListSection() {
+  const [allEventList, setAllEventList] = useState<PublishedEvent[]>([]);
+  useEffect(() => {
+    getAllPublishedEvents().then((res) => {
+      if (res.status_code === 200) setAllEventList(res.data);
+    });
+  }, []);
   return (
     <Box display="flex" width="100%" flexDirection="column" px="7%" py='50px'>
       <Box display="flex" p={3}>
@@ -27,6 +38,7 @@ export function EventListSection() {
         <OutlinedInput
           id="event-search"
           placeholder="Tìm kiếm"
+
           sx={{
             borderRadius: 3,
             borderColor: "#0986CA",
@@ -45,15 +57,15 @@ export function EventListSection() {
         />
       </Box>
       <Grid container spacing={4}>
-        {mockEventList.map((data) => (
-          <Grid item key={data.title} xs={4}>
+        {allEventList.map((data) => (
+          <Grid item key={data.event_name} xs={4}>
             <EventCard
-              img={data.img}
-              title={data.title}
-              description={data.description}
+              img={data.event_image[0]}
+              title={data.event_name}
+              description={data.event_description}
               location={data.location}
-              date="Sunday, March 18, 9.30PM"
-              participant={data.participant}
+              date={data.start_date}
+              participant={data.total_reach}
               width='100%'
             />
           </Grid>

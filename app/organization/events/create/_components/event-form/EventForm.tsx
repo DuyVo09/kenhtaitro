@@ -14,19 +14,17 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { Controller, useForm } from "react-hook-form";
-import { resolver } from "./resolver";
+import { Control, Controller, FieldErrors, UseFormSetValue } from "react-hook-form";
 import { TextEditor } from "@/common/components/TextEditor";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ITitleImageItem, IValueLabel } from "@/common/types";
 import { ImageUpload } from "@/common/components/ImageUpload";
 import { ImageListType } from "react-images-uploading";
 import {
-  findMissingUrls,
   convertToReduceImageList,
   convertToImageListType,
 } from "@/common/helpers/imageUpload";
-import dayjs, { Dayjs } from "dayjs";
+import { Dayjs } from "dayjs";
 import {
   DatePicker,
   LocalizationProvider,
@@ -47,6 +45,9 @@ interface IEventFormProps {
   onDeleteImage?: (urlList: string[]) => void;
   uploadImageUrl?: string;
   noEdit: boolean;
+  control: Control<IEventFormModel, any>;
+  errors: FieldErrors<IEventFormModel>;
+  setValue: UseFormSetValue<IEventFormModel>
 }
 
 export const EventForm = ({
@@ -58,6 +59,9 @@ export const EventForm = ({
   onDeleteImage,
   uploadImageUrl,
   noEdit,
+  control,
+  errors,
+  setValue
 }: IEventFormProps) => {
   const uploadImageUrl_ =
     typeof uploadImageUrl === "undefined" || uploadImageUrl === "" ? "" : "";
@@ -84,27 +88,6 @@ export const EventForm = ({
   const [open, setOpen] = useState(false);
   const [inputValue, setInputValue] = useState("");
 
-  const {
-    control,
-    handleSubmit,
-    setError,
-    formState: { errors },
-  } = useForm<IEventFormModel>({ resolver, defaultValues: initialValues });
-
-  const onSubmit = handleSubmit((formValues: IEventFormModel) => {
-    try {
-      onSubmitForm?.(formValues);
-    } catch (error: any) {}
-
-    if (redirect) {
-      // return navigate.replace(redirect);
-    }
-
-    if (onSuccess) {
-      return onSuccess();
-    }
-  });
-
   const handleTextClick = (): void => {
     if (editorRef.current) {
       editorRef.current.focus();
@@ -112,6 +95,7 @@ export const EventForm = ({
   };
 
   const onTextEditorChange = (data: string) => {
+    setValue("event_description", data);
     setDescription(data);
   };
 
@@ -119,6 +103,7 @@ export const EventForm = ({
     imageList: ImageListType,
     addUpdateIndex: number[] | undefined
   ) => {
+    setValue("event_image", convertToReduceImageList(imageList));
     setFormImageList((prev) => convertToReduceImageList(imageList));
     // if (typeof addUpdateIndex === "undefined") {
     //   let deleteUrlList: string[] = findMissingUrls(
@@ -175,7 +160,7 @@ export const EventForm = ({
   };
 
   const handleSubmitTag = () => {
-    console.log("Submitted value:", inputValue);
+    setValue("tags", [...tags, { value: inputValue, label: inputValue }]);
     setTags((prev) => [
       ...prev,
       {
@@ -188,7 +173,7 @@ export const EventForm = ({
   };
 
   return (
-    <form id="event-form" onSubmit={onSubmit}>
+    <form id="event-form">
       <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="vi">
         <Box display="flex" flexDirection="column">
           <Box
@@ -320,20 +305,20 @@ export const EventForm = ({
             <Box className="grid grid-cols-2 gap-9">
               <Controller
                 control={control}
-                name="area"
+                name="province"
                 render={({ field }) => (
                   <Box>
                     <Typography className="font-medium leading-tight">
                       Tỉnh/Thành phố
                     </Typography>
                     <Input
-                      id="area"
+                      id="province"
                       {...field}
                       fullWidth
-                      error={errors.area ? true : false}
+                      error={errors.province ? true : false}
                     />
                     <Typography variant="inherit" color={"error"}>
-                      {errors.area?.message}
+                      {errors.province?.message}
                     </Typography>
                   </Box>
                 )}
@@ -379,7 +364,26 @@ export const EventForm = ({
                 </Box>
               )}
             />
-
+            <Controller
+              control={control}
+              name="school"
+              render={({ field }) => (
+                <Box>
+                  <Typography className="font-medium leading-tight">
+                    Trường
+                  </Typography>
+                  <Input
+                    id="school"
+                    {...field}
+                    fullWidth
+                    error={errors.school ? true : false}
+                  />
+                  <Typography variant="inherit" color={"error"}>
+                    {errors.school?.message}
+                  </Typography>
+                </Box>
+              )}
+            />
             <Controller
               control={control}
               name="event_description"
@@ -390,6 +394,7 @@ export const EventForm = ({
                   </Typography>
                   <Box border={1} height="300px" onClick={handleTextClick}>
                     <TextEditor
+                      {...field}
                       propRef={editorRef}
                       noEdit={noEdit}
                       initialData={initialValues.event_description}
@@ -484,8 +489,8 @@ export const EventForm = ({
                 </Typography>
                 <Box className="grid grid-cols-3 gap-4">
                   <MobileTimePicker
-                    value={startTime}
-                    onChange={(newValue) => setStartTime(newValue)}
+                    value={endTime}
+                    onChange={(newValue) => setEndTime(newValue)}
                     ampm={false}
                     slotProps={{
                       textField: {
@@ -562,7 +567,7 @@ export const EventForm = ({
               Lĩnh vực sự kiện
             </Typography>
             <Controller
-              name="event_field"
+              name="event_category"
               control={control}
               render={({ field }) => (
                 <>
@@ -698,7 +703,7 @@ export const EventForm = ({
 
             <Controller
               control={control}
-              name="total_reach_in_house"
+              name="first_year_attendee_percentage"
               render={({ field }) => (
                 <Box className="col-span-2">
                   <Typography className="font-medium leading-tight">
@@ -706,7 +711,8 @@ export const EventForm = ({
                     sinh, điền “Học sinh”)
                   </Typography>
                   <Input
-                    id="total_reach_in_house"
+                    id="first_year_attendee_percentage
+                    "
                     {...field}
                     fullWidth
                     error={errors.total_reach_in_house ? true : false}

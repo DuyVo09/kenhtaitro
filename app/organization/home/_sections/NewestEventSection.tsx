@@ -1,18 +1,18 @@
+import { searchNewestEvent } from "@/apis/events";
+import { PublishedEvent } from "@/types";
 import { DescripEventCard } from "@components/DescripEventCard";
 import { Box, Grid, Typography } from "@mui/material";
 import Image from "next/image";
-
-const eventData = {
-  img: "/images/homepage/eventImg.png",
-  title:
-    "Event title that a little bit long. Nvm let make it really long after all",
-  description:
-    "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et",
-  location: "Đại học Bách Khoa TPHCM",
-  participant: 500,
-};
+import { useEffect, useState } from "react";
 
 export function NewestEventSection() {
+  const [eventData, setEventData] = useState<PublishedEvent[]>([]);
+  useEffect(() => {
+    searchNewestEvent().then((res) => {
+      console.log(res);
+      if (res.status_code === 200) setEventData(res.data);
+    })
+  }, []);
   return (
     <Box
       display="flex"
@@ -34,21 +34,16 @@ export function NewestEventSection() {
           alignItems="center"
           flexDirection="column"
         >
-          <DescripEventCard
-            img={eventData.img}
-            title={eventData.title}
-            description={eventData.description}
-            location={eventData.location}
-            participant={eventData.participant}
-          />
-
-          <DescripEventCard
-            img={eventData.img}
-            title={eventData.title}
-            description={eventData.description}
-            location={eventData.location}
-            participant={eventData.participant}
-          />
+          {eventData.slice(0, eventData.length / 2).map((event, idx) => (
+            <DescripEventCard
+              key={idx}
+              img={event.event_image[0]}
+              title={event.event_name}
+              description={event.event_description}
+              location={event.location}
+              participant={event.total_reach}
+            />
+          ))}
         </Grid>
 
         <Grid
@@ -92,21 +87,16 @@ export function NewestEventSection() {
           alignItems="center"
           flexDirection="column"
         >
-          <DescripEventCard
-            img={eventData.img}
-            title={eventData.title}
-            description={eventData.description}
-            location={eventData.location}
-            participant={eventData.participant}
-          />
-
-          <DescripEventCard
-            img={eventData.img}
-            title={eventData.title}
-            description={eventData.description}
-            location={eventData.location}
-            participant={eventData.participant}
-          />
+          {eventData.map((event, idx) => (
+            <DescripEventCard
+              key={idx}
+              img={event.event_image[0]}
+              title={event.event_name}
+              description={event.event_description}
+              location={event.location}
+              participant={event.total_reach}
+            />
+          )).slice(eventData.length / 2)}
         </Grid>
       </Grid>
     </Box>
