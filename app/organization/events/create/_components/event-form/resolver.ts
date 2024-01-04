@@ -17,7 +17,7 @@ export const resolver = yupResolver(
     email: string().required(requiredMsg),
     school: string().required(requiredMsg),
     location: string().required(requiredMsg),
-    area: string().required(requiredMsg),
+    province: string().required(requiredMsg),
     district: string().required(requiredMsg),
     event_name: string().required(requiredMsg).max(90),
     event_description: string()
@@ -27,8 +27,8 @@ export const resolver = yupResolver(
     organizer: string().required(requiredMsg),
     start_date: date().required(requiredMsg).typeError("Invalid Date"),
     end_date: date().required(requiredMsg).typeError("Invalid Date"),
-    deadline_sponsorship: string().required(requiredMsg),
-    event_field: fieldSchema,
+    deadline_sponsorship: date().required(requiredMsg).typeError("Invalid Date"),
+    event_category: fieldSchema,
     tags: fieldSchema,
     total_reach: number()
       .required(requiredMsg)
@@ -36,7 +36,7 @@ export const resolver = yupResolver(
     total_reach_in_house: number()
       .required(requiredMsg)
       .typeError("Trường này chỉ nhập số"),
-    first_year_attendee_percentage: number().typeError(
+    first_year_attendee_percentage: number().required(requiredMsg).typeError(
       "Trường này chỉ nhập số"
     ),
     exclusive_sponsorship: number()

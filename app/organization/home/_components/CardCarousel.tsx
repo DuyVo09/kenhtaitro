@@ -1,16 +1,17 @@
 "use client";
 
 import { convertEventDataToCardProps } from "@/common/helpers/convertEventData";
-import { mockEventList } from "../../../../common/mockData/mockEventList";
 import { Box } from "@mui/material";
 import Slider, { Settings } from "react-slick";
 import { PrevSliderArrow, NextSliderArrow } from "./CardCarouselArrow";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CardCarouselItem } from "./CardCarouselItem";
+import { PublishedEvent } from "@/types";
+import { searchLargeScaleEvent } from "@/apis/events";
 
 export function CardCarousel() {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
-
+  const [largeEventData, setLargeEventData] = useState<PublishedEvent[]>([]);
   const sliderSetting: Settings = {
     className: "center",
     dots: true,
@@ -45,6 +46,13 @@ export function CardCarousel() {
     ],
   };
 
+  useEffect(() => {
+    searchLargeScaleEvent().then((res) => {
+      if (res.status_code === 200) 
+        setLargeEventData(res.data);
+    });
+  }, []);
+
   return (
     <Box
       display="flex"
@@ -57,7 +65,7 @@ export function CardCarousel() {
       sx={{}}
     >
       <Slider {...sliderSetting}>
-        {mockEventList.map((data, index) => {
+        {largeEventData.map((data, index) => {
           const eventProps = convertEventDataToCardProps(data);
           return (
             <CardCarouselItem
