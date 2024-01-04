@@ -43,3 +43,7 @@ export const register = (
     body: form,
   });
 };
+
+export const getProfile = (): Promise<any> => {
+  return http.get("/users/personality/profile");
+}

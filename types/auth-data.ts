@@ -4,3 +4,10 @@ export interface ISignInResponse {
     tokenType: string;
 }
 
+export interface IUserProfile {
+    full_name: string;
+    email: string;
+    phone: string;
+    company: string;
+    role_id: number;
+}

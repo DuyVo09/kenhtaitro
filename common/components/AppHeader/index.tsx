@@ -46,8 +46,8 @@ function AppHeader() {
             <ActiveLink              
               href={path}
               childPath={children}
-              activeClassName="group is-active font-bold text-transparent bg-clip-text bg-gradient-to-b from-[#659FDF] to-[#B7B5F1]"
-              className="group peer relative uppercase pt-3 pb-2 font-medium flex items-center"
+              activeClassName="group is-active font-[900] text-transparent bg-clip-text bg-gradient-to-b from-[#659FDF] to-[#B7B5F1]"
+              className="group peer relative uppercase pt-3 pb-2 font-bold flex items-center"
             >
               <div className="relative group-[.is-active]:before:block before:absolute before:w-full before:border-primary before:top-[-14px] before:hidden">
                 {label}

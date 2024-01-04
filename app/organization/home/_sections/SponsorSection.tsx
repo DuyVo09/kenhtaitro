@@ -11,7 +11,7 @@ export function SponsorSection() {
     >
       <Typography className="font-extrabold text-pink-300">
         <span className="text-[150px]">S</span>
-        <span className="text-[70px]">ponsor</span>
+        <span className="text-[70px]">ponsorship</span>
       </Typography>
     </Box>
   );

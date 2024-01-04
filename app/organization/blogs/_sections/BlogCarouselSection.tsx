@@ -9,32 +9,29 @@ export function BlogCarouselSection() {
       <BlogCarousel />
       <Box display="flex" flexDirection="column" alignItems="center">
         <Box display="flex" alignItems="center">
-          <Box height="80px" width="80px" position="relative">
+          <Box height="150px" width="220px" position="relative">
             <Image
               src="/images/logo.png"
               alt="Logo"
               fill
               style={{
                 objectFit: "contain",
-                maxWidth: "100%",
-              }} />
+                maxHeight: "100%",
+              }}
+            />
           </Box>
           <Box>
-            <Typography className="font-medium text-primary text-xl ">
-              Sponsorship
-            </Typography>
-            <Typography className="font-light text-xs  text-zinc-500">
-              Communication Solutions Company Limited{" "}
+            <Typography className=" text-[20px] font-bold text-primary">
+              "Tiếp lửa thương hiệu"
             </Typography>
           </Box>
         </Box>
 
-        <Typography className="text-zinc-500 w-[668px] text-center my-6">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu
-          tristique velit, auctor cursus ipsum. Phasellus neque lacus, bibendum
-          sit amet lobortis ut, sollicitudin vel sem. Morbi eget neque ac magna
-          auctor luctus vel vitae metus. Morbi efficitur condimentum turpis, vel
-          iaculis turpis suscipit in. Donec imperdiet urna ut faucibus bibendum.
+        <Typography className="text-zinc-500 w-[668px] text-center my-3">
+          “Sponsorship Channel - nền tảng tìm kiếm sự kiện tài trợ hàng đầu,
+          cung cấp cho doanh nghiệp một cách tiếp cận nhanh chóng, đơn giản và
+          hiệu quả để tìm kiếm các sự kiện phù hợp với mục tiêu kinh doanh và
+          tối ưu hóa chiến lược tài trợ”
         </Typography>
 
         <Box display="flex" marginBottom="48px">

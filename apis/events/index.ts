@@ -12,6 +12,7 @@ import { ITitleImageItem } from "@/common/types";
 
 const fetchApi = async (url: string, method: string = "GET") => {
     const cookie = getCookie("access_token");
+    console.log('cookie: ', url);
     const res = await fetch(url, {
         method: method,
         headers: {
@@ -24,7 +25,7 @@ const fetchApi = async (url: string, method: string = "GET") => {
 const postApi = async (url: string, data: any) => {
     try {
         let cookie = getCookie("access_token");
-        cookie = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDQzMDEyMjAsInN1YiI6IjIiLCJ0eXBlIjoiYWNjZXNzIn0.DlMkHcw_yrWWWNXy_WkXa29A4DfePKtBg14tGxbKQxg";
+        cookie = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDQzNDAzNjQsInN1YiI6IjMiLCJ0eXBlIjoiYWNjZXNzIn0.bTG0dCnjMWaT2P5Kl5RVodOYaWy5Gv5YtT7B1kSb7i8";
         const res = await fetch(url, {
             method: "POST",
             headers: {
@@ -106,6 +107,7 @@ export const searchLargeScaleEvent = async (page: number = 1, limit: number = 3)
 // /newest/search
 export const searchNewestEvent = async (page: number = 1, limit: number = 3)
 : Promise<IEventPublishedResponse> => {
+    // console.log('page: ', API_URL);
     return await fetchApi(`${API_URL}/events/newest/search?page=${page}&limit=${limit}`);
 }
 
