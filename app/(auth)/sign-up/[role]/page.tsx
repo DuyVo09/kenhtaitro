@@ -1,16 +1,17 @@
+"use client";
 import { Box, Button, Typography } from "@mui/material";
 import { useRouter, redirect } from "next/navigation";
 import Image from "next/image";
 import { SignUpForm } from "./_components/SignUpForm";
 
-
 const SignupPage = ({ params }: { params: { role: string } }) => {
+  const router = useRouter();
   let accountRole = "";
   if (params.role !== "organization" && params.role !== "business") {
     redirect("/role");
   }
 
-  if(params.role === "organization") {
+  if (params.role === "organization") {
     accountRole = "Ban tổ chức";
   } else {
     accountRole = "Doanh nghiệp";
@@ -48,8 +49,7 @@ const SignupPage = ({ params }: { params: { role: string } }) => {
           alignItems="center"
           justifyContent="center"
           sx={{
-            backgroundImage:
-              "linear-gradient(to top, rgba(0, 0, 0, 0.4), rgba(7, 7, 7, 0.3), rgba(82, 82, 82, 0) 97%, rgba(84, 84, 84, 0))",
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
           }}
         >
           <Box
@@ -73,6 +73,7 @@ const SignupPage = ({ params }: { params: { role: string } }) => {
                   bgcolor: "rgba(255, 255, 255, 0.4)",
                 },
               }}
+              onClick={() => router.push("/sign-in")}
             >
               <Typography>Đăng nhập</Typography>
             </Button>

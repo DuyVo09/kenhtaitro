@@ -33,7 +33,7 @@ const RolePage = () => {
                 textTransform: "none",
               }}
               onClick={() => {
-                router.push("/sign-in/organization");
+                router.push("/sign-up/organization");
               }}
             >
               <Typography className="text-[22px] capitalize">Ban tổ chức</Typography>
@@ -44,7 +44,7 @@ const RolePage = () => {
                 textTransform: "none",
               }}
               onClick={() => {
-                router.push("/sign-in/business");
+                router.push("/sign-up/business");
               }}
             >
               <Typography className="text-[22px] capitalize">Doanh nghiệp</Typography>
