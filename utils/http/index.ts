@@ -1,127 +1,138 @@
-// import { TOKEN } from "@/common/constants/cookies";
-// import { getCookie } from "@/common/helpers/getCokkies";
+import { getAuthCookies } from "@/common/helpers/authCookies";
 
-// const getRequestURL = (url: string) => {
-//   if (!url.startsWith("/")) {
-//     url = `/${url}`;
+const getRequestURL = (url: string) => {
+  if (!url.startsWith("/")) {
+    url = `api/${url}`;
+  }
+
+  // server
+  if (typeof window == "undefined") {
+    return `${process.env.API_URL}${url}`;
+  }
+  return `/api${url}`;
+};
+
+const _get = async (url: string, options: RequestInit = {}) => {
+  const headers = { ...options.headers };
+  const authCookie = getAuthCookies();
+  if (authCookie.accessToken) {
+    (headers as any)["Authorization"] = `Bearer ${authCookie.accessToken}`;
+  }
+
+  const res = await fetch(getRequestURL(url), {
+    headers,
+    ...options,
+    method: "GET",
+  });
+
+//   if (res.status === 401) {
+//     // Refresh access token
+//     await refreshAccessToken();
+
+//     // Retry the original request
+//     return _get(url, options);
 //   }
 
-//   // server
-//   if (typeof window == "undefined") {
-//     return `${process.env.API_URL}${url}`;
-//   }
-//   return `/api${url}`;
-// };
+  if (res.status >= 500) {
+    return { status: res.status, detail: res.statusText };
+  }
 
-// const _get = async (url: string, options: RequestInit = {}) => {
-//   const headers = { ...options.headers };
-//   if (getCookie(TOKEN)) {
-//     (headers as any)["Authorization"] = `Bearer ${getCookie(TOKEN)}`;
-//   }
+  const responseData = await res?.json();
 
-//   const res = await fetch(getRequestURL(url), {
-//     headers,
-//     ...options,
+  return { status: res.status, ...responseData };
+};
 
-//     method: "GET",
-//   });
-//   if (res.status >= 500) {
-//     return { status: res.status, detail: res.statusText };
-//   }
+const _post = async <TEntity>(
+  url: string,
+  data: TEntity,
+  options: RequestInit = {}
+) => {
+  const authCookie = getAuthCookies();
+  const headers = {
+    "Content-Type": "application/json",
+    ...options?.headers,
+  };
 
-//   const responseData = await res?.json();
+  if (authCookie.accessToken) {
+    (headers as any)["Authorization"] = `Bearer ${authCookie.accessToken}`;
+  }
 
-//   return { status: res.status, ...responseData };
-// };
+  const res = await fetch(getRequestURL(url), {
+    body: JSON.stringify(data),
+    cache: "no-store",
+    headers,
+    ...options,
+    method: "POST",
+  });
 
-// const _post = async <TEntity>(
-//   url: string,
-//   data: TEntity,
-//   options: RequestInit = {}
-// ) => {
-//   const headers = {
-//     "Content-Type": "application/json",
-//     ...options?.headers,
-//   };
+  if (res.status >= 500) {
+    return { status: res.status, detail: res.statusText };
+  }
 
-//   if (getCookie(TOKEN)) {
-//     (headers as any)["Authorization"] = `Bearer ${getCookie(TOKEN)}`;
-//   }
+  const responseData = await res.json();
 
-//   const res = await fetch(getRequestURL(url), {
-//     body: JSON.stringify(data),
-//     cache: "no-store",
-//     headers,
-//     ...options,
-//     method: "POST",
-//   });
+  return { status: res.status, ...responseData };
+};
 
-//   if (res.status >= 500) {
-//     return { status: res.status, detail: res.statusText };
-//   }
+const _put = async <TEntity>(
+  url: string,
+  data: TEntity,
+  options: RequestInit = {}
+) => {
+  const authCookie = getAuthCookies();
+  const headers = {
+    "Content-Type": "application/json",
+    ...options?.headers,
+  };
 
-//   const responseData = await res.json();
+  if (authCookie.accessToken) {
+    (headers as any)["Authorization"] = `Bearer ${authCookie.accessToken}`;
+  }
 
-//   return { status: res.status, ...responseData };
-// };
+  const res = await fetch(getRequestURL(url), {
+    cache: "no-store",
+    body: JSON.stringify(data),
+    headers,
+    ...options,
+    method: "PUT",
+  });
 
-// const _put = async <TEntity>(
-//   url: string,
-//   data: TEntity,
-//   options: RequestInit = {}
-// ) => {
-//   const headers = {
-//     "Content-Type": "application/json",
-//     ...options?.headers,
-//   };
+  if (res.status >= 500) {
+    return { status: res.status, detail: res.statusText };
+  }
 
-//   if (getCookie(TOKEN)) {
-//     (headers as any)["Authorization"] = `Bearer ${getCookie(TOKEN)}`;
-//   }
+  const responseData = await res.json();
 
-//   const res = await fetch(getRequestURL(url), {
-//     cache: "no-store",
-//     body: JSON.stringify(data),
-//     headers,
-//     ...options,
-//     method: "PUT",
-//   });
+  return { status: res.status, ...responseData };
+};
 
-//   if (res.status >= 500) {
-//     return { status: res.status, detail: res.statusText };
-//   }
+const _delete = async (url: string, options: RequestInit = {}) => {
+  const headers = { ...options.headers };
+  const authCookie = getAuthCookies();
 
-//   const responseData = await res.json();
+  if (authCookie.accessToken) {
+    (headers as any)["Authorization"] = `Bearer ${authCookie.accessToken}`;
+  }
 
-//   return { status: res.status, ...responseData };
-// };
+  const res = await fetch(getRequestURL(url), {
+    cache: "no-store",
+    headers,
+    ...options,
+    method: "DELETE",
+  });
 
-// const _delete = async (url: string, options: RequestInit = {}) => {
-//   const headers = { ...options.headers };
+  if (res.status >= 500) {
+    return { status: res.status, detail: res.statusText };
+  }
 
-//   if (getCookie(TOKEN)) {
-//     (headers as any)["Authorization"] = `Bearer ${getCookie(TOKEN)}`;
-//   }
+  const responseData = await res.json();
 
-//   const res = await fetch(getRequestURL(url), {
-//     cache: "no-store",
-//     headers,
-//     ...options,
-//     method: "DELETE",
-//   });
+  return { status: res.status, ...responseData };
+};
 
-//   if (res.status >= 500) {
-//     return { status: res.status, detail: res.statusText };
-//   }
-
-//   const responseData = await res.json();
-
-//   return { status: res.status, ...responseData };
-// };
-
-// export const http = {
-//   get: _get,
-//   post: _post,
-//   put: _put,
-//   delete: _delete,
-// };
+export const http = {
+  get: _get,
+  post: _post,
+  put: _put,
+  delete: _delete,
+};

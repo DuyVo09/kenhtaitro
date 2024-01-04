@@ -23,6 +23,8 @@ import { useState } from "react";
 // import { login } from "@/common/apis/auth";
 // import { setAccessCookies } from "@/common/helpers/setCookies";
 import { ISignInForm } from "./type";
+import { login } from "@/apis/auth";
+import { setAuthCookies } from "@/common/helpers/authCookies";
 
 export const LoginForm = ({
   redirect,
@@ -53,27 +55,26 @@ export const LoginForm = ({
   };
 
   const onSubmit = handleSubmit(async (data) => {
-    // const res = await login(data.userName, data.password);
+    const res = await login(data.userName, data.password);
 
-    // if (res.status !== 200) {
-    //   console.log(res)
-    //   setError("root", { message: "Đăng nhập thất bại" });
-    //   return;
-    // }
+    if (res.status !== 200) {
+      setError("root", { message: "Đăng nhập thất bại" });
+      return;
+    }
 
-    // setAccessCookies(res);
+    setAuthCookies(res.data);
 
     // console.log(res)
 
-    // if (redirect) {
-    //   return navigate.replace(redirect);
-    // }
+    if (redirect) {
+      return navigate.replace(redirect);
+    }
 
-    // if (onSuccess) {
-    //   return onSuccess();
-    // }
+    if (onSuccess) {
+      return onSuccess();
+    }
 
-    // window.location.reload();
+    window.location.reload();
   });
   
   return (

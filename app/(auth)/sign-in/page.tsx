@@ -4,8 +4,9 @@ import { useRouter, redirect } from "next/navigation";
 import Image from "next/image";
 import { LoginForm } from "./_components/SignInForm";
 
-const SignInPage = ({ params }: { params: { role: string } }) => {
+const SignInPage = () => {
   const router = useRouter();
+
   return (
     <div className="flex w-full">
       <div className="flex flex-col max-h-screen grow p-5 items-center ">

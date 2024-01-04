@@ -7,3 +7,9 @@ export interface IValueLabel<T> {
     value: T;
     label: string;
 }
+
+export interface IResponse<T> {
+    data: T;
+    status: number;
+    detail?: string;
+}

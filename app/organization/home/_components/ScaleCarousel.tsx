@@ -46,6 +46,13 @@ export function ScaleCarousel() {
     ],
   };
 
+  function getNextIndices(currentIndex: number): number[] {
+    const nextIndices: number[] = [];
+    for (let i = 1; i <= 3; i++) {
+      nextIndices.push((currentIndex + i) % mockEventList.length);
+    }
+    return nextIndices;
+  }
   console.log("currentIndex", currentIndex)
 
   return (

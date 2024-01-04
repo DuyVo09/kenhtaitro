@@ -19,6 +19,7 @@ export function NewestEventSection() {
       flexDirection="column"
       flex={1}
       width="100%"
+      maxWidth="1440px"
       alignItems="center"
     >
       <Typography className="text-5xl uppercase font-bold p-20">
@@ -79,7 +80,8 @@ export function NewestEventSection() {
               style={{
                 objectFit: "cover",
                 maxWidth: "100%",
-              }} />
+              }}
+            />
           </Box>
         </Grid>
 

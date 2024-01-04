@@ -10,15 +10,16 @@ import { EventCard } from "@components/EventCard";
 import { convertEventDataToCardProps } from "@/common/helpers/convertEventData";
 import { CardCarousel } from "../_components";
 
-
 export function BigEventSection() {
   return (
-    <Box display="flex" flexDirection="column" width="100%">
-      <Typography sx={{px: 5}} className="font-bold text-5xl text-primary">
-        Sự kiện quy mô lớn
-      </Typography>
-      
-      <CardCarousel />
+    <Box display="flex" justifyContent="center" width="100%" bgcolor="white">
+      <div className="max-w-[1440px]">
+        <Typography className="font-bold text-5xl text-primary">
+          Sự kiện quy mô lớn
+        </Typography>
+
+        <CardCarousel />
+      </div>
     </Box>
   );
 }

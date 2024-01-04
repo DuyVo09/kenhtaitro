@@ -2,13 +2,15 @@
 
 import type { Metadata } from "next";
 import Head from "next/head";
-import { Montserrat, } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import classNames from "classnames";
 import "@/styles/_global.scss";
 
 import { CssBaseline, StyledEngineProvider, createTheme } from "@mui/material";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 import ThemeRegistry from "./ThemeRegistry";
+import QueryProvider from "../utils/query/QueryProvider";
+import { HydrationBoundary } from "@tanstack/react-query";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -21,13 +23,19 @@ const montserrat = Montserrat({
   fallback: ["Quicksand"],
 });
 
-export default function RootLayout({ children, params }: any) {
+export default function RootLayout({ children, params, ...props }: any) {
   return (
     <html lang="en">
       <AppRouterCacheProvider>
         <StyledEngineProvider injectFirst>
           <body className={classNames(montserrat.className, "bg-neutral-50")}>
-            <ThemeRegistry options={{ key: "mui" }}>{children}</ThemeRegistry>
+            <QueryProvider>
+              <HydrationBoundary state={props.dehydratedState}>
+                <ThemeRegistry options={{ key: "mui" }}>
+                  {children}
+                </ThemeRegistry>
+              </HydrationBoundary>
+            </QueryProvider>
           </body>
         </StyledEngineProvider>
       </AppRouterCacheProvider>
