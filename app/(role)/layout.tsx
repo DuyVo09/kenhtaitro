@@ -1,12 +1,6 @@
-import { useQueryClient } from "@tanstack/react-query";
+import { AuthProvider } from "@/provider/AuthContext";
 import { PropsWithChildren } from "react";
 
-const ProfileLayout = ({children}: PropsWithChildren) => {
-    const queryClient = useQueryClient();
-    
-    return ( <>
-    {children}
-    </> );
+export function RoleLayout({ children }: PropsWithChildren) {
+  return <AuthProvider>{children}</AuthProvider>;
 }
- 
-export default ProfileLayout;

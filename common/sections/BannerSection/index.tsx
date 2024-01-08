@@ -19,7 +19,7 @@ const BannerSection = () => {
           justifyContent="center"
         >
           <Box width="min-content">
-            <Typography color="#D7C7FF" className="font-semibold">
+            <Typography color="#D7C7FF" className="font-semibold ">
               Organization - Upto 500 attendees
             </Typography>
 
@@ -28,8 +28,9 @@ const BannerSection = () => {
             </Typography>
 
             <Box display="flex" alignItems="center" py={3}>
-              <AwesomeButton className="h-14" type="primary" size="large">
-                <Typography className="font-bold">Tài trợ</Typography>
+              <AwesomeButton className="h-14" type="primary" size="medium">
+                {/* <Typography className="font-bold">Tài trợ</Typography> */}
+                tài trợ
               </AwesomeButton>
               <Box display="flex" alignItems="center">
                 <Box

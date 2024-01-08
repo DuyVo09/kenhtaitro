@@ -4,12 +4,11 @@ const getRequestURL = (url: string) => {
   if (!url.startsWith("/")) {
     url = `api/${url}`;
   }
-
   // server
   if (typeof window == "undefined") {
-    return `${process.env.API_URL}${url}`;
+    return `/api${url}`;
   }
-  return `/api${url}`;
+  return `${process.env.NEXT_PUBLIC_API_URL}${url}`;
 };
 
 const _get = async (url: string, options: RequestInit = {}) => {
@@ -25,13 +24,13 @@ const _get = async (url: string, options: RequestInit = {}) => {
     method: "GET",
   });
 
-//   if (res.status === 401) {
-//     // Refresh access token
-//     await refreshAccessToken();
+  //   if (res.status === 401) {
+  //     // Refresh access token
+  //     await refreshAccessToken();
 
-//     // Retry the original request
-//     return _get(url, options);
-//   }
+  //     // Retry the original request
+  //     return _get(url, options);
+  //   }
 
   if (res.status >= 500) {
     return { status: res.status, detail: res.statusText };
@@ -48,10 +47,16 @@ const _post = async <TEntity>(
   options: RequestInit = {}
 ) => {
   const authCookie = getAuthCookies();
-  const headers = {
-    "Content-Type": "application/json",
+
+  const headers: HeadersInit = {
     ...options?.headers,
+    ...(!(options.headers as any)["Content-Type"] && {
+      "Content-Type": "application/json",
+    }),
   };
+
+  console.log(options);
+  console.log(headers);
 
   if (authCookie.accessToken) {
     (headers as any)["Authorization"] = `Bearer ${authCookie.accessToken}`;

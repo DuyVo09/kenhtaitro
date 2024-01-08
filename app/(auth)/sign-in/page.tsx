@@ -7,6 +7,10 @@ import { LoginForm } from "./_components/SignInForm";
 const SignInPage = () => {
   const router = useRouter();
 
+  const handleLoginSuccess = () => {
+    
+  }
+
   return (
     <div className="flex w-full">
       <div className="flex flex-col max-h-screen grow p-5 items-center ">

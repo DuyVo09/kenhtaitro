@@ -43,7 +43,7 @@ function AppHeader() {
       <div className="flex flex-auto justify-between px-5 max-w-[1000px]">
         {navigation.map(({ path, label, children }) => (
           <div key={path + label} className="flex relative">
-            <ActiveLink              
+            <ActiveLink   
               href={path}
               childPath={children}
               activeClassName="group is-active font-[900] text-transparent bg-clip-text bg-gradient-to-b from-[#659FDF] to-[#B7B5F1]"

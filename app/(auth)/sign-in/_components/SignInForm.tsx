@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { Controller, useForm } from "react-hook-form";
+import { Controller, set, useForm } from "react-hook-form";
 import { resolver } from "./resolver";
 import {
   Box,
@@ -19,9 +19,10 @@ import {
   Visibility,
   VisibilityOff,
 } from "@mui/icons-material";
-import { useState } from "react";
-// import { login } from "@/common/apis/auth";
-// import { setAccessCookies } from "@/common/helpers/setCookies";
+import { toast, ToastContainer } from "react-toastify";
+
+import { useRef, useState } from "react";
+
 import { ISignInForm } from "./type";
 import { login } from "@/apis/auth";
 import { setAuthCookies } from "@/common/helpers/authCookies";
@@ -34,7 +35,6 @@ export const LoginForm = ({
   onSuccess?: () => void;
 }) => {
   const navigate = useRouter();
-
   const [showPassword, setShowPassword] = useState(false);
 
   const {
@@ -55,30 +55,59 @@ export const LoginForm = ({
   };
 
   const onSubmit = handleSubmit(async (data) => {
-    const res = await login(data.userName, data.password);
+    const toastId = toast.loading("Đang đăng nhập...", {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+    });
 
-    if (res.status !== 200) {
-      setError("root", { message: "Đăng nhập thất bại" });
-      return;
-    }
+    login(data.userName, data.password)
+      .then((res) => {
+        if (res.status === 201) {
+          setAuthCookies(res.data);
+          toast.update(toastId, {
+            render: "Đăng nhập thành công!",
+            type: "success",
+            isLoading: false,
+            autoClose: 3000,
+          });
+          // console.log(res)
 
-    setAuthCookies(res.data);
+          if (redirect) {
+            return navigate.replace(redirect);
+          }
 
-    // console.log(res)
+          if (onSuccess) {
+            return onSuccess();
+          }
 
-    if (redirect) {
-      return navigate.replace(redirect);
-    }
-
-    if (onSuccess) {
-      return onSuccess();
-    }
-
-    window.location.reload();
+          window.location.reload();
+        } else {
+          toast.update(toastId, {
+            render: res.detail,
+            type: "error",
+            isLoading: false,
+            autoClose: 3000,
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.update(toastId, {
+          render: err.detail,
+          type: "error",
+          isLoading: false,
+          autoClose: 3000,
+        });
+      });
   });
-  
+
   return (
     <form onSubmit={onSubmit} className="w-full">
+      <ToastContainer />
       <Box
         display="flex"
         flexDirection="column"
@@ -154,7 +183,6 @@ export const LoginForm = ({
 
         <Button
           type="submit"
-          disabled={isDirty && !isValid}
           variant="contained"
           sx={{ textTransform: "none", py: 1 }}
         >

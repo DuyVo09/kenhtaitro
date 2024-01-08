@@ -27,7 +27,8 @@ export const DescripEventCard = ({
           style={{
             objectFit: "cover",
             maxWidth: "100%",
-          }} />
+          }}
+        />
       </Box>
       <Box
         sx={{
@@ -38,10 +39,12 @@ export const DescripEventCard = ({
           alignItems: "center",
         }}
       >
-        <Typography className="font-bold text-center text-transparent bg-clip-text bg-gradient-to-b from-primary to-[#D7C7FF] py-5">
+        <Typography className="font-bold  text-center text-transparent bg-clip-text bg-gradient-to-b from-primary to-[#D7C7FF] py-5">
           {title}
         </Typography>
-        <Typography className="font-light py-2">{description}</Typography>
+        <Typography className="font-light my-2 line-clamp-3">
+          {description}
+        </Typography>
         <Box
           display="flex"
           justifyContent="space-between"
@@ -53,9 +56,8 @@ export const DescripEventCard = ({
             sx={{
               display: "flex",
               flex: 1,
-              overflow: "hidden",
-              textOverflow: "ellipsis",
             }}
+            className="line-clamp-2"
           >
             {location}
           </Typography>

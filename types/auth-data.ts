@@ -11,3 +11,8 @@ export interface IUserProfile {
     company: string;
     role_id: number;
 }
+
+export interface IAuthContext {
+    isAuth: boolean;
+    userProfile: IUserProfile | null;
+}

@@ -1,10 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./app/**/*.{ts,tsx}", // Note the addition of the `app` directory.
-    "./common/**/*.{ts,tsx}",
-    "./modules/**/*.{ts,tsx}",
-    // "./common/components/**/*.{ts,tsx}",
+    "./app/**/*.{js,jsx,ts,tsx}",
+    "./common/**/*.{js,jsx,ts,tsx}",
+    "./modules/**/*.{js,jsx,ts,tsx}",
+    "./common/components/**/*.{ts,tsx}",
   ],
   corePlugins: {
     preflight: false,
@@ -44,4 +44,4 @@ module.exports = {
     },
   },
   plugins: [],
-}
+};

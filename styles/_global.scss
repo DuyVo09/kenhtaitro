@@ -4,6 +4,7 @@
 @use "node_modules/react-awesome-button/dist/styles.css" as *;
 @use "node_modules/slick-carousel/slick/slick.css" as *;
 @use "node_modules/slick-carousel/slick/slick-theme.css" as *;
+@use 'node_modules/react-toastify/dist/ReactToastify.css' as *;
 
 @use "./util";
 @use "./common";

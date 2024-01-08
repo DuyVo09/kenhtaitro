@@ -4,11 +4,13 @@ import { http } from "@/utils/http";
 import qs from "qs";
 
 export const login = (
-  userName: string,
+  username: string,
   password: string
 ): Promise<IResponse<ISignInResponse>> => {
-  const form = qs.stringify({ userName, password });
-  return http.post("/auth/sign-in", form, {
+  const form = qs.stringify({ username: username, password: password });
+  // const form = { username, password }
+  console.log(form);
+  return http.post("/auth/log-in", {
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
     },
