@@ -22,9 +22,9 @@ import {
   VisibilityOff,
 } from "@mui/icons-material";
 import { useState } from "react";
-// import { login } from "@/common/apis/auth";
-// import { setAccessCookies } from "@/common/helpers/setCookies";
 import { ISignUpForm } from "./type";
+import { register } from "@/apis/auth";
+import { toast } from "react-toastify";
 
 export const SignUpForm = ({
   redirect,
@@ -57,27 +57,42 @@ export const SignUpForm = ({
   };
 
   const onSubmit = handleSubmit(async (data) => {
-    // const res = await login(data.userName, data.password);
-
-    // if (res.status !== 200) {
-    //   console.log(res)
-    //   setError("root", { message: "Đăng nhập thất bại" });
-    //   return;
-    // }
-
-    // setAccessCookies(res);
-
-    // console.log(res)
-
-    // if (redirect) {
-    //   return navigate.replace(redirect);
-    // }
-
-    // if (onSuccess) {
-    //   return onSuccess();
-    // }
-
-    // window.location.reload();
+    const toastId = toast.loading("Đang đăng ký...", {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+    });
+    register(
+      data.full_name,
+      data.email,
+      isOrganization ? 1 : 2,
+      data.company,
+      data.phone,
+      data.password,
+      data.confirm_password,
+    )
+    .then((res) => {
+      if (res.status === 200) {
+        toast.update(toastId, {
+          render: "Đăng ký thành công",
+          type: "success",
+          isLoading: false,
+          autoClose: 3000,
+        });
+        window.location.reload();
+      } else {
+        toast.update(toastId, {
+          render: res.detail,
+          type: "error",
+          isLoading: false,
+          autoClose: 3000,
+        });
+        window.location.reload();
+      }
+    });
   });
 
   const role = isOrganization ? "Ban tổ chức" : "Doanh nghiệp";

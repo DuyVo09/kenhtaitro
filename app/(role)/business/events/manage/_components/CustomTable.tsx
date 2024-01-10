@@ -1,32 +1,30 @@
 "use client";
 
+import { getSponsorShipEvents } from "@/apis/events";
 import {
   configIDRowTable,
   configTableOptions,
 } from "@/common/components/ConfigIdRowTable";
-import { IEventDataModel } from "@/types";
+import { EventDetail } from "@/types";
+
 import MUIDataTable, {
   MUIDataTableColumnDef,
   MUIDataTableOptions,
 } from "mui-datatables";
+import { useEffect, useState } from "react";
 
-const data: IEventDataModel[] = [
-  {
-    id: "1",
-    name: "Event name",
-    schoolName: "University of Technology",
-    location: "Ho Chi Minh, District 10",
-    timeStart: "7:00",
-    category: "Technology",
-    size: 500,
-  },
-];
-
-function CustomDataTable() {
+function CustomDataTable({type} : {type: number}) {
+  const [data, setData] = useState<EventDetail[]>([]);
+  useEffect(() => {
+    getSponsorShipEvents(type === 0 ? 'Sponsored' : 'Interested' )
+    .then((res) => {
+      setData(res.data);
+    })
+  }, [type]);
   const columns: MUIDataTableColumnDef[] = [
     configIDRowTable("eventId", "", { page: 1 }, null),
     {
-      name: "name",
+      name: "event_name",
       label: "Tên sự kiện",
       options: {
         filter: false,
@@ -57,7 +55,7 @@ function CustomDataTable() {
       },
     },
     {
-      name: "schoolName",
+      name: "school",
       label: "Tên trường",
       options: {
         filter: false,
@@ -88,7 +86,7 @@ function CustomDataTable() {
       },
     },
     {
-      name: "startTime",
+      name: "start_date",
       label: "Thời gian bắt đầu",
       options: {
         filter: false,
@@ -110,7 +108,7 @@ function CustomDataTable() {
       },
     },
     {
-      name: "category",
+      name: "categories",
       label: "Lĩnh vực sự kiện",
       options: {
         filter: false,
@@ -132,7 +130,7 @@ function CustomDataTable() {
       },
     },
     {
-      name: "size",
+      name: "total_reach",
       label: "Quy mô",
       options: {
         filter: false,
@@ -154,7 +152,7 @@ function CustomDataTable() {
       },
     },
     {
-      name: "postTime",
+      name: "created_at",
       label: "Thời điểm đăng bài",
       options: {
         filter: false,
@@ -190,7 +188,7 @@ function CustomDataTable() {
   );
 
   return (
-    <MUIDataTable title={""} data={data} columns={columns} options={options} />
+    <MUIDataTable title={""} data={data!} columns={columns} options={options} />
   );
 }
 

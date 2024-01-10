@@ -1,5 +1,4 @@
 "use client";
-import { AppFooter } from "@components/AppFooter";
 import {
   AboutUsSection,
   BigEventSection,
@@ -12,7 +11,7 @@ import {
   ThirdCategorySection,
 } from "./_sections";
 import { BannerSection } from "@/common/sections/BannerSection";
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import { PartnerSection } from "@/common/sections/PartnerSection";
 import { QuoteSection } from "@/common/sections/QuoteSection";
 

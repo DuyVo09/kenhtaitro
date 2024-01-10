@@ -21,10 +21,10 @@ import {
 } from "@mui/icons-material";
 import { toast, ToastContainer } from "react-toastify";
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 import { ISignInForm } from "./type";
-import { login } from "@/apis/auth";
+import { getProfile, login } from "@/apis/auth";
 import { setAuthCookies } from "@/common/helpers/authCookies";
 
 export const LoginForm = ({
@@ -66,28 +66,28 @@ export const LoginForm = ({
 
     login(data.userName, data.password)
       .then((res) => {
-        if (res.status === 201) {
-          setAuthCookies(res.data);
+        if (res.access_token) {
+          setAuthCookies(res.access_token, res.refresh_token);
           toast.update(toastId, {
             render: "Đăng nhập thành công!",
             type: "success",
             isLoading: false,
             autoClose: 3000,
           });
-          // console.log(res)
-
-          if (redirect) {
-            return navigate.replace(redirect);
-          }
-
-          if (onSuccess) {
-            return onSuccess();
-          }
-
-          window.location.reload();
+          
+          getProfile().then((res) => {
+            if (res.status === 200) {
+              if (res.data.role_id === 1) {
+                navigate.replace("/organization/home");
+              } else if (res.data.role_id === 2) {
+                navigate.replace("/business/home");
+              }
+            }
+          });
+          
         } else {
           toast.update(toastId, {
-            render: res.detail,
+            render: 'Tài khoản hoặc mật khẩu không đúng',
             type: "error",
             isLoading: false,
             autoClose: 3000,

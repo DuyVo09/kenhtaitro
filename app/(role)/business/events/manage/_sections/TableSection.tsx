@@ -82,7 +82,7 @@ export function TableSection() {
       </Box>
 
       <Box my="70px">
-        <CustomDataTable />
+        <CustomDataTable type={tabValue} />
       </Box>
     </Box>
   );

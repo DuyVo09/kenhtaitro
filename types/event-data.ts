@@ -60,13 +60,13 @@ export interface IEventByCategoryResponse extends BaseEventResponse {
   data: PublishedEvent[];
 }
 
-interface DrafEventDetail {
+export interface EventDetail {
   event_image: string[];
   phone: string;
   organizer: string;
   first_year_attendee_percentage: number;
   is_published: boolean;
-  event_category: string[];
+  categories: string[];
   email: string;
   start_date: Date;
   exclusive_sponsorship: number;
@@ -101,8 +101,12 @@ interface DrafEventDetail {
   proposal: string;
 }
 
-export interface IEventDraftDetailResponse extends BaseEventResponse {
-  data: DrafEventDetail;
+export interface IEventDetailResponse extends BaseEventResponse {
+  data: EventDetail;
+}
+
+export interface IEventBusinessResponse extends BaseEventResponse {
+  data: EventDetail[];
 }
 
 interface DraftEvent {
@@ -112,7 +116,7 @@ interface DraftEvent {
   school: string;
   start_date: Date;
   end_date: Date;
-  event_category: string[];
+  categories: string[];
   total_reach: number;
   create_at: Date;
   updated_at: Date;
@@ -234,8 +238,7 @@ export type IEventFormModel = {
   [key: string]: any;
 };
 
-export interface IAllDraftEventResponse extends BaseEventResponse {
-  data: {
+export interface IEventPublished {
     id: number;
     school: string;
     event_name: string;
@@ -248,8 +251,12 @@ export interface IAllDraftEventResponse extends BaseEventResponse {
     total_reach: number;
     is_edit: boolean;
     event_id?: number;
-    }
-  }
+    event_type?: number;
+}
+
+export interface IAllDraftEventResponse extends BaseEventResponse {
+  data: IEventPublished[];
+}
 
 export interface IEventCreateResponse extends BaseEventResponse {
   data: IEventFormModel;

@@ -24,6 +24,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 export function EventCreateSection() {
   const [rejected, setRejected] = useState(false);
   const [open, setOpen] = useState(false);
+  const [eventId, setEventId] = useState(0);
   const [eventMessage, setEventMessage] = useState("");
   const initialValues: IEventFormModel = {
     full_name: "",
@@ -66,6 +67,7 @@ export function EventCreateSection() {
   const createEvent = async () => {
     const data = getValues();
     const res = await submitEvent("organizer/event", data);
+    setEventId(res.data.id ?? 0);
     setOpen(true);
     setEventMessage(res.detail);
   };
@@ -73,15 +75,17 @@ export function EventCreateSection() {
   const createDraft = async () => {
     const data = getValues();
     const res = await submitEvent("organizer/draft", data);
-    console.log(res);
     setOpen(true);
     setEventMessage(res.detail);
   }
   
   const deleteDraft = async (id: number) => {
     const res = await deleteDraftEvent(id);
+    setOpen(true);
+    setEventMessage(res.detail);
   }
-  const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
+  const handleClose = (event?: React.SyntheticEvent
+     | Event, reason?: string) => {
     if (reason === 'clickaway') {
       return;
     }
@@ -162,7 +166,7 @@ export function EventCreateSection() {
             idleText={
               <Typography className="font-bold  p-3">Huỷ bỏ</Typography>
             }
-            onClick={() => deleteDraft(1)} // must be changed
+            onClick={() => deleteDraft(eventId)} // must be changed
             size="large"
             style={{ borderRadius: "12px" }}
           />
@@ -189,6 +193,7 @@ export function EventCreateSection() {
           />
 
           <ReactiveButton
+            disabled
             className="bg-primary"
             idleText={
               <Typography className="font-bold  p-3">Chấp nhận</Typography>
@@ -198,6 +203,7 @@ export function EventCreateSection() {
           />
 
           <ReactiveButton
+            disabled
             className="bg-primary"
             idleText={
               <Typography className="font-bold  p-3">Từ chối</Typography>

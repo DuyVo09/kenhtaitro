@@ -1,32 +1,67 @@
 "use client";
 
+import { getAllDraftEvents, getAllInProgressEvents, getAllPublishedEventsByOrganizer, getDraftSearchEvent, searchInProgressEvent, searchPublishedEvent } from "@/apis/events";
 import {
   configIDRowTable,
   configTableOptions,
 } from "@/common/components/ConfigIdRowTable";
-import { IEventDataModel } from "@/types";
+import { IEventPublished } from "@/types";
 import MUIDataTable, {
   MUIDataTableColumnDef,
   MUIDataTableOptions,
 } from "mui-datatables";
+import { useEffect, useState } from "react";
 
-const data: IEventDataModel[] = [
-  {
-    id: "1",
-    name: "Event name",
-    schoolName: "University of Technology",
-    location: "Ho Chi Minh, District 10",
-    timeStart: "7:00",
-    category: "Technology",
-    size: 500,
-  },
-];
-
-function CustomDataTable() {
+function CustomDataTable(
+  { tabValue, keySearch } : 
+  { tabValue: number, keySearch: string }
+) {
+  const [data, setData] = useState<IEventPublished[]>([]);
+  useEffect(() => {
+    if (tabValue === 0) {
+      getAllPublishedEventsByOrganizer()
+      .then((res) => {
+        if(res.status_code === 200)
+          setData(res.data);
+      })
+    }
+    else if (tabValue === 1) {
+      getAllInProgressEvents()
+      .then((res) => {
+        if(res.status_code === 200)
+          setData(res.data);
+      })
+    }
+    else if (tabValue === 2) {
+      getAllDraftEvents()
+      .then((res) => {
+        if(res.status_code === 200)
+          setData(res.data);
+      })
+    }
+    else if (tabValue === 3) {
+      searchPublishedEvent(keySearch)
+      .then((res) => {
+        setData(res.data);
+      });
+    }
+    else if (tabValue === 4) {
+      searchInProgressEvent(keySearch)
+      .then((res) => {
+        setData(res.data);
+      });
+    }
+    else if (tabValue === 5) {
+      getDraftSearchEvent(keySearch)
+      .then((res) => {
+        setData(res.data);
+      })
+    }
+  }, [tabValue]);
   const columns: MUIDataTableColumnDef[] = [
     configIDRowTable("eventId", "", { page: 1 }, null),
     {
-      name: "name",
+      name: "event_name",
       label: "Tên sự kiện",
       options: {
         filter: false,
@@ -57,7 +92,7 @@ function CustomDataTable() {
       },
     },
     {
-      name: "schoolName",
+      name: "school",
       label: "Tên trường",
       options: {
         filter: false,
@@ -88,7 +123,7 @@ function CustomDataTable() {
       },
     },
     {
-      name: "startTime",
+      name: "start_date",
       label: "Thời gian bắt đầu",
       options: {
         filter: false,
@@ -110,7 +145,7 @@ function CustomDataTable() {
       },
     },
     {
-      name: "category",
+      name: "categories",
       label: "Lĩnh vực sự kiện",
       options: {
         filter: false,
@@ -132,8 +167,8 @@ function CustomDataTable() {
       },
     },
     {
-      name: "size",
-      label: "Quy mô",
+      name: [0, 2, 3, 5].includes(tabValue) ? "total_reach" : "updated_at",
+      label: [0, 2, 3, 5].includes(tabValue) ? "Quy mô": "Thời điểm",
       options: {
         filter: false,
         sort: true,
@@ -154,8 +189,9 @@ function CustomDataTable() {
       },
     },
     {
-      name: "postTime",
-      label: "Thời điểm đăng bài",
+      name: [0, 2, 3, 5].includes(tabValue) ? "updated_at" : "event_type",
+      label: tabValue === 0 || tabValue === 3 ? "Thời điểm đăng bài" : (
+        tabValue === 1 || tabValue === 4 ? "Trạng thái" : "Thời điểm viết bài"),
       options: {
         filter: false,
         sort: true,

@@ -4,10 +4,6 @@ import { Box, Typography } from "@mui/material";
 import Slider from "react-slick";
 // import "slick-carousel/slick/slick.css";
 // import "slick-carousel/slick/slick-theme.css";
-import { mockEventList } from "../../../../common/mockData/mockEventList";
-import { EventCard } from "@components/EventCard";
-
-import { convertEventDataToCardProps } from "@/common/helpers/convertEventData";
 import { CardCarousel } from "../_components";
 
 export function BigEventSection() {

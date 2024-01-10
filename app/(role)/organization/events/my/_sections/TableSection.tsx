@@ -1,8 +1,6 @@
 "use client";
 import {
   Box,
-  Button,
-  Divider,
   InputAdornment,
   OutlinedInput,
   Typography,
@@ -14,7 +12,14 @@ import classNames from "classnames";
 
 export function TableSection() {
   const [tabValue, setTabValue] = useState(0);
-
+  const [keysearch, setKeySearch] = useState("");
+  const handleSearch = () => {
+    if (keysearch) {
+      if (tabValue === 0) setTabValue(3);
+      else if (tabValue === 1) setTabValue(4);
+      else if (tabValue === 2) setTabValue(5);
+    }
+  }
   return (
     <Box display="flex" flexDirection="column" width="100%" maxWidth="1440px">
       <Box display="flex" alignItems="center" py={5}>
@@ -58,7 +63,7 @@ export function TableSection() {
                 tabValue === 1 ? "font-bold text-primary" : ""
               )}
             >
-              Đang sử lý
+              Đang xử  lý
             </Typography>
           </Box>
 
@@ -85,6 +90,7 @@ export function TableSection() {
         <OutlinedInput
           id="event-search"
           placeholder="Tìm kiếm sự kiện"
+          onChange={(e) => setKeySearch(e.target.value)}
           className="bg-[#BDE0FE]/50"
           sx={{
             borderRadius: 3,
@@ -97,14 +103,19 @@ export function TableSection() {
           }}
           endAdornment={
             <InputAdornment position="start">
-              <Search sx={{ color: "#0986CA" }} />
+              <Search sx={{ color: "#0986CA" }} 
+                onClick={() => handleSearch()}
+              />
             </InputAdornment>
           }
         />
       </Box>
 
       <Box my="70px">
-        <CustomDataTable />
+        <CustomDataTable 
+          tabValue={tabValue}
+          keySearch={keysearch}
+        />
       </Box>
     </Box>
   );

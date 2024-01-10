@@ -1,7 +1,8 @@
+import { EventDetail } from "@/types";
 import { PlaceOutlined } from "@mui/icons-material";
 import { Box, Button, Typography } from "@mui/material";
 
-export function OverviewSection() {
+export function OverviewSection({data} : {data: EventDetail}) {
   return (
     <Box display="flex" px="7%" py="50px">
       <Box display="flex" flexDirection="column" flex={1}>
@@ -18,7 +19,7 @@ export function OverviewSection() {
           boxShadow={2}
         >
           <Typography className="text-3xl text-white font-bold">
-            Upto 5k+
+            Upto {data.total_reach}
           </Typography>
           <Typography className="text-3xl font-bold text-white">
             Participants
@@ -26,14 +27,17 @@ export function OverviewSection() {
         </Box>
 
         <Typography className="text-6xl font-bold my-10">
-          Dream world wide in jakatra
+          {data.event_name}
         </Typography>
 
         <Typography className="text-4xl font-bold my-3">
           Event Category
         </Typography>
-
-        <Typography sx={{ my: 1 }}>Event description</Typography>
+        {data.categories.map((category, idx) => (
+          <div key={idx}>
+            <Typography sx={{ my: 1 }}>{category}</Typography>
+          </div>  
+          ))}
 
         <Box display="flex">
           <PlaceOutlined />
@@ -52,7 +56,7 @@ export function OverviewSection() {
           <Typography className="text-2xl font-bold">
             Deadline Tài Trợ
           </Typography>
-          <Typography>Sartuday, March 18 2023</Typography>
+          <Typography>{data.deadline_sponsorship.toString()}</Typography>
           <Button variant="contained" sx={{ my: 1, textTransform: "none" }}>
             Tài trợ
           </Button>

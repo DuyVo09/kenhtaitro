@@ -50,14 +50,8 @@ const _post = async <TEntity>(
 
   const headers: HeadersInit = {
     ...options?.headers,
-    ...(!(options.headers as any)["Content-Type"] && {
-      "Content-Type": "application/json",
-    }),
+    "Content-Type": "application/json",
   };
-
-  console.log(options);
-  console.log(headers);
-
   if (authCookie.accessToken) {
     (headers as any)["Authorization"] = `Bearer ${authCookie.accessToken}`;
   }

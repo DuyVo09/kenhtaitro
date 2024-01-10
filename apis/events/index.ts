@@ -1,18 +1,18 @@
 import { IEventFormModel, IEventByCategoryResponse, 
     IEventPublishedResponse, IEventSearchByCategory, 
     IEventUpdateStatus, IEventUpdateStatusResponse, 
-    IEventDraftDetailResponse, IEventDraftListResponse, 
+    IEventDetailResponse,
     IDraftDeleteResponse, SearchEventByContents, 
     IAllDraftEventResponse,
     IEventCreateResponse,
+    IEventBusinessResponse,
  } from "@/types";
 import { getCookie } from "@/utils/getCookie";
 import { API_URL } from "../constants";
 import { ITitleImageItem } from "@/common/types";
 
 const fetchApi = async (url: string, method: string = "GET") => {
-    const cookie = getCookie("access_token");
-    console.log('cookie: ', url);
+    const cookie = await getCookie("accessToken");
     const res = await fetch(url, {
         method: method,
         headers: {
@@ -24,8 +24,7 @@ const fetchApi = async (url: string, method: string = "GET") => {
 
 const postApi = async (url: string, data: any) => {
     try {
-        let cookie = getCookie("access_token");
-        cookie = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDQzNDAzNjQsInN1YiI6IjMiLCJ0eXBlIjoiYWNjZXNzIn0.bTG0dCnjMWaT2P5Kl5RVodOYaWy5Gv5YtT7B1kSb7i8";
+        let cookie = await getCookie("accessToken");
         const res = await fetch(url, {
             method: "POST",
             headers: {
@@ -60,14 +59,14 @@ export const searchByCategory = async (data: IEventSearchByCategory)
 }
 // /draft/:draft_event_id
 export const getDraftDetailEvent = async (draft_event_id: number)
-: Promise<IEventDraftDetailResponse> => {
+: Promise<IEventDetailResponse> => {
     return await fetchApi(`${API_URL}/events/drafts/${draft_event_id}`);
 }
 
 // /draft/search
 export const getDraftSearchEvent = async (query: string)
-: Promise<IEventDraftListResponse> => {
-    return await fetchApi(`${API_URL}/events/drafts/search?query=${query}`);
+: Promise<IAllDraftEventResponse> => {
+    return await fetchApi(`${API_URL}/events/draft/search?query=${query}`);
 }
 
 // /drafts/:draft_event_id
@@ -87,14 +86,14 @@ export const searchEventByContents = async (data: SearchEventByContents)
 }
 
 // /in-progress/:processed_event_id
-export const getInProgressEvent = async (processed_event_id: number)
-: Promise<IEventFormModel> => {
+export const getDetailInProgressEvent = async (processed_event_id: number)
+: Promise<IEventDetailResponse> => {
     return await fetchApi(`${API_URL}/events/in-progress/${processed_event_id}`);
 }
 
 // /in-progress/search
 export const searchInProgressEvent = async (query: string):
-Promise<IEventPublishedResponse> => {
+Promise<IAllDraftEventResponse> => {
     return await fetchApi(`${API_URL}/events/in-progress/search?query=${query}`);
 }
 
@@ -123,22 +122,33 @@ export const getAllInProgressEvents = async (): Promise<IAllDraftEventResponse> 
 
 // /organizer/published
 export const getAllPublishedEventsByOrganizer = async (): Promise<IAllDraftEventResponse> => {
-    return await fetchApi(`${API_URL}/events/organizer/published`);
+    return await fetchApi(`${API_URL}/events/organizer/publised`);
 }
 
 // /publish/:event_id
-export const getDetailPublishedEvent = async (event_id: number): Promise<IEventPublishedResponse> => {
+export const getDetailPublishedEvent = async (event_id: number): Promise<IEventDetailResponse> => {
     return await fetchApi(`${API_URL}/events/publish/${event_id}`);
 }
 
 // /publish/search
-export const searchPublishedEvent = async (query: string): Promise<IEventDraftListResponse> => {
+export const searchPublishedEvent = async (query: string): Promise<IAllDraftEventResponse> => {
     return await fetchApi(`${API_URL}/events/publish/search?query=${query}`);
 }
 
 // /search-event
 export const searchEvent = async (query: string): Promise<IEventPublishedResponse> => {
     return await fetchApi(`${API_URL}/events/search-event?query=${query}`);
+}
+
+// /sponsorships
+export const getSponsorShipEvents = async (type: string): Promise<IEventBusinessResponse> => {
+    return await fetchApi(`${API_URL}/sponsorships/${type}`);
+}
+
+// events/relate/
+export const getRelatedEvents = async (id: number, limit: number = 9, page: number = 1)
+: Promise<IEventPublishedResponse> => {
+    return await fetchApi(`${API_URL}/events/relate/${id}?limit=${limit}&page=${page}`);
 }
 
 // /organizer/draft and /organizer/event

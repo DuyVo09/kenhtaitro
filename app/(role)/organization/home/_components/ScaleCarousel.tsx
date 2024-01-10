@@ -1,14 +1,12 @@
 "use client";
 
 import { convertEventDataToCardProps } from "@/common/helpers/convertEventData";
-import { mockEventList } from "../../../../common/mockData/mockEventList";
 import { Box } from "@mui/material";
 import Slider, { Settings } from "react-slick";
 import { PrevSliderArrow, NextSliderArrow } from "./CardCarouselArrow";
 
 import { ScaleCarouselItem } from "./ScaleCarouselItem";
 import { useEffect, useState } from "react";
-import { CardCarouselItem } from "./CardCarouselItem";
 import { PublishedEvent } from "@/types";
 import { searchByCategory } from "@/apis/events";
 

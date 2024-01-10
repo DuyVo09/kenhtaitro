@@ -1,21 +1,24 @@
 import { IResponse } from "@/common/types";
-import { ISignInResponse } from "@/types/auth-data";
+import { ISignInResponse, ISignUpResponse } from "@/types/auth-data";
 import { http } from "@/utils/http";
-import qs from "qs";
 
 export const login = (
   username: string,
   password: string
-): Promise<IResponse<ISignInResponse>> => {
-  const form = qs.stringify({ username: username, password: password });
-  // const form = { username, password }
-  console.log(form);
-  return http.post("/auth/log-in", {
+) => {
+  let body = new URLSearchParams({
+    username: username,
+    password: password,
+  });
+  return fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
+    method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
+      "Accept": "application/json",
     },
-    body: form,
-  });
+    body: body,
+  })
+    .then((res) => res.json());
 };
 
 export const getAccessToken = (refreshToken: string): Promise<string> => {
@@ -25,27 +28,24 @@ export const getAccessToken = (refreshToken: string): Promise<string> => {
 export const register = (
   full_name: string,
   email: string,
+  role_id: number,
   company: string,
   phone: string,
   password: string,
   confirmed_password: string
-): Promise<ISignInResponse> => {
-  const form = qs.stringify({
+): Promise<IResponse<ISignUpResponse>> => {
+  return http.post("/users/personality/register", {
     full_name,
     email,
+    role_id,
     company,
     phone,
     password,
     confirmed_password,
   });
-  return http.post("/users/personality/register", form, {
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-    body: form,
-  });
 };
 
-export const getProfile = (): Promise<any> => {
-  return http.get("/users/personality/profile");
+export const getProfile = (): Promise<IResponse<ISignUpResponse>> => {
+  return http.get("/users/profile");
 }
+

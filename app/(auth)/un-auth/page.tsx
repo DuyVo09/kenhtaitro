@@ -1,13 +1,13 @@
 "use client";
 
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 
 const UnAuthPage = () => {
   const router = useRouter();
   useEffect(() => {
     const redirectTimer = setTimeout(() => {
-      router.replace("/login");
+      router.replace("/sign-in");
     }, 5000);
 
     return () => {
